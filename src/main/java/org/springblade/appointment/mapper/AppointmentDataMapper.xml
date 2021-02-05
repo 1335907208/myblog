@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.springblade.appointment.mapper.AppointmentDataMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="appointmentDataResultMap" type="org.springblade.appointment.entity.AppointmentData">
+        <id column="id" property="id"/>
+        <result column="status" property="status"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="project_id" property="projectId"/>
+        <result column="scheduling_id" property="schedulingId"/>
+        <result column="shift_data_id" property="shiftDataId"/>
+        <result column="date" property="date"/>
+        <result column="apply_vistor_num" property="applyVistorNum"/>
+        <result column="name" property="name"/>
+        <result column="tel" property="tel"/>
+        <result column="email" property="email"/>
+        <result column="nric" property="nric"/>
+        <result column="enter_num" property="enterNum"/>
+        <result column="check_in_time" property="checkInTime"/>
+        <result column="check_out_time" property="checkOutTime"/>
+        <result column="user_type" property="userType"/>
+    </resultMap>
+
+
+    <select id="selectAppointmentDataPage" resultMap="appointmentDataResultMap">
+        select * from house_appointment_data where is_deleted = 0
+    </select>
+
+    <select id="selectAppointmentDataWithShift" resultType="org.springblade.appointment.vo.AppointmentDataVO">
+        select a.*,
+        b.id AS shift_data_id,
+        c.id AS shift_id,
+        c.shift_name AS shiftName,
+        b.start_time AS startTime,
+        b.end_time AS endTime,
+        CONCAT_WS( '~', b.start_time, b.end_time ) AS dateTime
+        FROM house_appointment_data a
+        left join house_appointment_shift_data b on a.shift_data_id = b.id
+        left join house_appointment_shift c on b.shift_id = c.id
+        <where>
+           ${ew.getSqlSegment}
+        </where>
+
+    </select>
+
+    <select id="appointmentDataCount" resultType="java.util.Map">
+        SELECT
+            a.date as date,
+            a.shift_data_id as shiftDataId,
+            b.start_time as startTime,
+            b.end_time as endTime,
+            sum( a.apply_vistor_num ) as applyCount,
+            sum( a.enter_num )  as enterCount
+        FROM
+            house_appointment_data a
+            LEFT JOIN house_appointment_shift_data b ON a.shift_data_id = b.id
+            <where>
+                ${ew.getSqlSegment}
+            </where>
+        GROUP BY
+            a.date,
+            a.shift_data_id,
+            b.start_time,
+            b.end_time
+        ORDER BY
+            b.start_time
+    </select>
+
+</mapper>

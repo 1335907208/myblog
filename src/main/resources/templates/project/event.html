@@ -1,0 +1,59 @@
+<div class="container-fluid" id="eventsBox" th:fragment="event">
+    <div class="box">
+        <div class="box-title">
+            <h2 class="box-title__content">EVENT</h2>
+            <h4 class="box-title__sub" th:text="${projectinfodetail.name}">QUEENS PEAK</h4>
+        </div>
+        <div class="box-content">
+            <div class="event">
+                <div class="event-item"
+                     th:each="projectEvent, projectEventState : ${projectEventList}">
+                    <div class="event-item__pic bg-img"
+                         th:style="'background-image: url('+${prefixUrl}+${projectEvent.url}+');'">
+                        <div class="event-item__pic-tips" th:text="${projectEvent.name}">LIVE</div>
+                        <!-- class="video-js vjs-big-play-centered" -->
+                        <!-- controls -->
+                        <!-- <video id="videoMedia" width="1000" height="1000"  > -->
+                        <iframe width="100%" height="700"
+                                th:if="${not #strings.isEmpty(projectEvent.liveUrlChina) || not #strings.isEmpty(projectEvent.liveUrlWorld)}"
+                                th:src="${projectEvent.liveUrlWorld}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<!--                        <video id="eventVideo" width="885" height="700" class="video-js vjs-big-play-centered"-->
+<!--                               controls>-->
+<!--                            <source th:src="@{${prefixUrl}+${projectEvent.url}}" type="video/mp4/png/jpg"></source>-->
+<!--                        </video>-->
+                    </div>
+                    <div class="event-item__content">
+                        <h3 class="event-item__title">
+                            <span th:text="${projectEvent.title}">FORM AND FUNCTIONINSPIRED BY NATURE</span>
+                        </h3>
+                        <div class="event-item__desc" th:text="${projectEvent.remark}">
+                            Good architecture is naturally elegant. It pushes the boundaries of design by
+                            integrating form and function. Inspired by nature, the artful contours create an
+                            illusion of movement, heightening the sense of how captivating the balconies are from
+                            the outside, as the views it provide looking out from within.
+                        </div>
+                    </div>
+                </div>
+<!--                <div class="event-item"-->
+<!--                     th:style="'display:' + (${projectEventState.index%2==0} ? 'none' : '') + ''">-->
+<!--                    <div class="event-item__pic bg-img"-->
+<!--                         th:style="'background-image: url('+${prefixUrl}+${projectEvent.url}+');'">-->
+<!--                        <div class="event-item__pic-tips" th:text="${projectEvent.name}">EVENT</div>-->
+<!--                    </div>-->
+<!--                    <div class="event-item__content">-->
+<!--                        <h3 class="event-item__title">-->
+<!--                            <span th:text="${projectEvent.title}">FORM AND FUNCTIONINSPIRED BY NATURE</span>-->
+<!--                        </h3>-->
+<!--                        <div class="event-item__desc" th:text="${projectEvent.remark}">-->
+<!--                            Good architecture is naturally elegant. It pushes the boundaries of design by-->
+<!--                            integrating form and function. Inspired by nature, the artful contours create an-->
+<!--                            illusion of movement, heightening the sense of how captivating the balconies are from-->
+<!--                            the outside, as the views it provide looking out from within.-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+
+</div>

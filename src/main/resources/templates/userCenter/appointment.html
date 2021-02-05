@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="inc/commons :: head(Member, user)">
+
+
+
+<body>
+<div th:replace="index/header :: header"></div>
+<div th:replace="userCenter/header :: user"></div>
+
+<div class="container">
+    <div class="registry">
+        <h2 class="page_titles">My Appointment <a href="/userCenter/apponitmentSelect" class="btn btn-primary btn-sm">预约看房</a></h2>
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th>#</th>
+                <th>Project</th>
+                <th>Scheduling ID</th>
+                <th>Shift Data ID</th>
+                <th>Date</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="project, stat : ${appointmentList}">
+                <th scope="row" th:text="${stat.index + 1}">1</th>
+                <td th:text="${project.projectName}"></td>
+                <td th:text="${project.schedulingId}"></td>
+                <td th:text="${project.shiftDataId}"></td>
+                <td th:text="${project.date}"></td>
+                <td><a th:href="${'?id=' + project.id}" class="btn btn-primary btn-sm">View</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+<div th:replace="footer :: footer"></div>
+
+
+<th:block th:replace="inc/commons :: foot(user)"></th:block>
+
+
+<script th:inline='javascript'>
+    var identity=  $('#identity').val()
+
+</script>
+</body>
+
+</html>

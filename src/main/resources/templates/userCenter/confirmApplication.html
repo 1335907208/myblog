@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="inc/commons :: head(Member, user)">
+
+
+
+<body>
+<div th:replace="index/header :: header"></div>
+<div th:replace="userCenter/header :: user"></div>
+
+<div class="container">
+    <div class="registry">
+        <h2 class="page_title">Confirm Application</h2>
+        <div class="registry_confirm" style="display: block">
+            <div>
+                <ul>
+                    <li>
+                        <label>order number</label>
+                        <input class="ordernumber" type="text" style="text-indent: 6px;" placeholder="order number">
+                    </li>
+                    <li>
+                        <label>Check photo</label>
+                        <div class="input_file">Upload</div>
+                        <input type="file" id="selectFiles" style="opacity: 0;cursor: pointer;" onchange="photoUploads(this)"/>
+                    </li>
+                    <li style="padding-left: 120px">
+                        <div class="confirm_img ">
+                            <div class="img__close-btn" id="close"><i class="iconfont iconguanbi"></i></div>
+                            <img src="" id="file_Check">
+                        </div>
+                    </li>
+                    <li style="padding-left: 120px"><button id="confirm_Submit">confirm Submit</button></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div th:replace="footer :: footer"></div>
+
+
+<th:block th:replace="inc/commons :: foot(user)"></th:block>
+
+
+<script th:inline='javascript'>
+    var identity=  $('#identity').val()
+    var url;
+    function photoUploads(){
+        //获取展示图片的区域
+        var img = document.getElementById("file_Check");
+        //获取文件对象
+        let file = $("#selectFiles")[0].files[0];
+        //获取文件阅读器
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function(){
+            //给img的src设置图片url
+            img.setAttribute("src", this.result);
+            $('.confirm_img #close').show()
+            var formData = new FormData();
+            formData.append("file",file)
+            $.ajax({
+                url: "/client/uploadOrderPhoto",    //请求的url地址
+                dataType: "json",   //返回格式为json
+                type: "POST",   //请求方式
+                async: true,//请求是否异步，默认为异步，这也是ajax重要特性
+                contentType:false,
+                processData:false,
+                mimeType:"multipart/form-data",
+                data: formData,
+                success: function (res) {//请求成功时处理
+                    url = res.data.url
+
+                },
+                fail: function () {//请求失败
+                    console.log("fail");
+                },
+                error: function () {//请求出错处理
+                    console.log("error");
+                }
+            })
+        }
+    }
+
+
+    //订单号
+    $('#confirm_Submit').on('click',function(){
+        // if(!url){
+        //     alert('Please upload a picture')
+        // }
+        var ordernumber = $('.ordernumber').val();
+        $.ajax({
+            url: "/client/agentConfirm",    //请求的url地址
+            dataType: "json",   //返回格式为json
+            type: "GET",   //请求方式
+            async: true,//请求是否异步，默认为异步，这也是ajax重要特性
+            data: {
+                ordernumber:ordernumber,
+                photoUrl:url,
+            },
+            success: function (res) {//请求成功时处理
+                if(res.success){
+                    alert("Success！Your order number is:" + res.data);
+                }else{
+                    alert('Order not found')
+                }
+            },
+            fail: function () {//请求失败
+                alert('Order not found')
+            },
+            error: function () {//请求出错处理
+                alert('Order not found')
+            }
+        })
+    })
+
+    $('.confirm_img').on('click',function(){
+        $('#selectFiles').click();
+    })
+    $('.confirm_img #close').on('click',function(event){
+        var img = document.getElementById("file_Check");
+        img.setAttribute("src", "");
+        $('.confirm_img #close').hide()
+        event.stopPropagation();
+    })
+
+</script>
+</body>
+
+</html>

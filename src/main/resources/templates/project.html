@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="inc/commons :: head(${projectinfodetail.name}, project)">
+
+<body>
+
+
+<div id="body">
+
+    <!-- 首页轮播 -->
+    <div th:replace="project/slider :: slider"></div>
+
+    <!-- 项目导航 -->
+
+    <div th:replace="project/nav :: nav"></div>
+
+    <!-- 项目介绍 -->
+
+    <div th:replace="project/intro :: intro"></div>
+
+    <!-- Gallery -->
+
+    <div th:replace="project/gallery :: gallery"></div>
+
+
+    <!-- Location -->
+
+    <div th:replace="project/location :: location"></div>
+
+    <!-- Video -->
+
+    <div th:replace="project/video :: video"></div>
+
+    <!-- Site Plan -->
+
+    <div th:replace="project/siteplan :: siteplan"></div>
+
+    <!-- Floor Plan -->
+    <div th:replace="project/floorplan :: floorplan"></div>
+
+
+    <!-- VR -->
+    <div th:replace="project/vr :: vr"></div>
+
+
+    <!-- 360 View -->
+    <div th:replace="project/view360 :: view360"></div>
+
+    <!-- Events -->
+    <div th:replace="project/event :: event"></div>
+
+
+</div>
+<div th:replace="footer :: footer"></div>
+<th:block th:replace="inc/commons :: foot(project)"></th:block>
+
+<!--<script src="/plugins/jquery/jquery.min.js"></script>-->
+<!--<script src="/plugins/bootstrap/js/bootstrap.min.js"></script>-->
+<!--<script src="/plugins/swiper-6.0.4/package/swiper-bundle.min.js"></script>-->
+<!--<script src="/plugins/select2-4.0.13/dist/js/select2.min.js"></script>-->
+<!--<script src="/plugins/share/dist/js/social-share.min.js"></script>-->
+<!--<script src="/plugins/lightgallery/demo/js/lightgallery.min.js"></script>-->
+<!--<script src="/plugins/lightgallery/demo/js/lg-zoom.min.js"></script>-->
+<!--<script src="/plugins/lightgallery/demo/js/lg-thumbnail.min.js"></script>-->
+<!--<script src="/plugins/lightgallery/demo/js/lg-autoplay.js"></script>-->
+<!--<script src="https://cdn.staticfile.org/video.js/7.9.2/video.min.js"></script>-->
+<!--<script src="/plugins/Watch3D/dist/watch3D.js "></script>-->
+<!--<script src="/font/iconfont/iconfont.js"></script>-->
+<!--<script th:inline='javascript' src="/js/login.js"></script>-->
+<!--<script src="//api.map.baidu.com/api?v=2.0&ak=dWQTUFqH4jZ3h8ts0uLGGgS82YTgEtsn"></script>-->
+
+<!-- 内联数据统一输出 -->
+<script th:inline='javascript'>
+    var unitType = [[${unittype}]]
+    var units = [[${unitList}]]
+    var prefixUrl = [[${prefixUrl}]]
+</script>
+<script src="/js/project.js"></script>
+<script th:inline='javascript'>
+function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i=0;i<vars.length;i++) {
+        var pair = vars[i].split("=");
+        if(pair[0] == variable){return pair[1];}
+    }
+    return false;
+}
+$(document).ready(function(){
+	//console.log([[${ProjectAllviewlist}]]);
+    //获取url参数
+
+});
+
+var locationTypeBYUrl = getQueryVariable('type')
+if(locationTypeBYUrl){
+    setTimeout(()=>{
+        $("body,html").animate({ scrollTop: $('#' + locationTypeBYUrl).offset().top }, 800);
+    },500)
+}
+//7. 360 view
+Project.prototype.init360View = function () {
+    var layer = document.querySelector(".layer");
+
+    var time = 'day';
+
+    var iconfont = 'view360__pic-icon-day';
+
+    var $watchViewDom = $('.view360__btn-item');
+    if($watchViewDom.length < 1) {
+        return
+    }
+
+    $watchViewDom.eq(0).addClass('view360__btn-item_active')
+    var lvl = $watchViewDom.eq(0).data('src') || '';
+    var lvlDark = $watchViewDom.eq(0).attr('data-srcDark') || '';
+    if(lvl && lvlDark){
+        $('.view360__switch').show()
+    }else{
+        $('.view360__switch').hide()
+    }
+    $watchViewDom.on('click', function() {
+        $watchViewDom.removeClass("view360__btn-item_active");
+        $(".view360__pic-icon-day").show();
+        $(".view360__pic-icon-night").hide();
+        $(this).addClass('view360__btn-item_active')
+        lvl = $(this).data('src') || '';
+        lvlDark = $(this).attr('data-srcDark') || '';
+        var img;
+        if(lvl && lvlDark){
+            $('.view360__switch').show()
+            img = lvl
+        }else{
+            $('.view360__switch').hide()
+            img = lvl ? lvl : lvlDark
+        }
+        console.log(img)
+        watch3DInint(img);
+        // e.target.setAttribute('class', 'view360__btn-item view360__btn-item_active');
+        // lvl = e.target.getAttribute("data-src");
+        // lvlDark = e.target.getAttribute("data-srcDark");
+        // if(lvl && lvlDark){
+        //     $('.view360__switch').show()
+        // }else{
+        //     $('.view360__switch').hide()
+        // }
+        // watch3DInint(time, lvl);
+    })
+    // for (var index = 0; index < watchViewDom.length; index++) {
+    //     if(index == 0){
+    //         var dom = $('.view360__btn-item:nth-of-type(1)')
+    //         dom.addClass('view360__btn-item_active');
+    //         lvl = dom.getAttribute("data-src");
+    //         lvlDark = dom.target.getAttribute("data-srcDark");
+    //
+    //         if(lvl && lvlDark){
+    //             $('.view360__switch').show()
+    //         }else{
+    //             $('.view360__switch').hide()
+    //         }
+    //     }
+    //     var element = watchViewDom[index];
+    //     element.onclick = changeView;
+    // }
+
+    $(".view360__pic-icon-day").click(iconNightShow);
+    $(".view360__pic-icon-night").click(iconDayShow);
+    function iconDayShow() {
+        $(".view360__pic-icon-day").show();
+        $(".view360__pic-icon-night").hide();
+        watch3DInint(lvl);
+    }
+    function iconNightShow() {
+        $(".view360__pic-icon-day").hide();
+        $(".view360__pic-icon-night").show();
+        watch3DInint(lvlDark);
+    }
+    function watch3DInint(src) {
+        var img = new Image();
+        //img.src = '../img/watch3D/' + time + '/' + lvl + '.jpg';
+        img.src = src;
+        img.onload = function () {
+            var width = img.width;
+            var height = img.height;
+            var w3d = new watch3D({
+                wrapper: ".wrapper",
+                autoplay: true,
+                width: width * 2,
+                height: height * 2,
+                num: 1,
+                maxY: 0.0001,
+                reverse: false,
+                resource: img.src
+            });
+        };
+    }
+    $watchViewDom.eq(0).click();
+};
+
+
+</script>
+
+</body>
+</html>

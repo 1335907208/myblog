@@ -1,0 +1,11 @@
+INSERT INTO `blade_menu`(`parent_id`, `code`, `name`, `alias`, `path`, `source`, `sort`, `category`, `action`, `is_open`, `remark`, `is_deleted`)
+VALUES (0, 'projectgallery', '', 'menu', '/project/projectgallery', NULL, 1, 1, 0, 1, NULL, 0);
+set @parentid = (SELECT LAST_INSERT_ID());
+INSERT INTO `blade_menu`(`parent_id`, `code`, `name`, `alias`, `path`, `source`, `sort`, `category`, `action`, `is_open`, `remark`, `is_deleted`)
+VALUES (@parentid, 'projectgallery_add', '新增', 'add', '/project/projectgallery/add', 'plus', 1, 2, 1, 1, NULL, 0);
+INSERT INTO `blade_menu`(`parent_id`, `code`, `name`, `alias`, `path`, `source`, `sort`, `category`, `action`, `is_open`, `remark`, `is_deleted`)
+VALUES (@parentid, 'projectgallery_edit', '修改', 'edit', '/project/projectgallery/edit', 'form', 2, 2, 1, 2, NULL, 0);
+INSERT INTO `blade_menu`(`parent_id`, `code`, `name`, `alias`, `path`, `source`, `sort`, `category`, `action`, `is_open`, `remark`, `is_deleted`)
+VALUES (@parentid, 'projectgallery_delete', '删除', 'delete', '/api/project/projectgallery/remove', 'delete', 3, 2, 1, 3, NULL, 0);
+INSERT INTO `blade_menu`(`parent_id`, `code`, `name`, `alias`, `path`, `source`, `sort`, `category`, `action`, `is_open`, `remark`, `is_deleted`)
+VALUES (@parentid, 'projectgallery_view', '查看', 'view', '/project/projectgallery/view', 'file-text', 4, 2, 1, 2, NULL, 0);

@@ -1,0 +1,56 @@
+<div class="container-fluid" id="floorplanBox" th:fragment="floorplan">
+    <div class="box">
+        <div class="box-title">
+            <h2 class="box-title__content">FLOOR PLAN</h2>
+            <h4 class="box-title__sub" th:text="${projectinfodetail.name}">QUEENS PEAK</h4>
+            <div class="head-tool">
+               <a style="text-decoration:none;" th:href="${prefixUrl+projectinfodetail.bookUrl}"><button class="btn"><i class="iconfont icondownload"></i>Download Brochures</button></a>
+            </div>
+        </div>
+        <div class="box-content">
+            <div class="sub-left">
+                <div class="img-container" style="display: flex" id="imgContainer">
+                    <div class="download-btn">
+                        <a href="#" target="_blank"><i class="iconfont icondownload"></i></a>
+                    </div>
+                    <div class="table-btn">
+                        <i class="iconfont iconfenleimulu"></i>
+                    </div>
+                    <div class="img-container-table">
+                        <table>
+                        </table>
+                    </div>
+                    <img src="" alt="">
+                </div>
+            </div>
+            <div class="sub-right">
+                <div class="select-block1">
+                    <h2 class="sub-title">
+                        Select Type
+                    </h2>
+                    <ul class="select-lists" id="selectBlock" >
+                        <li class="list-item" data-br=""
+                        >ALL</li>
+                        <li class="list-item" th:each="br : ${dicts}" th:text="${br.dictValue}" th:if="${br.parentId != 0}"
+                            th:data-br="${br.dictAlias}"
+                        >1-Bedroom</li>
+                    </ul>
+                </div>
+                <div class="select-block2" id="selectBlock2">
+                    <h2 class="sub-title">
+                        Select Block
+                    </h2>
+                    <div class="btn-lists" id="btnLists">
+                    </div>
+                </div>
+                <div class="select-block3" id="selectBlock3">
+                    <h2 class="sub-title">
+                        Select Unit
+                    </h2>
+                    <div class="floor-block" id="floorBlock">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

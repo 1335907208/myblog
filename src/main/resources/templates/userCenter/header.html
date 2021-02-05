@@ -1,0 +1,31 @@
+<div class="usercenter_header" th:fragment="user" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="model_list">
+        <ul>
+            <li th:classappend="${model == 'usercenter' ? 'active' : ''}"><a href="/userCenter/profile">USER CENTER</a></li>
+            <li th:classappend="${model == 'application' ? 'active' : ''}"><a href="/userCenter/application">APPLICATION</a></li>
+            <li th:classappend="${model == 'buy' ? 'active' : ''}"><a href="/userCenter/buy">BUY</a></li>
+            <li th:classappend="${model == 'disclaimer' ? 'active' : ''}"><a href="/userCenter/disclaimer">DISCLAIMER</a></li>
+        </ul>
+    </div>
+    <div class="userinfo">
+        <div class="avatar">
+            <input type="file" id="file" name="file" style="display: none"/>
+            <img src="/img/default_avatar.jpg" alt="" width="100%">
+        </div>
+        <h2 th:text="${userInfo.name}">NAME</h2>
+        <h3 th:text="${userInfo.username}"> Eamil:sale@mcc.sg</h3>
+    </div>
+    <div class="model_footer" th:classappend="${model != 'usercenter' ? 'no-nav' : ''}">
+        <ul class="trunk_fenxuan" th:if="${model == 'usercenter'}">
+            <li th:classappend="${page == 'profile' ? 'active' : ''}"><a href="/userCenter/profile">Profile</a></li>
+            <li th:classappend="${page == 'appointment' ? 'active' : ''}"><a href="/userCenter/appointment">My Appointment</a></li>
+            <li th:classappend="${page == 'myApplication' ? 'active' : ''}"><a href="/userCenter/myApplication">My Application</a></li>
+            <li id="MyProperties" th:classappend="${page == 'myProperties' ? 'active' : ''}"><a href="/userCenter/myProperties">My Properties</a></li>
+            <li th:if="${identity == 'agent'}" th:classappend="${page == 'myClients' ? 'active' : ''}"><a href="/userCenter/myClients?size=10&current=1">My Clients</a></li>
+            <li class="confirms" th:if="${identity == 'agent'}" th:classappend="${page == 'agentConfirm' ? 'active' : ''}"><a href="/userCenter/agentConfirm">Confirm Application</a></li>
+            <li class="ChangePasswords" th:classappend="${page == 'changePassword' ? 'active' : ''}"><a href="/userCenter/changePassword">Change Password</a></li>
+        </ul>
+    </div>
+    <input type="hidden" name="identity" id="identity" th:value="${identity}">
+</div>
+

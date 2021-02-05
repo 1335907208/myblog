@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="inc/commons :: head(Finance, finance)">
+<body>
+<div th:replace="index/header :: header"></div>
+<div id="body">
+
+    <div id="Finance">
+        <div class="slider">
+            <img src="/img/finance.jpg">
+        </div>
+        <!-- tab标签 -->
+        <nav class="firstnav">
+            <ul>
+                <li class="liactive" data-link="flowerCount"><span>Stamp Duty</span></li>
+                <li data-link="progressPayment"><span>Payment Schedule</span></li>
+                <li data-link="loanInformation"><span>Housing Loan Information</span></li>
+                <li data-link="rentalYield"><span>Rental Yield</span></li>
+            </ul>
+        </nav>
+
+        <div class="box">
+            <div class="box-title primary">
+                <h2 id="finance_title" class="box-title__content">Stamp Duty</h2>
+                <h4 class="box-title__sub">FINANCE</h4>
+            </div>
+        </div>
+
+        <div class="finance_container finance_container_show" name="flowerCount">
+            <div class="finance-form">
+                <div class="finance-form-col-left">
+                    <p>Property Price($)&nbsp;:&nbsp;&nbsp;</p>
+                    <p>Type&nbsp;:&nbsp;&nbsp;</p>
+                    <button style="margin: 0 0 20px 0;visibility:hidden;"></button>
+                </div>
+                <div class="finance-form-col-right">
+                    <input class="property-price" type="number" /><br />
+                    <select class="select select-flowerCount-type" name="" >
+                        <option value="1">Singaporean</option>
+                        <option value="2">PR</option>
+                        <option value="3">FOREIGNER</option>
+                    </select><br />
+                    <button style="margin: 0 0 20px 0;" th:onclick="countFlowerCount()">Confirm</button>
+                </div>
+            </div>
+            <div class="finance-tables">
+                <table>
+                    <thead>
+                    <tr>
+                        <td style="width: 25%;"></td>
+                        <td style="width: 25%;">1st Property</td>
+                        <td style="width: 25%;">2nd Property</td>
+                        <td style="width: 25%;">3rd Property and above</td>
+                    </tr>
+                    </thead>
+                    <tr>
+                        <td>Buyer Stamp Duty</td>
+                        <td class="buyer-sum"></td>
+                        <td class="buyer-sum"></td>
+                        <td class="buyer-sum"></td>
+                    </tr>
+                    <tr>
+                        <td>Additional Stamp Duty</td>
+                        <td class="additional-sum"></td>
+                        <td class="additional-sum"></td>
+                        <td class="additional-sum"></td>
+                    </tr>
+                    <tr>
+                        <td>Total Buyer Stamp Duty</td>
+                        <td class="totalBuyer-sum"></td>
+                        <td class="totalBuyer-sum"></td>
+                        <td class="totalBuyer-sum"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h2>Additional Stamp Duty</h2>
+                    <div class="finance-table">
+                        <table>
+                            <thead>
+                            <tr>
+                                <td style="width: 25%;">Nationality</td>
+                                <td style="width: 25%;">1st Property</td>
+                                <td style="width: 25%;">2nd Property</td>
+                                <td style="width: 25%;">3rd Property and above</td>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td>Singaporean</td>
+                                <td>0</td>
+                                <td>12%</td>
+                                <td>15%</td>
+                            </tr>
+                            <tr>
+                                <td>PR</td>
+                                <td>5%</td>
+                                <td>15%</td>
+                                <td>15%</td>
+                            </tr>
+                            <tr>
+                                <td>FOREIGNER</td>
+                                <td>20%</td>
+                                <td>20%</td>
+                                <td>20%</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col">
+                    <h2>Buyer Stamp Duty </h2>
+                    <div class="finance-table">
+                        <table>
+                            <thead>
+                            <tr>
+                                <td>Purchase Price or Market Value of the Property</td>
+                                <td>BSD Rates for Residential Properties</td>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td>First $180,000</td>
+                                <td>1%</td>
+                            </tr>
+                            <tr>
+                                <td>Next $180,000</td>
+                                <td>2%</td>
+                            </tr>
+                            <tr>
+                                <td>Next $640,000</td>
+                                <td>3%</td>
+                            </tr>
+                            <tr>
+                                <td>Above $1,000,000</td>
+                                <td>4%</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="finance_container" name="progressPayment">
+
+            <div class="finance-form">
+                <div class="finance-form-col-left">
+                    <label>Property Price($)&nbsp;:&nbsp;&nbsp;</label>
+                </div>
+                <div class="finance-form-col-right">
+                    <input class="progressPayment-price" type="number" />
+                </div>
+                <button th:onclick="countProgressPayment()">Confirm</button>
+            </div>
+            <div class="finance-table">
+                <table>
+                    <thead>
+                    <tr>
+                        <td style="width: 50px;text-align: center;">S/N</td>
+                        <td>Stage</td>
+                        <td style="width: 150px;">%</td>
+                        <td style="width: 200px;">SUM</td>
+                    </tr>
+                    </thead>
+                    <tr>
+                        <td>1</td>
+                        <td>Booking Fee</td>
+                        <td>5%</td>
+                        <td class="progress-payment-sum" data-ratio="0.05"></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Within 8 weeks of OTP</td>
+                        <td>15%</td>
+                        <td class="progress-payment-sum" data-ratio="0.15"></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Completion of Foundation</td>
+                        <td>10%</td>
+                        <td class="progress-payment-sum" data-ratio="0.1"></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Completion of   Reinforced concrete framework</td>
+                        <td>10%</td>
+                        <td class="progress-payment-sum" data-ratio="0.1"></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Completion of partition walls</td>
+                        <td>5%</td>
+                        <td class="progress-payment-sum" data-ratio="0.05"></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Completion of roofing/ceiling</td>
+                        <td>5%</td>
+                        <td class="progress-payment-sum" data-ratio="0.05"></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Completion of door sub-frames/door frames and window frames,electrical wiring (without fittings), the internal plastering and the plumbing</td>
+                        <td>5%</td>
+                        <td class="progress-payment-sum" data-ratio="0.05"></td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Completion of car park, roads and drains</td>
+                        <td>5%</td>
+                        <td class="progress-payment-sum" data-ratio="0.05"></td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>TOP</td>
+                        <td>25%</td>
+                        <td class="progress-payment-sum" data-ratio="0.25"></td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>CSC</td>
+                        <td>8%</td>
+                        <td class="progress-payment-sum" data-ratio="0.08"></td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>Expiry of DLP</td>
+                        <td>5%</td>
+                        <td class="progress-payment-sum" data-ratio="0.05"></td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>Legal Completion</td>
+                        <td>2%</td>
+                        <td class="progress-payment-sum" data-ratio="0.02"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center;">TOTAL</td>
+                        <td>100%</td>
+                        <td class="progress-payment-sum" data-ratio="1"></td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+        <div class="finance_container" name="loanInformation">
+            <h2>Residential Home Loan Regulations (MAS)</h2>
+            <div class="finance-table">
+                <table>
+                    <thead>
+                    <tr>
+                        <td style="width: 25%;"></td>
+                        <td style="width: 25%;" colspan="3">First Loan</td>
+                        <td style="width: 25%;" colspan="3">Second Loan</td>
+                        <td style="width: 25%;" colspan="3">Third Loan</td>
+                    </tr>
+                    </thead>
+                    <tr>
+                        <td>Loan Tenure</td>
+                        <td colspan="2">Up to 30 years</td>
+                        <td>31-35 years</td>
+                        <td colspan="2">Up to 30 years</td>
+                        <td>31-35 years</td>
+                        <td colspan="2">Up to 30 years</td>
+                        <td>31-35 years</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">Age</td>
+                        <td colspan="9" style="text-align: center;">Age used to calculate loan tenure, will be based on income-weighted</td>
+                    </tr>
+                    <tr>
+                        <td>Up to 65</td>
+                        <td>Up to 70-75</td>
+                        <td>Up to 70-75</td>
+                        <td>Up to 65</td>
+                        <td>Up to 70-75</td>
+                        <td>Up to 70-75</td>
+                        <td>Up to 65</td>
+                        <td>Up to 70-75</td>
+                        <td>Up to 70-75</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">Maximum LTV Limit</td>
+                        <td>75%</td>
+                        <td>55%</td>
+                        <td>55%</td>
+                        <td>45%</td>
+                        <td>25%</td>
+                        <td>25%</td>
+                        <td>35%</td>
+                        <td>15%</td>
+                        <td>15%</td>
+                    </tr>
+                    <tr>
+                        <td colspan="9" style="text-align: center;">20% (non-individuals)</td>
+                    </tr>
+                    <tr>
+                        <td>Minimum Cash Downpayment</td>
+                        <td>5%</td>
+                        <td>10%</td>
+                        <td>10%</td>
+                        <td>25%</td>
+                        <td>25%</td>
+                        <td>25%</td>
+                        <td>25%</td>
+                        <td>25%</td>
+                        <td>25%</td>
+                    </tr>
+                    <tr>
+                        <td>Gaurantors / Co-borrowers</td>
+                        <td colspan="9" style="text-align: center;">
+                            <p>All Co-borrowers must be mortgagors.</p>
+                            <p>Guarantors must be co-borrowers if the latter did not pass the TDSR criteria</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mortgage Servicing Ratio</td>
+                        <td colspan="9" style="text-align: center;">N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Total Debt Servicing Ratio</td>
+                        <td colspan="9" style="text-align: center;">60%</td>
+                    </tr>
+                    <tr>
+                        <td>Stress Test Interest Rate</td>
+                        <td colspan="9" style="text-align: center;">3.5%</td>
+                    </tr>
+
+                </table>
+            </div>
+
+        </div>
+        <div class="finance_container" name="rentalYield">
+
+            <div class="finance-form">
+                <div class="finance-form-col-left">
+                    <p>Property Price ($)&nbsp;:&nbsp;&nbsp;</p>
+                    <p>Estimated Monthly Rental ($)&nbsp;:&nbsp;&nbsp;</p>
+                    <button style="margin: 0 0 20px 0;visibility:hidden;"></button>
+                    <p>Gross Rental Yield&nbsp;:&nbsp;&nbsp;</p>
+                </div>
+                <div class="finance-form-col-right">
+                    <input class="rentalYield-price" type="number" /><br />
+                    <input class="rentalYield-rental" type="number" /><br />
+                    <button style="margin: 0 0 20px 0;" th:onclick="countRentalYield()">Confirm</button>
+                    <p class="rental-yield-sum">&nbsp;</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="finance_remarks">
+            <p>
+                Disclaimer: The computation above is indicative and for illustrative purposes. Any person acting upon or in reliance of this information does so entirely at their own risk. No warranty whatsoever is given and no liability is accepted by us behind this calculator for loss arising directly or indirectly as a result of any action or omission made in reliance of any information presented herein at any time.
+            </p>
+        </div>
+    </div>
+
+</div>
+<div th:replace="footer :: footer"></div>
+
+<!--<script src="/plugins/bootstrap/js/bootstrap.min.js"></script>-->
+<!--<script src="/plugins/swiper-6.0.4/package/swiper-bundle.min.js"></script>-->
+<!--<script src="/plugins/select2-4.0.13/dist/js/select2.min.js"></script>-->
+<!--<script src="/plugins/share/dist/js/social-share.min.js"></script>-->
+<!--<script src="/plugins/lightgallery/demo/js/lightgallery.min.js"></script>-->
+<!--<script src="/plugins/lightgallery/demo/js/lg-zoom.min.js"></script>-->
+<!--<script src="/plugins/lightgallery/demo/js/lg-thumbnail.min.js"></script>-->
+<!--<script src="/plugins/lightgallery/demo/js/lg-autoplay.js"></script>-->
+<!--<script src="https://cdn.staticfile.org/video.js/7.9.2/video.min.js"></script>-->
+<!--<script src="/font/iconfont/iconfont.js"></script>-->
+<th:block th:replace="inc/commons :: foot(finance)"></th:block>
+
+</body>
+</html>

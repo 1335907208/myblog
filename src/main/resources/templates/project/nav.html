@@ -1,0 +1,92 @@
+<div id="projectNav" th:fragment="nav" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="menu-btn" id="sideMenuCtr">
+        <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADIBAMAAABfdrOtAAAAHlBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC3KG9qAAAACXRSTlMAQCzer2MbDQwNX1mmAAAAp0lEQVR42u3YLQ7CQBCA0eUnQcMNkDgsjnACLA7BQbBIQJC5LbrZ1k0mFe9dYJJ2dzb5GgAAAMCUzX6bZvdsox6nSPS9tBGLSHZtvVske7fOMtLduyHrSHfuhqwi3bEb8op0v27IIdJ9SoaUfK6SH19yhEsuY8VaKVmQFau+5NECAACYN+VOuVPulDvlTrlT7gAAAOZIuVPulDvlTrlT7pQ7AAAAgIE/3CxPKlaPT10AAAAASUVORK5CYII="
+            alt="" class="btnSlider">
+    </div>
+<!--    <div>-->
+<!--        <input id="subeninput" checked="checked" type="radio" name="sublan"/>-->
+<!--        <label for="subeninput">En</label>-->
+<!--        <input id="subchinput" type="radio" name="sublan"/>-->
+<!--        <label for="subchinput">文</label>-->
+
+<!--    </div>-->
+<!--    <a href="#" class="language-switch">中文</a>-->
+    <div class="social-share" data-initialized="true">
+        <a href="#" class="social-share-icon icon-facebook"></a>
+        <a href="#" class="social-share-icon icon-wechat"></a>
+<!--        <a href="#" class="social-share-icon icon-twitter"></a>-->
+<!--        <a href="#" class="social-share-icon icon-google"></a>-->
+<!--        <a href="#" class="social-share-icon icon-weibo"></a>-->
+    </div>
+    <div class="wechat__screen mask" id="wechat-full-screen" style="display: none;">
+        <div class="wechat-box">
+            <span class="wechat__screen-close wechat__close-btn"><i class="iconfont iconguanbi"></i></span>
+            <img src="https://open.weixin.qq.com/qr/code?username=gh_0411478a1b56">
+        </div>
+    </div>
+    <div class="links">
+        <div class="link" th:text="${projectinfodetail.showType}"></div>
+        <div class="icon phone"></div>
+        <div class="link" th:text="${projectinfodetail.remark}"></div>
+        <a href="http://sales@mcc.sg"><div class="icon mail"></div></a>
+    </div>
+    <div class="tool-bar">
+        <!--<div class="btn-group">-->
+        <!--<input id="subeninput" checked="checked" type="radio" name="sublan"/>-->
+        <!--<label for="subeninput">En</label>-->
+        <!--<input id="subchinput" type="radio" name="sublan"/>-->
+        <!--<label for="subchinput">文</label>-->
+        <!--</div>-->
+        <a href="/" class="item iconfont iconhome" id="toHome"><span
+            class="info">Back Home</span></a>
+    </div>
+    <div class="silderMenu isslider" id="sideMenu">
+        <div class="sliderHead" id="sliderHead"><img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAZlBMVEUAAAC/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7/////6+vrExMTPz8/39/fz8/Pv7+/s7Ozn5+fe3t7Y2NjMzMzIyMjT09Ph4eGYlrn1AAAAEnRSTlMA+pokDPXJV4kI6unR6zLNI4pXbM9RAAAA1UlEQVQ4y5WT1w7CMAxFndFBW5bdvfn/n0RQyGgqLM5TLEe5vo4NFp3IOBcij2WiIUTJCA2RVOBzSgV6iPTk5m9XDLg6j1xyPCC/GPkMD8nUR79Aj8Gciq2O1EsvLdkgfRfo1b+WNDleXiLSzT+omd1YAminP1VHfYUukYbERnVJI+5IHIWRytUEViP+Pt9Tu2BADOftMDc04AFn2ExOtKerN6PsBVaCLdK3WYc22UaxreY/C9TP72YG5s6NnOaGlh17gyrCfKG41ftnee36Z0Jk/vo/AaJzOG9RbiopAAAAAElFTkSuQmCC"
+            alt="" class="icon_back"></div>
+        <div class="menuContent">
+            <ul>
+                <li th:if="${projectIntroductionList.size() != 0}" data-src="introBox"><span>Introduction</span></li>
+                <li th:if="${projectGalleryList.size() != 0}" data-src="galleryBox"><span>Gallery</span></li>
+                <li th:if="${projectNearbyList.size() != 0}" data-src="locationBox"><span>Location Map</span></li>
+                <li data-src="videoBox"><span>Video</span></li>
+                <li th:if="${projectSitePlanVOList.size() != 0}" data-src="siteplanBox"><span>Site Plan</span></li>
+                <li th:if="${projectFloorPlanList.size() != 0}" data-src="floorplanBox"><span>Floor Plan</span></li>
+                <li th:if="${projectVrList.size() != 0}" data-src="vrBox"><span>VR</span></li>
+                <li th:if="${ProjectAllviewlist.size() != 0}" data-src="view360Box"><span>360 View</span></li>
+                <li th:if="${projectEventList.size() != 0}" data-src="eventsBox"><span>Events</span></li>
+                <a th:if="${userid == null}" th:href="${'/?login=application&projectId='+projectinfodetail.id}" style="text-decoration:none">
+                    <li data-src=""><span>Application</span></li>
+                </a>
+                <a th:if="${userid != null}" th:href="${'/userCenter/application?projectId='+projectinfodetail.id}" style="text-decoration:none">
+                    <li data-src=""><span>Application</span></li>
+                </a>
+                <li data-src=""><span>Financing</span></li>
+                <button th:if="${userid == null}" type="button" id="loginBtn" class="login-btn"><span>LOGIN</span></button>
+                <a th:if="${userid != null}" th:href="${'/project/logout?id='+projectinfodetail.id}"><button type="button" class="login-btn"><span>LOGOUT</span></button></a>
+            </ul>
+        </div>
+
+
+<!--        <div class="menuButton">-->
+<!--            <button type="button" class="login-btn"><span>LOGIN</span></button>-->
+<!--        </div>-->
+        <!--<div class="menuFoot">-->
+        <!--<div class="btn-group">-->
+        <!--<input id="subeninput" checked="checked" type="radio" name="sublan"/>-->
+        <!--<label for="subeninput">En</label>-->
+        <!--<input id="subchinput" type="radio" name="sublan"/>-->
+        <!--<label for="subchinput">中文</label>-->
+        <!--</div>-->
+        <!--</div>-->
+
+
+    </div>
+    <!--注册登录-->
+    <div th:replace="index/login :: login"></div>
+    <div th:replace="index/register :: chooseType"></div>
+    <div th:replace="index/register :: userReg"></div>
+    <div th:replace="index/register :: agentReg"></div>
+</div>
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.springblade.client.mapper.UserJackpotMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="userJackpotResultMap" type="org.springblade.client.entity.UserJackpot">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user" property="createUser"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="project_id" property="projectId"/>
+        <result column="opening_id" property="openingId"/>
+        <result column="user_id" property="userId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="EOINo" property="EOINo"/>
+        <result column="EOINo4" property="EOINo4"/>
+        <result column="choose_status" property="chooseStatus"/>
+        <result column="two_choose" property="twoChoose"/>
+        <result column="raise hands" property="raise hands"/>
+    </resultMap>
+
+
+    <select id="selectUserJackpotPage" resultMap="userJackpotResultMap">
+        select * from house_user_jackpot where is_deleted = 0
+    </select>
+
+</mapper>

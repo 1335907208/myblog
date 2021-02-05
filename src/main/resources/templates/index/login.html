@@ -1,0 +1,79 @@
+<div class="login" th:fragment="login">
+    <!-- 遮罩层 -->
+    <div class="graybox"></div>
+    <div class="login_box">
+
+        <!-- 用户登录 -->
+        <div class="login_left">
+
+            <div class="login_top">
+                <a href="javascript:;" class="closeLogin">x</a>
+                <ul class="Registerswitch">
+                    <li id="userlogin">BUYER</li>
+                    <li id="agentlogin">AGENT</li>
+                </ul>
+                <div id="userlogin_div">
+                    <div class="group">
+                        <input type="text" id="Usernamelogin" placeholder="Please Enter Your Email" value="">
+                    </div>
+                    <div class="group">
+                        <input type="password" id="Passwordloginval" placeholder="Please Enter Your Password" value="">
+                    </div>
+                    <div class="remember">
+                        <input type="checkbox" id="input1" class="inputbox">
+                        <label for="input1">Remember me</label>
+                        <a href="javaScript:;" class="Forgot_pwd">Forgot Password?</a>
+                    </div>
+                </div>
+                <div id="Forgot_div" style="display: none;">
+                    <div class="group">
+                        <input type="text" id="forgot_mail" name="username" placeholder="Please Enter Your Email" value="">
+                    </div>
+                </div>
+                <div id="agentlogin_div" style="display:none;">
+                    <div class="group">
+                        <input type="text" id="agentnamelogin" placeholder="Please Enter Your Email">
+                    </div>
+                    <div class="group">
+                        <input type="password" id="agentPassword" placeholder="Please Enter Your Password">
+                    </div>
+                    <div class="remember">
+                        <input type="checkbox" id="input2" class="inputbox">
+                        <label for="input2">Remember me</label>
+                        <a href="javaScript:;" class="Forgot_pwd">Forget Password?</a>
+                    </div>
+                </div>
+                <div class="loginButton_user" id="loginButton_user">
+                    BUYER SIGN IN
+                </div>
+                <div class="loginButton_agert" id="loginButton_agert">
+                    AGENT SIGN IN
+                </div>
+                <div class="loginButton_forgot" id="loginButton_forgot">
+                    SEND MAIL
+                </div>
+            </div>
+
+            <div class="login_bottom">
+                Don't have an account?
+                <a href="#" class="register">Sign up</a>
+            </div>
+        </div>
+        <!-- 鍙宠竟鍥剧墖 -->
+        <!-- <div class="login_right">
+            <img src="../img/images/bottom4.jpg" alt="">
+        </div> -->
+
+        <!-- 遮罩层 -->
+    </div>
+
+<!--    <div class="graybox"></div>-->
+    <!-- 准备弹框 -->
+    <div class="submitEmailBox">
+        <p>Your MCC account activation email has been sent to your email address, please go to confirm, if not received, you can resend</p>
+        <div class="btns">
+            <span class="emailConfirm">Resend mail</span>
+            <span class="emailSubmit">Cancel</span>
+        </div>
+    </div>
+</div>

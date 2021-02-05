@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="inc/commons :: head(Member, user)">
+
+
+<body>
+<div th:replace="index/header :: header"></div>
+<div th:replace="userCenter/header :: user"></div>
+
+<div class="container">
+    <div class="registry">
+        <h2 class="page_title">My Application</h2>
+        <div id="showinterest">
+            <button id="exportToPdf" style="width: 200px;height: 50px;">Download PDF</button>
+            <div class="Application_information" id="export_content">
+                <div>
+                    <h3>Expression of Interest</h3>
+                    <table>
+                        <tr>
+                            <td>EOI NO:</td>
+                            <td rowspan="2" valign="top" style="text-align: left;width: 20%;border: 1px solid #666;"><span th:text="${'Agent & Contact (If any): ' + detail.agent + '(' + detail.agentContact + ')'}">Agent & Contact (If any):</span></td>
+                        </tr>
+                        <tr>
+                            <td>DATE:</td>
+                        </tr>
+                    </table>
+                    <p class="App_everyparticular">UNIT(S) DETAILS:</p>
+                    <table class="Intentionform_pdf table" border="1">
+                        <tr>
+                            <td>S/N</td>
+                            <td>BLK</td>
+                            <td>LEVEL</td>
+                            <td>UNIT</td>
+                            <td>TYPE</td>
+                        </tr>
+                        <tr th:if="${detail.choice01 != null}">
+                            <td>1</td>
+                            <td th:text="${detail.choiceFormat.choice01Block}"></td>
+                            <td th:text="${detail.choiceFormat.choice01Level}"></td>
+                            <td th:text="${detail.choiceFormat.choice01Unit}"></td>
+                            <td th:text="${detail.choiceFormat.choice01Type}"></td>
+                        </tr>
+                        <tr th:if="${detail.choice02 != null}">
+                            <td>2</td>
+                            <td th:text="${detail.choiceFormat.choice02Block}"></td>
+                            <td th:text="${detail.choiceFormat.choice02Level}"></td>
+                            <td th:text="${detail.choiceFormat.choice02Unit}"></td>
+                            <td th:text="${detail.choiceFormat.choice02Type}"></td>
+                        </tr>
+                        <tr th:if="${detail.choice03 != null}">
+                            <td>3</td>
+                            <td th:text="${detail.choiceFormat.choice03Block}"></td>
+                            <td th:text="${detail.choiceFormat.choice03Level}"></td>
+                            <td th:text="${detail.choiceFormat.choice03Unit}"></td>
+                            <td th:text="${detail.choiceFormat.choice03Type}"></td>
+                        </tr>
+                    </table>
+                    <p class="App_everyparticular">PURCHASER(S) DETAILS:</p>
+                    <table border="1" class="Intentionform_pdfs table table-center">
+                        <thead>
+                        <tr>
+                            <td>NAME</td>
+                            <td>GENDER<br/>
+                                (if Purchaser is an individual)</td>
+                            <td>NATIONALITY <br/>
+                                (if Singapore PR, please indicate Nationality)</td>
+                            <td>CONTACT </td>
+                            <td>E-mail</td>
+                        </tr>
+                        </thead>
+                        <tr>
+                            <td th:text="${detail.purchaser1}">NAME</td>
+                            <td th:text="${detail.gender1 == 1 ? 'Male' : 'Female'}">GENDER</td>
+                            <td th:text="${detail.nationality1}">NATIONALITY</td>
+                            <td th:text="${detail.contact1}">CONTACT </td>
+                            <td th:text="${detail.email1}">E-mail</td>
+                        </tr>
+                        <tr th:if="${detail.purchaser2 != null}">
+                            <td th:text="${detail.purchaser2}">NAME</td>
+                            <td th:text="${detail.gender2 == 2 ? 'Male' : 'Female'}">GENDER</td>
+                            <td th:text="${detail.nationality2}">NATIONALITY</td>
+                            <td th:text="${detail.contact2}">CONTACT </td>
+                            <td th:text="${detail.email2}">E-mail</td>
+                        </tr>
+                        <tr>
+                            <td>ADDRESS</td>
+                            <td colspan="4" th:text="${detail.address}"></td>
+                        </tr>
+                    </table>
+                    <span style="font-style:oblique;">
+                    <p>Please note that this reservation "DOES NOT CONSTITUTE" a sale and developer shall not be liable for any claims whatsoever.</p>
+                    <p>We are fully aware that developer will not warrant, assure or confirm that the Intending purchaser/s will be able to secure unit(s) that they have selected.</p><br />
+                    <p>My/Our purchase is subject to the terms and conditions contained in the OTP which may be issued to me/us thereafter.</p>
+                    <p>I/We confirm that this request is merely an expression of interest without any liability to you if you are subsequently unable to issue the OTP for the unit/s to me/us for any reason whatsoever.</p>
+                    </span>
+                    <hr/>
+                </div>
+                <div>
+                    <h4>IMPORTANT NOTES AND PURCHASER DECLARATION</h4>
+                    <p class="App_everyparticular">A.ELIGIBILITY</p>
+                    <p>1.The purchaser(s) must be 21 YEARS OLD or above and must be eligible to purchase private property by virtue of the Housing & Development Act/Executive Condominium Housing Scheme Act.</p>
+                    <p>2.The Option to Purchase will be issued to the person(s) named only. No assignment, addition, deletion or substitution of names will be allowed once the Option to Purchase is issued.</p>
+                    <p>3.Please note that the Option to Purchase is not subject to approval of Housing Loan.</p>
+                    <p>4.I/We hereby confirm my/our eligibility to purchase private residential property under the existing HDB rules & regulations, if applicable.</p>
+                    <p class="App_everyparticular" id="App_everyparticular_B">B.PERSONAL DATA</p>
+                    <p>5.I/We hereby confirm that we agree and consent to developer, its officers, employees and associates to collect the Personal Data listed in this form. </p>
+                    <p>6.I/We also consent to the disclosure of our personal data to the related corporations, associates, independent contractors and other third parties that developer is associated with, but only in connection with the purposes required for the purchase of the Property and/or Unit(s) listed in the form.</p>
+                    <p>7.I/We, undertake to notify developer if I/we wish to withdraw the above consent for the purposes stated in this form.</p>
+                    <p class="App_everyparticular" id="App_everyparticular_C">C.ANTI MONEY LAUNDERING AND COUNTERING TERRORISM FINANCING</p>
+                    <p>8.I/We understand that Developer may require further declaration, information or documents from me as part of their compliance with prevailing money laundering and countering terrorism financing laws.</p>
+                    <p>9.It is further declared that I am/we are or the beneficial owner is/beneficial owners are (applicable to 9(b), (c) and (d) if there is a beneficial owner/there are beneficial owners in the transaction):</p>
+                    <table border="1" class="table">
+                        <tr>
+                            <td>(a)</td>
+                            <td>the beneficial owner(s) of the property which will be purchased</td>
+                            <td>Yes/No</td>
+                        </tr>
+                        <tr>
+                            <td>(b)</td>
+                            <td>not a politically exposed person (“PEP”) i.e. holding a position with prominent public function (includes Head  of  State  or government, government ministers, senior civil or public servants, senior judicial or military officials, senior 	executives of state owned corporations or senior officials of political parties, members of the legislature and senior management of international organisations)</td>
+                            <td>Yes/No</td>
+                        </tr>
+                        <tr>
+                            <td>(c)</td>
+                            <td>not a family member of a PEP i.e. a parent/step-parent/child/step-child/adopted  child/spouse/sibling/step-sibling/adopted sibling</td>
+                            <td>Yes/No</td>
+                        </tr>
+                        <tr>
+                            <td>(d)</td>
+                            <td>not a close associate of the PEP i.e. closely connected to the PEP, either socially or professionally</td>
+                            <td>Yes/No</td>
+                        </tr>
+                    </table>
+                    <p>10.Please provide more details if you have declared “No” for any of the above:</p>
+                    <p>_________________________________________________________________</p>
+                    <table>
+                        <tr>
+                            <td>____________________________</td>
+                            <td>____________________________</td>
+                        </tr>
+                        <tr>
+                            <td>Signature of Intending Purchaser</td>
+                            <td>Signature of Intending Purchaser</td>
+                        </tr>
+                        <tr>
+                            <td>Name:</td>
+                            <td>Name:</td>
+                        </tr>
+                        <tr>
+                            <td>NRIC:</td>
+                            <td>NRIC:</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+<div th:replace="footer :: footer"></div>
+
+
+<th:block th:replace="inc/commons :: foot(user)"></th:block>
+
+<script src="https://cdn.bootcss.com/jspdf/1.5.3/jspdf.debug.js"></script>
+<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+<script th:inline='javascript' type="text/javascript">
+    var downPdf = document.getElementById("exportToPdf");
+    downPdf.onclick = function () {
+        var defHei = $('#export_content>div')[0].scrollHeight
+        if(defHei<1300){
+            $('#export_content>div')[0].style.marginBottom = 1300 - defHei + 'px'
+        }
+        html2canvas(
+            document.getElementById("export_content"),
+            {
+                dpi: 172,//导出pdf清晰度
+                onrendered: function (canvas) {
+                    var contentWidth = canvas.width;
+                    var contentHeight = canvas.height;
+
+                    //一页pdf显示html页面生成的canvas高度;
+                    var pageHeight = contentWidth / 592.28 * 841.89;
+                    //未生成pdf的html页面高度
+                    var leftHeight = contentHeight;
+                    //pdf页面偏移
+                    var position = 0;
+                    //html页面生成的canvas在pdf中图片的宽高（a4纸的尺寸[595.28,841.89]）
+                    var imgWidth = 595.28;
+                    var imgHeight = 592.28 / contentWidth * contentHeight;
+
+                    var pageData = canvas.toDataURL('image/jpeg', 1.0);
+                    var pdf = new jsPDF('', 'pt', 'a4');
+
+                    //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+                    //当内容未超过pdf一页显示的范围，无需分页
+                    if (leftHeight < pageHeight) {
+                        pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
+                    } else {
+                        while (leftHeight > 0) {
+                            pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+                            leftHeight -= pageHeight;
+                            position -= 841.89;
+                            //避免添加空白页
+                            if (leftHeight > 0) {
+                                pdf.addPage();
+                            }
+                        }
+                    }
+                    pdf.save('content.pdf');
+                },
+                //背景设为白色（默认为黑色）
+                background: "#fff"
+            })
+        $('#export_content>div')[0].style.marginBottom = '0'
+    }
+</script>
+
+</body>
+
+</html>

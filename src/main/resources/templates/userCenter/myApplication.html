@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="inc/commons :: head(Member, user)">
+
+
+
+<body>
+<div th:replace="index/header :: header"></div>
+<div th:replace="userCenter/header :: user"></div>
+
+<div class="container">
+    <div class="registry">
+        <h2 class="page_title">My Application</h2>
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th>#</th>
+                <th>Order No.</th>
+                <th>EOI No.</th>
+                <th>Project</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="project, stat : ${applicationList}">
+                <th scope="row" th:text="${stat.index + 1}">1</th>
+                <td th:text="${project.ordernumber}"></td>
+                <td th:text="${project.EOINo == null ? ' - ' : project.EOINo}"></td>
+                <td th:text="${project.projectId}"></td>
+                <td><span class="badge badge-warning" th:text="${project.agentConfirm == 0 ? 'Waiting Agent Confirm' : (project.mccConfirm == 0 ? 'Waiting Mcc Confirm' : 'Confirmed')}"></span></td>
+                <td><a th:href="${'?id=' + project.id}" class="btn btn-primary btn-sm">View</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+<div th:replace="footer :: footer"></div>
+
+
+<th:block th:replace="inc/commons :: foot(user)"></th:block>
+
+
+<script th:inline='javascript'>
+    var identity=  $('#identity').val()
+
+</script>
+</body>
+
+</html>

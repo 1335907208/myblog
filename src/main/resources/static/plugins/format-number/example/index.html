@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>文本框数字格式化</title>
+</head>
+<body>
+	<script src="../src/jquery-1.11.2.js"></script>
+	<script src="../src/format-number.js"></script>
+	<div>整数：<input type="text" data-type="int" data-name="int"/></div>
+	<script>
+		var n1 = new FormatNumber();
+		n1.init({trigger:$('[data-type="int"]'),decimal:0});
+	</script>
+	<div>整数可为负：<input type="text" data-type="int2" data-name="int2"/></div>
+	<script>
+		var n2 = new FormatNumber();
+		n2.init({trigger:$('[data-type="int2"]'),decimal:0,minus:true});
+	</script>
+	<div>两位小数(默认)：<input type="text" class="has-minus" value="1112212.221" data-type="number" data-name="as" /></div>
+	<script>
+		var n3 = new FormatNumber();
+		n3.init({trigger:$('[data-type="number"]')});
+	</script>
+	<div>3位小数并且可为负数：<input type="text" data-name="pc" data-type="pecent"/></div>
+	<script>
+		var n4 = new FormatNumber();
+		n4.init({trigger:$('[data-type="pecent"]'),decimal:3,minus:true});
+	</script>
+	<div>4位小数并且不可为负数：<input type="text" data-name="pc" data-type="pecent2"/></div>
+	<script>
+		var n5 = new FormatNumber();
+		n5.init({trigger:$('[data-type="pecent2"]'),decimal:4});
+	</script>
+	<div>标签：123123123.13211=<span id="sp_number">123123123.11</span></div>
+	<script>
+	$('#sp_number').FormatNumber({decimal:4})
+	</script>
+</body>
+</html>

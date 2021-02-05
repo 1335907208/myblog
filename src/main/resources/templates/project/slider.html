@@ -1,0 +1,117 @@
+<div class="" id="sliderBox" th:fragment="slider" xmlns:th="http://www.w3.org/1999/xhtml"
+     xmlns:display="http://www.w3.org/1999/xhtml">
+    <div class="content">
+        <div class="swiper-container banner-swiper" id="videos">
+            <div class="swiper-wrapper">
+                <!--                <div class="swiper-slide">-->
+                <!--                    <video id="video-details" class="slider-video" autoplay="" muted="" poster="">-->
+                <!--                        <source src="/media/1.mp4" type="video/mp4">-->
+                <!--                    </video>-->
+                <!--                    &lt;!&ndash; <video class="vjs-tech" playsinline="playsinline" webkit-playsinline="true"-->
+                <!--                           x5-playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="false"-->
+                <!--                           id="vjs_video_433_html5_api" tabindex="-1" preload="false" autoplay=""-->
+                <!--                           src="/media/1.mp4"></video>-->
+                <!--                    </video> &ndash;&gt;-->
+                <!--                </div>-->
+                <div class="swiper-slide" th:each="headerSwiper : ${headerSwipers}">
+                    <div class="swiper-slide"
+                         th:style="'background: url('+${prefixUrl}+${headerSwiper.url}+') center/cover no-repeat;'"></div>
+                </div>
+                <!--                <div class="swiper-slide">-->
+                <!--                    <div class="swiper-slide"-->
+                <!--                         style="background: url('/media/lead/banner2.jpg') center/cover no-repeat;"></div>-->
+                <!--                </div>-->
+                <!--                <div class="swiper-slide">-->
+                <!--                    <div class="swiper-slide"-->
+                <!--                         style="background: url('/media/lead/banner3.png') center/cover no-repeat;"></div>-->
+                <!--                </div>-->
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="info-box">
+                <div class="boxTxt">
+                    <div class="txtFirst">
+                        <div class="pointH"></div>
+                        <span class="txtType">FOR SALE</span></div>
+                    <div class="txtName" style="white-space: nowrap;" th:text="${projectinfodetail.name}">Queens Peak</div>
+                    <div class="detail1" th:if="${projectinfodetail.address != ''}">
+                        <div class="logo_point"><i class="iconfont icondizhi"></i></div>
+                        <span class="txtRise" th:text="${projectinfodetail.address}">District 03,Queenstown,Dundee Road</span>
+                    </div>
+                    <div class="detail1" th:if="${projectinfodetail.siteArea != ''}">
+                        <div class="draw_point"></div>
+                        <span class="txtRise"
+                              th:text="'Site Area: '+${projectinfodetail.siteArea }">Site Area: </span></div>
+                    <div class="detail1" th:if="${projectinfodetail.landArea != ''}">
+                        <div class="draw_point1"></div>
+                        <span class="txtRise1" th:text="'GPR: '+${projectinfodetail.landArea}">GPR: </span>
+                    </div>
+                    <div class="detail1" th:if="${projectinfodetail.gfa != ''}">
+                        <div class="draw_point1"></div>
+                        <span class="txtRise1" th:text="'GFA: '+${projectinfodetail.gfa}">GFA: </span>
+                    </div>
+                    <div class="detail1" th:if="${projectinfodetail.tenure != ''}">
+                        <div class="draw_point1"></div>
+                        <span class="txtRise1" th:text="'Lease Period:'+${projectinfodetail.tenure}">Lease Period:</span>
+                    </div>
+                    <div class="detail1" th:if="${projectinfodetail.bicyclelots != null}">
+                        <div class="draw_point1"></div>
+                        <span class="txtRise1" th:text="'Number of Housing Units: '+${projectinfodetail.bicyclelots}">Number of Housing Units:</span>
+                    </div>
+                    <div class="detail1" th:if="${projectinfodetail.storeys != null}">
+                        <div class="draw_point1"></div>
+                        <span class="txtRise1" th:text="'No. of Storeys: '+${projectinfodetail.storeys}">No. of Storeys: </span>
+                    </div>
+                    <div class="detail1" th:if="${projectinfodetail.blocks != null}">
+                        <div class="draw_point1"></div>
+                        <span class="txtRise1"
+                              th:text="'No. of Blocks: '+${projectinfodetail.blocks}">No. of Blocks: </span>
+                    </div>
+                    <div class="detail1" th:if="${projectinfodetail.top != ''}">
+
+                        <div class="draw_point1"></div>
+                        <span class="txtRise1" th:text="'TOP: '+${projectinfodetail.top}">TOP:</span>
+                    </div>
+                    <div class="detail1">
+                        <a th:if="${projectinfodetail.openStatus == 1 && userid == null}" th:href="${'/?login=openingQuotation&projectId='+projectinfodetail.id}">
+                            <button type="button" class="btn">
+                                <span>APPLY NOW</span>
+                            </button>
+                        </a>
+                        <a th:if="${projectinfodetail.openStatus == 1 && userid != null}" th:href="${'/userCenter/openingQuotation?id='+projectinfodetail.id}">
+                            <button type="button" class="btn">
+                                <span>APPLY NOW</span>
+                            </button>
+                        </a>
+
+                        <a th:if="${(projectinfodetail.openStatus == 0 || projectinfodetail.openStatus == 4 || projectinfodetail.openStatus == 3) && userid == null}" th:href="${'/?login=application&projectId='+projectinfodetail.id}">
+                            <button type="button" class="btn">
+                                <span>APPLY NOW</span>
+                            </button>
+                        </a>
+                        <a th:if="${(projectinfodetail.openStatus == 0 || projectinfodetail.openStatus == 4 || projectinfodetail.openStatus == 3) && userid != null}" th:href="${'/userCenter/application?projectId='+projectinfodetail.id}">
+                            <button type="button" class="btn">
+                                <span>APPLY NOW</span>
+                            </button>
+                        </a>
+
+                        <a th:if="${projectinfodetail.openStatus == 2 && userid == null}" th:href="${'/?login=daily&projectId='+projectinfodetail.id}">
+                            <button type="button" class="btn">
+                                <span>APPLY NOW</span>
+                            </button>
+                        </a>
+                        <a th:if="${projectinfodetail.openStatus == 2 && userid != null}" th:href="${'/userCenter/daily?id='+projectinfodetail.id}">
+                            <button type="button" class="btn">
+                                <span>APPLY NOW</span>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--<div class="swiper-button-prev"></div>-->
+        <!--<div class="swiper-button-next"></div>-->
+
+    </div>
+</div>

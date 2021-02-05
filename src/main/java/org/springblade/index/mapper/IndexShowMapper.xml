@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.springblade.index.mapper.IndexShowMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="indexShowResultMap" type="org.springblade.index.entity.IndexShow">
+        <id column="id" property="id"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="status" property="status"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="name" property="name"/>
+        <result column="url_type" property="urlType"/>
+        <result column="url" property="url"/>
+        <result column="memo1" property="memo1"/>
+        <result column="memo2" property="memo2"/>
+        <result column="memo3" property="memo3"/>
+        <result column="memo4" property="memo4"/>
+        <result column="memo5" property="memo5"/>
+        <result column="project_id" property="projectId"/>
+        <result column="sort" property="sort"/>
+        <result column="id_push" property="idPush"/>
+        <result column="btn_show" property="btnShow"/>
+        <result column="btn_text" property="btnText"/>
+        <result column="link_model" property="linkModel"/>
+        <result column="link_url" property="linkUrl"/>
+        <result column="video_duration" property="videoDuration"/>
+    </resultMap>
+
+
+    <select id="selectIndexShowPage" resultMap="indexShowResultMap">
+        select * from house_index_show where is_deleted = 0
+    </select>
+
+</mapper>

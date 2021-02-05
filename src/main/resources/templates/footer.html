@@ -1,0 +1,123 @@
+<div id="footer" class="footer"  th:fragment="footer">
+
+    <div class="row">
+        <div class="col-sm region-col">
+            <div class="f-list">
+                <div class="f-tit">MCC LAND (SINGAPORE) PTE LTD</div>
+                <a class="f-item">21 Bukit Batok Crescent,</a>
+                <a class="f-item">#19-77 WCEGA Tower,</a>
+                <a class="f-item">Singapore 658065</a>
+                <a class="f-item"></a>
+                <a class="f-item">Email: sales@mcc.sg</a>
+            </div>
+
+        </div>
+        <div class="col-sm region-col">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="f-list">
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="f-tit">Residential</div>
+                                <a href="#" class="f-item">Current Projects</a>
+<!--                                <a class="f-item">Queens Peak</a>-->
+                                <a th:each="project : ${projects}"
+                                   th:if="${project.statusType == 1 && project.constructionType == 1 && project.locationType != 2}"
+                                   th:text="${project.name}"
+                                   th:href="${project.linkType==1?project.siteUrl:('/project?id='+project.id)}"
+                                   class="f-item-a"
+                                ></a>
+                                <a href="#" class="f-item">Upcoming Projects</a>
+<!--                                <a class="f-item">The Landmark</a>-->
+<!--                                <a class="f-item">Bernam Street</a>-->
+<!--                                <a class="f-item">Canberra Link EC</a>-->
+                                <a th:each="project : ${projects}"
+                                   th:if="${project.statusType == 2 && project.constructionType == 1 && project.locationType != 2}"
+                                   th:text="${project.name}"
+                                   th:href="${project.linkType==1?project.siteUrl:('/project?id='+project.id)}"
+                                   class="f-item-a"
+                                ></a>
+                            </div>
+                            <div class="col-sm">
+                                <div class="f-tit">&nbsp;</div>
+                                <a href="#" class="f-item">Completed Projects</a>
+<!--                                <a class="f-item">The Alps Residences</a>-->
+<!--                                <a class="f-item">Northwave EC</a>-->
+<!--                                <a class="f-item">The Poiz Residences</a>-->
+<!--                                <a class="f-item">TRE Residences</a>-->
+<!--                                <a class="f-item">The Santorini</a>-->
+<!--                                <a class="f-item">Sea Horizon EC</a>-->
+<!--                                <a class="f-item">Forestville EC</a>-->
+<!--                                <a class="f-item">One Canberra EC</a>-->
+<!--                                <a class="f-item">The Nautical</a>-->
+<!--                                <a class="f-item">Canberra Residences</a>-->
+<!--                                <a class="f-item">The Canopy EC</a>-->
+
+                                <a th:each="project : ${projects}"
+                                   th:if="${project.statusType == 3 && project.constructionType == 1 && project.locationType != 2}"
+                                   th:text="${project.name}"
+                                   th:href="${project.linkType==1?project.siteUrl:('/project?id='+project.id)}"
+                                   class="f-item-a"
+                                ></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm region-col">
+            <div class="f-list">
+                <div class="f-tit">Commercial</div>
+<!--                <a class="f-item">The Poiz Centre</a>-->
+                <a th:each="project : ${projects}"
+                   th:if="${project.constructionType == 3 && project.locationType != 2}"
+                   th:text="${project.name}"
+                   th:href="${project.linkType==1?project.siteUrl:('/project?id='+project.id)}"
+                   class="f-item"
+                ></a>
+                <div class="f-tit" style="margin-top: 40px;">OVERSEAS</div>
+<!--                <a class="f-item">Sky Villa @ Phnom Penh, Cambodia</a>-->
+<!--                <a class="f-item">Living Star @ Jakarta, Indonesia</a>-->
+                <a th:each="project : ${projects}"
+                   th:if="${project.locationType == 2}"
+                   th:text="${project.name}"
+                   th:href="${project.linkType==1?project.siteUrl:('/project?id='+project.id)}"
+                   class="f-item"
+                ></a>
+            </div>
+        </div>
+        <div class="col-sm region-col noline">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="f-list">
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="f-tit">CONTACT US</div>
+                                <a class="f-item f-sub-tit">General&nbsp;Enquiry</a>
+                                <a class="f-item">T: +65 6508 2288</a>
+                                <a class="f-item">F: +65 6508 2289</a>
+                                <a class="f-item">E:&nbsp;sales@mcc.sg</a>
+                                <a class="f-item"></a></div>
+                            <div class="col-sm">
+                                <div class="f-tit">&nbsp;</div>
+                                <a class="f-item f-sub-tit">The Poiz Centre Hotline</a>
+                                <a class="f-item">T: +65 8338 7800</a>
+                                <a class="f-item">E: contact@thepoizcentre.com.sg</a>
+                                <a class="f-item"></a>
+                                <a class="f-item f-sub-tit">Sky Villa @ Phnom Penh (Cambodia)</a>
+                                <a class="f-item f-sub-tit">Sales Enquiry</a>
+                                <a class="f-item">T: +855 99-821919</a>
+                                <a class="f-item">E: skyvillasales@mcc.sg</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

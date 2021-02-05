@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="inc/commons :: head(Member, user)">
+
+
+<body>
+<div th:replace="index/header :: header"></div>
+<div th:replace="userCenter/header :: user"></div>
+
+<div class="container">
+    <div class="registry">
+        <h2 class="page_title">My Order</h2>
+        <div id="showinterest">
+            <button id="exportToPdf" style="width: 200px;height: 50px;">Download PDF</button>
+            <div class="Application_information" id="export_content">
+                <div>
+                    <div id="top_ul">
+                        <ul>
+                            <li class="li-text"><span>OTP NO:</span></li> <li class="ul_li_input"><input th:value="${detail.application.orderNumber}"/></li>
+                            <li class="li-text"><span>OPTION DATE :</span></li> <li class="ul_li_input"><input type="text" th:value="${createTime}"/></li>
+                            <li class="li-text"><span>AGENT:</span></li> <li class="ul_li_input"><input type="text" th:value="${detail.application.agent}"/></li>
+                            <li class="li-text"><span>CONTACT NO:</span></li> <li class="ul_li_input"><input type="text" th:value="${detail.application.agentContact}"/></li>
+                            <li class="li-text"><span>CO-BROKE</span></li> <li class="ul_li_input"><input type="text"/></li>
+                            <li class="li-texts"><span>(Agency/Agent/Contact)</span></li> <li class="ul_li_inputs"><input type="text" th:value="${detail.application.agency}"/></li>
+                        </ul>
+                    </div>
+                    <div class="clear-float"></div>
+                    <hr/>
+                    <h3><b>PURCHASER’S PARTICULARS FORM</b></h3>
+                    <div id="fgx"></div>
+                    <div id="xinxi">
+                        <ul>
+                            <li><span>Blk No:</span> <input type="text"/></li>
+                            <li><span>Unit No:</span> <input type="text"/></li>
+                            <li><span>Unit Type:</span> <input type="text"/></li>
+                            <li><span>Strata Area:</span> <input type="text"/><span>sq.m</span></li>
+                        </ul>
+                    </div>
+                    <div class="clear-float"></div>
+                    <div class="Price">
+                        <span>Purchase Price: S$</span>
+                        <div>
+                            <input type="text"/>
+                        </div>
+                    </div>
+                    <div class="App_everyparticular">Particulars of Purchaser(s)</div>
+                    <table border="1" class="Intentionform_pdfs table table-center">
+                        <thead>
+                        <tr>
+                            <td>NAME OF PURCHASER</td>
+                            <td>GENDER<br/>
+                                (if Purchaser is an individual)
+                            </td>
+                            <td>NRIC/IC/ <br/>
+                                Passport No./<br/>
+                                UEN
+                            </td>
+                            <td>NATIONALITY <br/>
+                                (if Singapore PR, please indicate Nationality)
+                            </td>
+                            <td>E-mail</td>
+                        </tr>
+                        </thead>
+                        <tr th:each="user : ${ detail.purchaseIntentVO.purchaseIntentUserList}">
+                            <td th:text="${user.name}">NAME</td>
+                            <td th:text="${user.gender == 1 ? 'Male' : 'Female'}">GENDER</td>
+                            <td th:text="${user.passportNo}">NATIONALITY</td>
+                            <td th:text="${user.nationality}">CONTACT </td>
+                            <td th:text="${user.email}">E-mail</td>
+                        </tr>
+                    </table>
+                    <div id="Address">
+                        <div class="Address_div1">
+                            <span>Correspondence Address (or Company’s Registered Address):</span>
+                            <div>
+                                <input type="text" th:value="${detail.userBuyer.address}"/>
+                            </div>
+                        </div>
+                        <div class="Address_div2">
+                            <span>(S)</span>
+                            <div>
+                                <input type="text"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Purchaser">
+                        <span>Contact No (Purchaser): (HP)</span>
+                        <div>
+                            <input type="text" th:value="${detail.userBuyer.mobile}"/>
+                        </div>
+                    </div>
+                    <div id="Company">
+                        <span>Purchaser's Solicitors (Company & address):</span>
+                        <div>
+                            <input type="text"/>
+                        </div>
+                    </div>
+                    <div id="Tel">
+                        <span>Contact Person & Tel:</span>
+                        <div>
+                            <input type="text"/>
+                        </div>
+                    </div>
+                    <div id="following">
+                        <div>
+                            <p>I/We* hereby confirm and agree to the following:
+                            <ul>
+                                <li>1.   The Option to Purchase ("OTP") will only be issued to the above person(s) named under "Purchasers".</li>
+                                <li>2.   I/We understand that the OTP would not be assignable and any change, addition/deletion of name(s) will not be permitted once the option is granted.</li>
+                                <li>3.   I/We am/are aware that stamp duties are payable within 14 days from the date of exercise of the OTP.</li>
+                                <li>4.   I/We am/are aware that I/We am/are required to exercise the OTP and any non-exercise of the OTP would result in a 25% forfeiture of the booking fee.</li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+                    <div id="text_input">
+                        <div class="left_input">
+                            <input type="text"/>
+                        </div>
+                        <div class="right_input">
+                            <input type="text"/>
+                        </div>
+                    </div>
+                    <div id="text">
+                        <div class="left_text">
+                            <span>Signed by Purchaser(s)</span>
+                        </div>
+                        <div class="right_text">
+                            <span>Signed by Purchaser(s)</span>
+                        </div>
+                    </div>
+                    <div id="input_bottom">
+                        <input type="text"/>
+                    </div>
+                    <div id="USE">
+                        <span>FOR OFFICIAL USE:</span>
+                    </div>
+                    <div id="OFFICIAL">
+                        <div class="Fee">
+                            <span>5% Option Fee: S$</span>
+                            <div>
+                                <input type="text"/>
+                            </div>
+                        </div>
+                        <div class="Cheque">
+                            <span>Bank & Cheque No.:</span>
+                            <div>
+                                <input type="text"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Remarks"><span>Remarks:</span>
+                        <div><input type="text"/></div>
+                    </div>
+                    <div id="option">
+                        <div><span>All payments are to be made by cheque or cashier’s order to be crossed “Account Payee only” and drawn in favour of: </span></div>
+                        <div><span>“Malayan Banking Berhad for Project A/c No. 04013001219 of HY Realty (Dundee) Pte Ltd”</span></div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+<div th:replace="footer :: footer"></div>
+
+
+<th:block th:replace="inc/commons :: foot(user)"></th:block>
+
+<script src="https://cdn.bootcss.com/jspdf/1.5.3/jspdf.debug.js"></script>
+<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+<script th:inline='javascript' type="text/javascript">
+    var downPdf = document.getElementById("exportToPdf");
+    downPdf.onclick = function () {
+        var defHei = $('#export_content>div')[0].scrollHeight
+        if(defHei<1300){
+            $('#export_content>div')[0].style.marginBottom = 1300 - defHei + 'px'
+        }
+        html2canvas(
+            document.getElementById("export_content"),
+            {
+                dpi: 172,//导出pdf清晰度
+                onrendered: function (canvas) {
+                    var contentWidth = canvas.width;
+                    var contentHeight = canvas.height;
+
+                    //一页pdf显示html页面生成的canvas高度;
+                    var pageHeight = contentWidth / 592.28 * 841.89;
+                    //未生成pdf的html页面高度
+                    var leftHeight = contentHeight;
+                    //pdf页面偏移
+                    var position = 0;
+                    //html页面生成的canvas在pdf中图片的宽高（a4纸的尺寸[595.28,841.89]）
+                    var imgWidth = 595.28;
+                    var imgHeight = 592.28 / contentWidth * contentHeight;
+
+                    var pageData = canvas.toDataURL('image/jpeg', 1.0);
+                    var pdf = new jsPDF('', 'pt', 'a4');
+
+                    //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+                    //当内容未超过pdf一页显示的范围，无需分页
+                    if (leftHeight < pageHeight) {
+                        pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
+                    } else {
+                        while (leftHeight > 0) {
+                            pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+                            leftHeight -= pageHeight;
+                            position -= 841.89;
+                            //避免添加空白页
+                            if (leftHeight > 0) {
+                                pdf.addPage();
+                            }
+                        }
+                    }
+                    pdf.save('content.pdf');
+                },
+                //背景设为白色（默认为黑色）
+                background: "#fff"
+            })
+        $('#export_content>div')[0].style.marginBottom = '0'
+    }
+</script>
+
+</body>
+
+</html>

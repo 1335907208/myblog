@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="inc/commons :: head(Home, home)">
+<body>
+
+<div th:replace="index/header :: header"></div>
+<div id="body">
+    <!-- 首页轮播 -->
+
+    <div th:replace="index/slider :: slider"></div>
+
+
+    <!-- 项目切换swiper -->
+
+    <div th:replace="index/project :: project"></div>
+    <!-- 首页地图 -->
+
+
+    <div th:replace="index/map :: map"></div>
+
+</div>
+<!--最下方-->
+<div th:replace="footer :: footer"></div>
+
+<th:block th:replace="inc/commons :: foot(home)"></th:block>
+
+
+
+<!--<script th:inline='javascript' src="/js/header.js"></script>-->
+<!--<script th:inline='javascript' src="/js/finance.js"></script>-->
+
+<!--谷歌地图api引用-->
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0_k_01FtocVYtOw3mk0wDGLPL5L3fZ1E&libraries=&v=weekly"
+    defer
+></script>
+<script th:inline='javascript'>
+    var prefixUrl = [[${prefixUrl}]]
+    var headers = [[${headers}]]
+    var userid = [[${userid}]]
+
+    $(document).ready(function(){
+    });
+    // 3. 地图 map
+    Index.prototype.initMap = function () {
+
+        var listDataTemp__ = [[${listDataTemp}]];
+        var listDataTemp = []
+        if(Array.isArray(listDataTemp__)){
+            listDataTemp__.forEach(item => {
+                if(item.constructionType != 3 && item.constructionType != '3'){
+                    listDataTemp.push(item)
+                }
+            })
+        }
+
+        var IS_CHINA = false;
+        //select2 初始化
+        $('#indexMap .select-localtion').select2({
+            placeholder: 'Localtion',
+            minimumResultsForSearch: -1,
+            allowClear: true
+        });
+        $('#indexMap .select-status').select2({
+            placeholder: 'Status',
+            minimumResultsForSearch: -1,
+            allowClear: true
+        });
+        $('#indexMap .select-type').select2({
+            placeholder: 'Type',
+            minimumResultsForSearch: -1,
+            allowClear: true
+        });
+        $('#indexMap .select-bedrooms').select2({
+            placeholder: 'Bedrooms',
+            minimumResultsForSearch: -1,
+            allowClear: true
+        });
+        $('#indexMap .select-price').select2({
+            placeholder: 'Price',
+            minimumResultsForSearch: -1,
+            allowClear: true
+        });
+
+        var saleType = [{
+            imgUrl: '../img/map/marker/icon_orange.png',
+            backImgUrl: '../img/map/marker/icon_biglo_orange.png',
+            color: '#f26522',
+            type: 2
+        }, {
+            imgUrl: '../img/map/marker/icon_blue.png',
+            backImgUrl: '../img/map/marker/icon_biglo.png',
+            color: '#2c2cdd',
+            type: 1
+        }, {
+            imgUrl: '../img/map/marker/icon_hui.png',
+            backImgUrl: '../img/map/marker/icon_biglo_hui.png',
+            color: '#555',
+            type: 2
+        }];
+        console.log(listDataTemp)
+        var markerData = listDataTemp;
+        var listData = listDataTemp;
+        var defaultZoom = 14;
+        $("#indexMap .search-button").click(pointSearch);
+        //列表详情点击
+        // $("#indexMap .row-sea-horizon").click(function () {
+        //   window.location.href = "project.html";
+        // });
+
+        //地图初始化
+        function baiduMapInint() {
+
+            //地图初始化
+            // 百度地图API功能
+            var map = new BMap.Map("allmap"); // 创建Map实例
+            //清除覆盖物
+            map.getOverlays().forEach(item => {
+                map.removeOverlay(item);
+            })
+            map.centerAndZoom(new BMap.Point(103.84109, 1.315895), defaultZoom); // 初始化地图,设置中心点坐标和地图级别
+
+            map.enableScrollWheelZoom(true); //允许缩放
+            // map.disableScrollWheelZoom(); //禁止缩放
+            // map.disableDoubleClickZoom(); //禁止双击缩放
+
+            for (var i = 0; i < markerData.length; i++) {
+                //创建标注
+                var imgSrc = saleType[markerData[i].saleType - 1];
+                var pointSrc = new BMap.Point(markerData[i].location.split(',')[0], markerData[i].location.split(',')[1]);
+                var myIcon = new BMap.Icon(imgSrc.imgUrl, new BMap.Size(60, 71)); //自定义图标
+
+                var marker = new BMap.Marker(pointSrc, {
+                    icon: myIcon
+                });
+                // marker.addEventListener("click",mapGetPoint);
+                map.addOverlay(marker);
+
+                defultPointInint({
+                    id: markerData[i].id,
+                    name: markerData[i].name,
+                    saleType: markerData[i].saleType,
+                    storeys:markerData[i].storeys,
+                    blocks:markerData[i].blocks,
+                    linkType:markerData[i].linkType,
+                    siteUrl:markerData[i].siteUrl,
+                    bicyclelots:markerData[i].bicyclelots,
+                    landArea: markerData[i].landArea,
+                    address: markerData[i].address,
+                    blockImg: prefixUrl + markerData[i].previewImage,
+                    img: prefixUrl + imgSrc.imgUrl, //背景
+                    backImgUrl: imgSrc.backImgUrl,
+                    color: imgSrc.color, //颜色
+                    //count: markerData[i].blocks !== -1 ? markerData[i].blocks : 0, //右上角计数
+                    count: markerData[i].cansaleunits,
+                    cansaleunits: markerData[i].cansaleunits,
+                    size: {
+                        width: '60px',
+                        height: '71px'
+                    }, //icon大小
+                    point: pointSrc //点位
+                });
+            }
+            map.addEventListener("click", showInfo); //地图点击事件监听
+
+            var preMarker = {}; //储存当前点击的点
+
+
+            $("#indexMap .row-premium-property").click(mapShowInfo); //列表点击
+            $("#indexMap .title-back").click(mapInfoBack); //头部返回按钮
+
+            function showInfo(e) {
+                //console.log(e.point.lng + ", " + e.point.lat);
+            }
+
+            function mapGetPoint(e) {
+                //列表切换
+                mapShowInfo(e, 'click');
+            }
+
+            //点击右侧列表
+            function mapShowInfo(e, value, type) {
+                // $("#indexMap .house-list")[0].style.display = 'none';
+                // $("#indexMap .house-detail")[0].style.display = 'block';
+                if (value === 'click') {
+                    pointShow(e, type);
+                } else {
+                    var index = e.currentTarget.getAttribute("data-src");
+                    var imgSrc = saleType[markerData[index].saleType - 1];
+                    var temp = {
+                        id: markerData[index].id,
+                        name: markerData[index].name,
+                        storeys:markerData[index].storeys,
+                        saleType: markerData[index].saleType,
+                        linkType:markerData[index].linkType,
+                        siteUrl:markerData[index].siteUrl,
+                        blocks:markerData[index].blocks,
+                        //landArea: markerData[index].landArea,
+                        bicyclelots:markerData[index].bicyclelots,
+                        address: markerData[index].address,
+                        blockImg: prefixUrl + markerData[index].previewImage,
+                        img: prefixUrl + imgSrc.imgUrl, //背景
+                        backImgUrl: imgSrc.backImgUrl,
+                        color: imgSrc.color, //颜色
+                        count: markerData[index].cansaleunits,
+                        cansaleunits: markerData[index].cansaleunits,
+                        size: {
+                            width: '60px',
+                            height: '71px'
+                        }, //icon大小
+                        point: pointSrc //点位
+                    };
+                    pointShow(map.getOverlays()[index], temp);
+                }
+            }
+            //点击列表返回按钮
+            function mapInfoBack() {
+                $("#indexMap .house-list")[0].style.display = 'block';
+                $("#indexMap .house-detail")[0].style.display = 'none';
+            }
+
+            //点位的信息展示
+            function pointShow(e, type) {
+                var currentPoint = e.currentTarget ? e.currentTarget.point : e.point;
+                map.panTo(new BMap.Point(currentPoint.lng, currentPoint.lat + 0.02));
+                var allOverlay = map.getOverlays();
+                map.removeOverlay(preMarker);
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = allOverlay[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var item = _step.value;
+
+                        if (item.V) {
+                            if (item.V.id === 'pointInfoWindow') {
+                                map.removeOverlay(item);
+                            }
+                        }
+                        //如果点击元素在baidumap里面找到，进行遮盖物的添加
+                        if (currentPoint == item || currentPoint == item.point) {
+                            var ComplexCustomOverlay1 = function ComplexCustomOverlay1(point) {
+                                this._point1 = point;
+                            };
+
+                            ComplexCustomOverlay1.prototype = new BMap.Overlay();
+
+                            //初始化信息窗口
+                            ComplexCustomOverlay1.prototype.initialize = function (map1) {
+                                this._map = map1;
+                                var div = this._div = document.createElement("div");
+                                var img = document.createElement("img");
+                                img.setAttribute('src', type.blockImg);
+                                img.style.width = '95px';
+                                img.style.height = '95px';
+                                img.style.borderRadius = '50%';
+
+                                div.style.width = '187px';
+                                div.style.height = '200px';
+                                div.style.paddingTop = '26px';
+                                div.style.position = 'relative';
+
+                                div.style.textAlign = 'center';
+                                div.appendChild(img);
+                                div.style.backgroundImage = 'url(' + type.backImgUrl + ')';
+                                div.style.position = "absolute";
+                                div.style.zIndex = "99";
+
+                                if(type.count){
+                                    var countElement = document.createElement("span");
+
+                                    countElement.style.color = '#fff';
+                                    countElement.innerText = type.count;
+                                    countElement.style.position = 'absolute';
+                                    countElement.style.right = '20px';
+                                    countElement.style.top = '20px';
+                                    countElement.style.display = 'inline-block';
+                                    countElement.style.width = '50px';
+                                    countElement.style.lineHeight = '35px';
+                                    countElement.style.backgroundColor = type.color;
+                                    countElement.style.borderRadius = '5px';
+                                    div.appendChild(countElement);
+                                }
+                                // var house = this._house = document.createElement("img")
+                                // house.setAttribute('src','../../../img/map/marker/icon_house.png')
+                                // house.style.position = "absolute";
+                                // house.style.zIndex = "999";
+
+                                map.getPanes().labelPane.appendChild(div);
+                                // map.getPanes().labelPane.appendChild(house);
+                                return div;
+                            };
+                            //设置信息窗口位置
+                            ComplexCustomOverlay1.prototype.draw = function () {
+                                var map = this._map;
+                                var pixel = map.pointToOverlayPixel(this._point1);
+                                if (this._div.offsetWidth > 0 && this._div.offsetHeight > 0) {
+                                    this._div.style.left = pixel.x - this._div.offsetWidth / 2 + "px";
+                                    this._div.style.top = pixel.y - this._div.offsetHeight + 64 + "px";
+                                    //this._house.style.left = pixel.x -(this._house.offsetWidth/2)  + "px";
+                                    //this._house.style.top  = pixel.y -this._house.offsetHeight - 15+ "px";
+                                } else {
+                                    this._div.style.left = "-9999px";
+                                    this._div.style.top = "-9999px";
+                                    // this._house.style.left = "-9999px";
+                                    // this._house.style.top  = "-9999px";
+                                }
+                            };
+
+                            var myCompOverlay1 = new ComplexCustomOverlay1(new BMap.Point(currentPoint.lng, currentPoint.lat));
+
+                            map.addOverlay(myCompOverlay1);
+                            preMarker = myCompOverlay1;
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+
+                function ComplexCustomOverlay(point) {
+                    this._point = point;
+                }
+                ComplexCustomOverlay.prototype = new BMap.Overlay();
+
+                //初始化信息窗口
+                ComplexCustomOverlay.prototype.initialize = function (map1) {
+                    this._map = map1;
+                    // var div = this._div = $(".point-info-window")[0]
+                    var temp = this.cerateInfoWindow();
+                    var div = this._div = $(temp)[0];
+                    div.style.display = 'block';
+                    div.style.border = '5px solid ' + type.color;
+                    $(".point-info-window").remove();
+                    map.getPanes().labelPane.appendChild(div);
+                    //点位详情的detail的按钮跳转
+                    $("#indexMap .point-detail").click(function (e) {
+                        var URL = type.linkType == 1 ? type.siteUrl : '/project?id=' + type.id
+                        window.location.href=URL;
+                    });
+                    return div;
+                };
+                //设置信息窗口位置
+                ComplexCustomOverlay.prototype.draw = function () {
+                    var map = this._map;
+                    var pixel = map.pointToOverlayPixel(this._point);
+                    this._div.style.left = pixel.x - (this._div.offsetWidth / 2 - 8) + "px";
+                    this._div.style.top = pixel.y - this._div.offsetHeight - 120 + "px";
+                };
+
+                var myCompOverlay = new ComplexCustomOverlay(new BMap.Point(currentPoint.lng, currentPoint.lat));
+
+                //设置信息窗口位置
+                ComplexCustomOverlay.prototype.cerateInfoWindow = function (data) {
+                    var temp = '<div class="point-info-window">' + '  <img class="img-infowindow" src="' + type.blockImg + '" alt="">' + '  <div class="title">' + '    <span> '+type.name+ '</span>' + '  </div>' + '  <div class="point">' + '    <img class="img-point" src="../../../img/map/icon_point.png" alt="">' + '    <span>' + type.address + '</span>' + '  </div>' +'  <div class="footer">'  +'<span>'+'Number of Housing Units:'+type.bicyclelots+'</span>'+ '  </div>'+ '  <div class="footer">' + '    <span>'+'No. of Storeys:'+type.storeys+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+'No. of Blocks:'+type.blocks+'</span>' + '  </div>' + '<button class="point-detail">DETAILS>></button>' + '</div>';
+
+                    return temp;
+                };
+                map.addOverlay(myCompOverlay);
+            }
+
+            //默认点位初始化
+            function defultPointInint(prototype) {
+                var currentPoint = prototype.point;
+                var imgUrl = prototype.img;
+                var backImgUrl = prototype.backImgUrl;
+                var cansaleunits = prototype.cansaleunits;
+                var color = prototype.color;
+                var size = prototype.size;
+                var blockImg = prototype.blockImg;
+
+                var allOverlay = map.getOverlays();
+                var _iteratorNormalCompletion2 = true;
+                var _didIteratorError2 = false;
+                var _iteratorError2 = undefined;
+
+                try {
+                    for (var _iterator2 = allOverlay[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                        var item = _step2.value;
+
+                        var temp = item.point || {};
+                        if (currentPoint.lng === temp.lng && currentPoint.lat === temp.lat) {
+
+                            item.addEventListener("click", function (e) {
+                                mapShowInfo(e, 'click', prototype);
+                            });
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError2 = true;
+                    _iteratorError2 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                            _iterator2.return();
+                        }
+                    } finally {
+                        if (_didIteratorError2) {
+                            throw _iteratorError2;
+                        }
+                    }
+                }
+
+                function defultPoint(point) {
+                    this._point1 = point;
+                }
+                defultPoint.prototype = new BMap.Overlay();
+
+                //初始化信息窗口
+                defultPoint.prototype.initialize = function (map1) {
+                    this._map = map1;
+                    var div = this._div = document.createElement("div");
+                    div.style.width = size.width;
+                    div.style.height = size.height;
+                    div.style.cursor = 'pointer';
+                    div.style.textAlign = 'center';
+                    div.style.position = "absolute";
+                    div.style.zIndex = "99";
+
+                    if(cansaleunits) {
+                        var countElement = document.createElement("span");
+
+                        countElement.style.color = '#fff';
+                        countElement.innerText = cansaleunits;
+                        countElement.style.position = 'absolute';
+                        countElement.style.right = '-6px';
+                        countElement.style.top = '6px';
+                        countElement.style.display = 'inline-block';
+                        countElement.style.width = '30px';
+                        countElement.style.lineHeight = '25px';
+                        countElement.style.backgroundColor = color;
+                        countElement.style.borderRadius = '5px';
+                        div.appendChild(countElement);
+                    }
+                    // var house = this._house = document.createElement("img")
+                    // house.setAttribute('src','../../../img/map/marker/icon_house.png')
+                    // house.style.position = "absolute";
+                    // house.style.zIndex = "999";
+
+                    map.getPanes().labelPane.appendChild(div);
+                    // map.getPanes().labelPane.appendChild(house);
+                    return div;
+                };
+                //设置信息窗口位置
+                defultPoint.prototype.draw = function () {
+                    var map = this._map;
+                    var pixel = map.pointToOverlayPixel(this._point1);
+                    if (this._div.offsetWidth > 0 && this._div.offsetHeight > 0) {
+                        this._div.style.left = pixel.x - this._div.offsetWidth / 2 + "px";
+                        this._div.style.top = pixel.y - this._div.offsetHeight + "px";
+                        //this._house.style.left = pixel.x -(this._house.offsetWidth/2)  + "px";
+                        //this._house.style.top  = pixel.y -this._house.offsetHeight - 15+ "px";
+                    } else {
+                        this._div.style.left = "-9999px";
+                        this._div.style.top = "-9999px";
+                        // this._house.style.left = "-9999px";
+                        // this._house.style.top  = "-9999px";
+                    }
+                };
+                defultPoint.prototype.getEl = function () {
+                    return this._div;
+                };
+
+                var myDefultPoint = new defultPoint(new BMap.Point(currentPoint.lng, currentPoint.lat));
+
+                map.addOverlay(myDefultPoint);
+                return myDefultPoint.getEl();
+            }
+        }
+
+        //Google 地图
+        function googleMapInint() {
+            var map;
+            var markers = [];
+            map = new window.google.maps.Map(document.getElementById("allmap"), {
+                center: { lat: 1.315895, lng: 103.84109 },
+                zoom: defaultZoom,
+            });
+            for (var i = 0; i < markerData.length; i++) {
+                var imgSrc = saleType[markerData[i].saleType - 1];
+                var pointSrc = { lng: parseFloat(markerData[i].location.split(',')[0]), lat: parseFloat(markerData[i].location.split(',')[1]) };
+
+                var defultPoint = {
+                    id: markerData[i].id,
+                    name: markerData[i].name,
+                    storeys:markerData[i].storeys,
+                    saleType: markerData[i].saleType,
+                    linkType:markerData[i].linkType,
+                    siteUrl:markerData[i].siteUrl,
+                    blocks:markerData[i].blocks,
+                    bicyclelots:markerData[i].bicyclelots,
+                    landArea: markerData[i].landArea,
+                    address: markerData[i].address,
+                    blockImg: prefixUrl + markerData[i].previewImage,
+                    img: imgSrc.imgUrl, //背景
+                    backImgUrl: imgSrc.backImgUrl,
+                    color: imgSrc.color, //颜色
+                    //count: markerData[i].blocks !== -1 ? markerData[i].blocks : 0, //右上角计数
+                    count: markerData[i].cansaleunits,
+                    cansaleunits: markerData[i].cansaleunits,
+                    size: {
+                        width: '60px',
+                        height: '71px'
+                    }, //icon大小
+                    point: pointSrc //点位
+                };
+                createMarker(map,defultPoint)
+                defultPointInint(defultPoint)
+            }
+
+            $("#indexMap .row-premium-property").click(mapShowInfo); //列表点击
+            $("#indexMap .title-back").click(mapInfoBack); //头部返回按钮
+
+            //默认点位初始化
+            function defultPointInint(prototype) {
+                var currentPoint = prototype.point;
+                var imgUrl = prototype.img;
+                var backImgUrl = prototype.backImgUrl;
+                var cansaleunits = prototype.cansaleunits;
+                var color = prototype.color;
+                var size = prototype.size;
+                var blockImg = prototype.blockImg;
+
+
+                function USGSOverlay(point) {
+                    this.point_ = point;
+                    this.div_ = null;
+                }
+                USGSOverlay.prototype = new google.maps.OverlayView();
+                USGSOverlay.prototype.onAdd = function () {
+                    var div = document.createElement("div");
+                    div.classList.add('custom')
+                    div.style.width = size.width;
+                    div.style.height = size.height;
+                    div.style.cursor = 'pointer';
+                    div.style.textAlign = 'center';
+                    div.style.position = "absolute";
+                    div.style.zIndex = "1";
+
+                    if(cansaleunits) {
+                        var countElement = document.createElement("span");
+
+                        countElement.style.color = '#fff';
+                        countElement.innerText = cansaleunits;
+                        countElement.style.position = 'absolute';
+                        countElement.style.right = '-6px';
+                        countElement.style.top = '6px';
+                        countElement.style.display = 'inline-block';
+                        countElement.style.width = '30px';
+                        countElement.style.lineHeight = '25px';
+                        countElement.style.backgroundColor = color;
+                        countElement.style.borderRadius = '5px';
+                        div.appendChild(countElement);
+                    }
+                    this.div_ = div;
+
+
+                    var panes = this.getPanes();
+                    panes.overlayLayer.style.zIndex='200'
+                    panes.overlayLayer.appendChild(this.div_);
+                }
+                USGSOverlay.prototype.draw = function () {
+                    const overlayProjection = this.getProjection();
+                    const point = overlayProjection.fromLatLngToDivPixel(
+                        new google.maps.LatLng({lat:this.point_.lat,lng:this.point_.lng})
+                    );
+
+                    if (this.div_.offsetWidth > 0 && this.div_.offsetHeight > 0) {
+                        this.div_.style.left = point.x - this.div_.offsetWidth / 2 + "px";
+                        this.div_.style.top = point.y - this.div_.offsetHeight + "px";
+                    } else {
+                        this.div_.style.left = "-9999px";
+                        this.div_.style.top = "-9999px";
+                    }
+                }
+
+                // this.overlay = new USGSOverlay({lng: currentPoint.lng,lat: currentPoint.lat}) // 创建实例化对象
+                // this.overlay.draw()
+                // this.overlay.onAdd()
+                var overlay = new USGSOverlay({lng: currentPoint.lng,lat: currentPoint.lat});
+                overlay.setMap(map);
+            }
+
+            //创建marker点位
+            function createMarker(map,defultPoint){
+                var marker = new window.google.maps.Marker({
+                    position:defultPoint.point,
+                    map,
+                    icon: defultPoint.img
+                });
+                marker.addListener("click", function (e) {
+                    mapShowInfo(e, 'click', defultPoint);
+                });
+                markers.push(marker)
+            }
+
+            //点击右侧列表
+            function mapShowInfo(e, value, type) {
+                if (value === 'click') {
+                    pointShow(e, type);
+                } else {
+                    var index = e.currentTarget.getAttribute("data-src");
+                    var imgSrc = saleType[markerData[index].saleType - 1];
+                    var temp = {
+                        id: markerData[index].id,
+                        name: markerData[index].name,
+                        storeys:markerData[index].storeys,
+                        saleType: markerData[index].saleType,
+                        linkType:markerData[index].linkType,
+                        siteUrl:markerData[index].siteUrl,
+                        blocks:markerData[index].blocks,
+                        bicyclelots:markerData[index].bicyclelots,
+                        landArea: markerData[index].landArea,
+                        address: markerData[index].address,
+                        blockImg: prefixUrl + markerData[index].previewImage,
+                        img: prefixUrl + imgSrc.imgUrl, //背景
+                        backImgUrl: imgSrc.backImgUrl,
+                        color: imgSrc.color, //颜色
+                        count: markerData[index].cansaleunits,
+                        cansaleunits: markerData[index].cansaleunits,
+                        size: {
+                            width: '60px',
+                            height: '71px'
+                        }, //icon大小
+                        point: pointSrc //点位
+                    };
+                    pointShow(markers[index], temp);
+                }
+            }
+
+            //点位的信息展示
+            function pointShow(e, type) {
+                var currentPoint = e.latLng ? {lng:e.latLng.lng(),lat:e.latLng.lat()} : {lng:e.position.lng(),lat:e.position.lat()}
+                map.panToWithOffset(new google.maps.LatLng({lng:currentPoint.lng, lat:currentPoint.lat}), 0, -200);
+
+                function ComplexCustomOverlay(point) {
+                    this._point = point;
+                }
+                ComplexCustomOverlay.prototype = new google.maps.OverlayView();
+
+                //初始化信息窗口
+                ComplexCustomOverlay.prototype.onAdd = function (map1) {
+                    // var div = this._div = $(".point-info-window")[0]
+                    var temp = this.cerateInfoWindow();
+                    var div = this._div = $(temp)[0];
+                    div.style.display = 'block';
+                    div.style.border = '5px solid ' + type.color;
+                    $(".point-info-window").remove();
+
+                    var div2  = document.createElement("div");
+                    var img = document.createElement("img");
+                    img.setAttribute('src', type.blockImg);
+                    img.style.width = '95px';
+                    img.style.height = '95px';
+                    img.style.borderRadius = '50%';
+
+                    div2.style.width = '187px';
+                    div2.style.height = '200px';
+                    div2.style.paddingTop = '26px';
+
+                    div2.style.textAlign = 'center';
+                    div2.appendChild(img);
+                    div2.style.backgroundImage = 'url(' + type.backImgUrl + ')';
+                    div2.style.position = "absolute";
+                    div2.style.left='50%';
+                    div2.style.transform='translateX(-50%)';
+                    div2.style.zIndex = "99";
+
+                    if(type.count){
+                        var countElement = document.createElement("span");
+
+                        countElement.style.color = '#fff';
+                        countElement.innerText = type.count;
+                        countElement.style.position = 'absolute';
+                        countElement.style.right = '20px';
+                        countElement.style.top = '20px';
+                        countElement.style.display = 'inline-block';
+                        countElement.style.width = '50px';
+                        countElement.style.lineHeight = '35px';
+                        countElement.style.backgroundColor = type.color;
+                        countElement.style.borderRadius = '5px';
+                        div2.appendChild(countElement);
+                    }
+                    div.appendChild(div2);
+
+                    var panes = this.getPanes();
+                    panes.floatPane.appendChild(this._div);
+                    //点位详情的detail的按钮跳转
+                    $("#indexMap .point-detail").click(function (e) {
+                        var URL = type.linkType == 1 ? type.siteUrl : '/project?id=' + type.id
+                        window.location.href=URL;
+                    });
+                    return div;
+                };
+                //设置信息窗口位置
+                ComplexCustomOverlay.prototype.draw = function () {
+                    const overlayProjection = this.getProjection();
+                    const point = overlayProjection.fromLatLngToDivPixel(
+                        new google.maps.LatLng({lat:this._point.lat,lng:this._point.lng})
+                    );
+                    this._div.style.left = point.x - (this._div.offsetWidth / 2 + 8) + "px";
+                    this._div.style.top = point.y - this._div.offsetHeight - 120 + "px";
+                };
+
+                //设置信息窗口位置
+                ComplexCustomOverlay.prototype.cerateInfoWindow = function (data) {
+                    var temp = '<div class="point-info-window">' + '  <img class="img-infowindow" src="' + type.blockImg + '" alt="">' + '  <div class="title">' + '    <span> '+type.name+ '</span>' + '  </div>' + '  <div class="point">' + '    <img class="img-point" src="../../../img/map/icon_point.png" alt="">' + '    <span>' + type.address + '</span>' + '  </div>' +'  <div class="footer">'  +'<span>'+'Number of Housing Units:'+type.bicyclelots+'</span>'+ '  </div>'+ '  <div class="footer">' + '    <span>'+'No. of Storeys:'+type.storeys+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+'No. of Blocks:'+type.blocks+'</span>' + '  </div>' + '<button class="point-detail">DETAILS>></button>' + '</div>';
+
+                    return temp;
+                };
+                var overlay = new ComplexCustomOverlay({lng: currentPoint.lng,lat: currentPoint.lat});
+                overlay.setMap(map);
+            }
+
+            //点击列表返回按钮
+            function mapInfoBack() {
+                $("#indexMap .house-list")[0].style.display = 'block';
+                $("#indexMap .house-detail")[0].style.display = 'none';
+            }
+
+            //创建Goolge的panToWithOffset的属性方法
+            (function panTOInint(){
+                google.maps.Map.prototype.panToWithOffset = function(latlng, offsetX, offsetY) {
+                    var map = this;
+                    var ov = new google.maps.OverlayView();
+                    ov.onAdd = function() {
+                        var proj = this.getProjection();
+                        var aPoint = proj.fromLatLngToContainerPixel(latlng);
+                        aPoint.x = aPoint.x+offsetX;
+                        aPoint.y = aPoint.y+offsetY;
+                        map.panTo(proj.fromContainerPixelToLatLng(aPoint));
+                    };
+                    ov.draw = function() {};
+                    ov.setMap(this);
+                };
+            })()
+        }
+        //点位搜索
+        function pointSearch(e) {
+            var statusVal = $('#indexMap .select-status').val();
+            var tmep1 = [];
+            var tmep2 = [];
+            var tmep3 = [];
+            listDataTemp.forEach(function (item) {
+                if (!statusVal) {
+                    tmep1.push(item);
+                } else if (item.statusType == statusVal) {
+                    tmep1.push(item);
+                }
+            });
+
+            var typeVal = $('#indexMap .select-type').val();
+            if (typeVal) {
+                tmep1.forEach(function (item) {
+                    // if (saleType[item.saleType - 1].type == typeVal) {
+                    //     markerData.push(item);
+                    //     listData.push(item);
+                    // }
+                    if(item.constructionType == typeVal){
+                        // markerData.push(item);
+                        // listData.push(item);
+                        tmep2.push(item);
+                    }
+                });
+            } else {
+                tmep2 = tmep1;
+            }
+            var typeVal = $('#indexMap .select-bedrooms').val();
+            if (typeVal) {
+                tmep2.forEach(function (item) {
+                    if(item.bedrooms.split(',').indexOf(typeVal)!=-1){
+                        tmep3.push(item);
+                    }
+                });
+            } else {
+                tmep3 = tmep2;
+            }
+            var localtionVal = $('#indexMap .select-localtion').val();
+            if(localtionVal){
+                markerData = [];
+                listData = [];
+                tmep3.forEach(function (item) {
+                if(item.locationType == localtionVal){
+                    markerData.push(item);
+                    listData.push(item);
+                }
+                });
+                defaultZoom = localtionVal ==1 ? 14 : 5;
+            }else{
+                markerData = tmep3;
+                listData = tmep3;
+            }
+            listDataInint();
+            mapInint();
+        }
+
+        function listDataInint() {
+            $('#premium-property')[0].innerHTML = '';
+            //列表添加
+            function addList(data, index) {
+                var dataTmep = {
+                    id:data.id,
+                    previewImage: data.previewImage ? prefixUrl + data.previewImage : '',
+                    name: data.name ? data.name : '-',
+                    address: data.address ? data.address : '-',
+                    swm: data.landArea ? data.landArea : '-',
+                    park: data.siteArea ? data.siteArea : '-',
+                    landArea: data.storeys ? data.storeys : '-',
+                    total: data.blocks ? data.blocks : '-',
+                    gfa: data.gfa ? data.gfa : '-',
+                    top: data.top ? data.top : '-',
+                    tenure: data.tenure ? data.tenure : '-',
+                    units: data.bicyclelots ? data.bicyclelots : '-',
+                    avgPrice: data.avgPrice ? data.avgPrice : '-'
+                };
+                var html = '<div class="info-row row-premium-property" data-src="' + index + '">' + '<div class="info-row-img">' + '<img class="img-house" src="' + dataTmep.previewImage + '" alt="">' + '</div>' + '<div class="info-row-databox">' + '<div class="info-row-databox-title row">' + '<span>' + dataTmep.name + '</span>' + '</div>' + '<div class="info-row-databox-textpoint row">' + '<span><img class="img-point" src="../../../img/map/icon_point.png" alt="">' + dataTmep.address + '</span>' + '</div>' + '<div class="info-row-databox-textarea row">' + '<span>Lease Period:&nbsp;' + dataTmep.tenure + '</span>' + '</div>' +'<div class="info-row-databox-textarea row">' + '<span>Number of Housing Units:&nbsp;' + dataTmep.units + '</span>' + '</div>' + '<div class="info-row-databox-textarea row row">' + '<span class="first">GPR:&nbsp;' + dataTmep.swm + '</span>' + '<span class="last">Site Area:&nbsp;' + dataTmep.park + '</span>' + '</div>' + '<div class="info-row-databox-textarea row">' + '<span class="first">No. of Storeys:&nbsp;' + dataTmep.landArea + '</span>' + '<span class="last">No. of Blocks:&nbsp;' + dataTmep.total + '</span>' + '</div>' + '<div class="info-row-databox-textarea row">' + '<span class="first">GFA: ' + dataTmep.gfa + '</span>' + '<span class="last">TOP: ' + dataTmep.top + '</span>' + '</div>' + '</div>' + '</div>';
+                $('#premium-property')[0].appendChild($(html)[0]);
+            }
+            for (var index = 0; index < listData.length; index++) {
+                var element = listData[index];
+                addList(element, index);
+            }
+        }
+
+        $('#indexMap .select-localtion').select2("val", '1');
+        pointSearch()
+
+        listDataInint();
+        mapInint();
+        function mapInint(){
+            if(IS_CHINA){
+                baiduMapInint()
+            }else{
+                googleMapInint()
+            }
+        }
+    };
+
+    function applynow(id) {
+        window.location.href="/project?id="+id;
+    }
+    function jumpTo(url) {
+
+        window.location.href=url;
+    }
+	function applynowByType(id,type) {
+        window.location.href="/project?id="+id+"&type="+type;
+    }    //function subenu_member() {
+        //window.location.href=[[${requestUrl}]]+"/userCenter";
+    //}
+
+</script>
+<!-- A -->
+<script th:inine="javascript"></script>
+<!-- B -->
+<script th:inine="javascript"></script>
+<!-- C -->
+<script th:inine="javascript"></script>
+
+<!-- D -->
+<script th:inine="javascript">
+    $('.show_model_link').on('click', function(){
+        $('#modelBox iframe').attr('src', $(this).data('link'));
+        $('body').css({
+            overflow: 'hidden'
+        });
+        $('#modelBox').show();
+    })
+    $('#modelBox .mask__close-btn').on('click', function(){
+        $('#modelBox iframe').attr('src', $(this).data('link'));
+        $('body').css({
+            overflow: 'auto'
+        });
+        $('#modelBox').hide();
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.springblade.client.mapper.UserApplicationMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="userApplicationResultMap" type="org.springblade.client.entity.UserApplication">
+        <id column="id" property="id"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="project_id" property="projectId"/>
+        <result column="choose_status" property="chooseStatus"/>
+        <result column="EOINo" property="EOINo"/>
+        <result column="EOINo4" property="EOINo4"/>
+        <result column="purchaser1" property="purchaser1"/>
+        <result column="passport_no1" property="passportNo1"/>
+        <result column="nationality1" property="nationality1"/>
+        <result column="contact1" property="contact1"/>
+        <result column="email1" property="email1"/>
+        <result column="address" property="address"/>
+        <result column="postal_code" property="postalCode"/>
+        <result column="purchaser2" property="purchaser2"/>
+        <result column="passport_no2" property="passportNo2"/>
+        <result column="nationality2" property="nationality2"/>
+        <result column="contact2" property="contact2"/>
+        <result column="email2" property="email2"/>
+        <result column="Agency" property="Agency"/>
+        <result column="Agent" property="Agent"/>
+        <result column="Agent_contact" property="agentContact"/>
+        <result column="choice01" property="choice01"/>
+        <result column="choice02" property="choice02"/>
+        <result column="choice03" property="choice03"/>
+        <result column="cheque_status" property="chequeStatus"/>
+        <result column="remark" property="remark"/>
+        <result column="userid" property="userid"/>
+        <result column="photo_url" property="photoUrl"/>
+        <result column="agent_id" property="agentId"/>
+        <result column="agent_confirm" property="agentConfirm"/>
+        <result column="agent_confirm_time" property="agentConfirmTime"/>
+        <result column="mcc_user_id" property="mccUserId"/>
+        <result column="mcc_confirm" property="mccConfirm"/>
+        <result column="mcc_confirm_time" property="mccConfirmTime"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+
+    <select id="selectUserApplicationPage" resultMap="userApplicationResultMap">
+        select * from hourse_user_application where is_deleted = 0
+    </select>
+
+</mapper>

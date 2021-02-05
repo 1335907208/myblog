@@ -1,0 +1,39 @@
+<div class="container-fluid" id="siteplanBox" th:fragment="siteplan">
+    <div class="box">
+        <div class="box-title">
+            <h2 class="box-title__content">SITE PLAN</h2>
+            <h4 class="box-title__sub" th:text="${projectinfodetail.name}">QUEENS PEAK</h4>
+        </div>
+        <div class="box-content">
+            <div class="siteplan">
+                <div class="siteplan__pic">
+                    <a th:each="projectSitePlanVO,projectSitePlanState : ${projectSitePlanVOList}"
+                       th:href="@{${prefixUrl}+${projectSitePlanVO.url}}"
+                       th:attr="data-index=${projectSitePlanState.index}"
+                       th:classappend="${projectSitePlanState.index == 0} ? 'active' : '' "
+                    >
+                        <img th:src="@{${prefixUrl}+${projectSitePlanVO.url}}" alt="">
+                    </a>
+                    <!--                        <a href="/media/siteplan/1.jpg" data-index="1">-->
+                    <!--                            <img src="/media/siteplan/1.jpg" alt="">-->
+                    <!--                        </a>-->
+                    <!--                        <a href="/media/siteplan/2.jpg" data-index="2">-->
+                    <!--                            <img src="/media/siteplan/2.jpg" alt="">-->
+                    <!--                        </a>-->
+                </div>
+                <div class="siteplan__btn">
+                    <a th:each="projectSitePlanVO,projectSitePlanState : ${projectSitePlanVOList}" href="javascript:;"
+                       class="siteplan__btn-item "
+                       th:classappend="${projectSitePlanState.index == 0} ? 'siteplan__btn-item_active' : '' "
+                       th:data-src="@{${prefixUrl}+${projectSitePlanVO.url}}"
+                       th:attr="data-index=${projectSitePlanState.index}"
+                       th:text="${projectSitePlanVO.name}">1st Floor</a>
+                    <!--                        <a href="javascript:;" class="siteplan__btn-item" data-src="/media/siteplan/1.jpg"-->
+                    <!--                           data-index="1">7th Floor</a>-->
+                    <!--                        <a href="javascript:;" class="siteplan__btn-item" data-src="/media/siteplan/2.jpg"-->
+                    <!--                           data-index="2">27th Floor</a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

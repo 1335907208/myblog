@@ -1,0 +1,168 @@
+<div id="header" th:fragment="header">
+    <a class="logo" href="/"></a>
+    <div class="top-menu">
+        <ul class="menu">
+            <li class="submenu">
+                <a href="/"><div class="name">HOME</div></a>
+            </li>
+            <li class="submenu">
+                <div class="name">PREMIUM PROPERTIES</div>
+            </li>
+            <div class="subcontent">
+                <div class="content-l">
+                    <div class="pj-type" style="flex:10 3 auto;">
+                        <div class="type-tit">Residential Projects</div>
+                        <div class="type-list">
+                            <a>Current Projects</a>
+                            <a th:each="project : ${projects}"
+                               th:if="${project.statusType == 1 && project.constructionType == 1 && project.locationType != 2}"
+                               th:text="${project.name}"
+                               th:href="${project.linkType==1?project.siteUrl:('/project?id='+project.id)}"
+                                ></a>
+                            <a>Upcoming Projects</a>
+                            <a th:each="project : ${projects}"
+                               th:if="${project.statusType == 2 && project.constructionType == 1 && project.locationType != 2}"
+                               th:text="${project.name}"
+                               th:href="${project.linkType==1?project.siteUrl:('/project?id='+project.id)}"
+                            ></a>
+                            <a>Completed Projects</a>
+                            <a th:each="project : ${projects}"
+                               th:if="${project.statusType == 3 && project.constructionType == 1 && project.locationType != 2}"
+                               th:text="${project.name}"
+                               th:href="${project.linkType==1?project.siteUrl:('/project?id='+project.id)}"
+                            ></a>
+                        </div>
+                    </div>
+                    <div class="pj-type">
+                        <div class="type-tit">Commercial Projects</div>
+                        <div class="type-list">
+                            <a th:each="project : ${projects}"
+                               th:if="${project.constructionType == 3 && project.locationType != 2}"
+                               th:text="${project.name}"
+                               th:href="${project.linkType==1?project.siteUrl:('/project?id='+project.id)}"
+                            ></a>
+<!--                            <a href="#" th:onclick="handleUrlNone()">The Poiz Centre</a>-->
+                        </div>
+                    </div>
+                    <div class="pj-type">
+                        <div class="type-tit">Overseas Projects</div>
+                        <div class="type-list">
+                            <a th:each="project : ${projects}"
+                               th:if="${project.locationType == 2}"
+                               th:text="${project.name}"
+                               th:href="${project.linkType==1?project.siteUrl:('/project?id='+project.id)}"
+                            ></a>
+<!--                            <a href="#" th:onclick="handleUrlNone()">Sky Villa @ Phnom Penh, Cambodia</a>-->
+<!--                            <a href="#" th:onclick="handleUrlNone()">Living Star @ Jakarta, Indonesia</a>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="content-r">
+                    <div class="media">
+                        <img src="/media/menu/sub/media1.jpg" alt=""/>
+                    </div>
+                </div>
+
+            </div>
+            <li class="submenu">
+                <a>
+                    <div class="name">MCC SPACE</div>
+                </a>
+            </li>
+            <li class="submenu">
+                <div class="name">VR</div>
+            </li>
+            <div class="subcontent" style="padding-left: 30px;padding-right: 30px;overflow: hidden">
+                <div class="content" style="overflow: auto;justify-content: left;">
+                    <div th:each="project : ${projects}" class="media" style="cursor: pointer;" th:if="${project.linkType == 0}" th:onclick="handleHeaderVr([[${project}]])">
+                        <div class="header-application-pic" th:style="${'background-image: url(' + prefixUrl + project.previewImage + ')'}"></div>
+                        <span class="lab" style="bottom: 17px;padding-top: 5px;" th:text="${project.name}">Developer</span>
+                    </div>
+                </div>
+            </div>
+            <li class="submenu">
+                <div class="name">LIVE</div>
+            </li>
+            <div class="subcontent" style="padding-left: 30px;padding-right: 30px;overflow: hidden">
+                <div class="content" style="overflow: auto;justify-content: left;">
+                    <div th:each="project : ${projects}" class="media" style="cursor: pointer;" th:if="${project.linkType == 0}" th:onclick="handleHeaderLive([[${project}]])">
+                        <div class="header-application-pic" th:style="${'background-image: url(' + prefixUrl + project.previewImage + ')'}"></div>
+                        <span class="lab" style="bottom: 17px;padding-top: 5px;" th:text="${project.name}">Developer</span>
+                    </div>
+                </div>
+            </div>
+            <li class="submenu">
+                <div class="name">ONLINE APPLICATION</div>
+                <input id="userId" style="display: none;" th:value="${userid}" />
+            </li>
+            <div class="subcontent" style="padding-left: 30px;padding-right: 30px;overflow: hidden">
+                <div class="content" style="overflow: auto;justify-content: left;">
+                    <div th:each="project : ${projects}" class="media" style="cursor: pointer;" th:if="${project.openStatus == 1 || project.openStatus == 2 || project.openStatus == 4}" th:onclick="handleHeaderApplition([[${project}]])">
+                        <div class="header-application-pic" th:style="${'background-image: url(' + prefixUrl + project.previewImage + ')'}"></div>
+                        <span class="lab" style="bottom: 17px;padding-top: 5px;" th:text="${project.name}">Developer</span>
+                    </div>
+                </div>
+            </div>
+            <li class="submenu">
+                <a class="name" th:if="${userid == null}" id="subenu_member" href="/?login">MEMBER</a>
+                <a class="name" th:if="${userid != null}" id="subenu_member" href="/userCenter/profile">MEMBER</a>
+
+            </li>
+            <li class="submenu">
+                <div class="name" th:onclick="handleFinance()">FINANCE</div>
+            </li>
+        </ul>
+        <div class="menu-toolbar">
+            <div class="btnSearch" th:if="${model == 'index'}"><i class="iconfont iconsousuo"></i></div>
+<!--            <div class="btn-group">-->
+<!--                <input id="eninput" checked="checked" type="radio" value="en" name="lan"/>-->
+<!--                <label for="eninput">En</label>-->
+<!--                <input id="chinput" type="radio" value="zh" name="lan"/>-->
+<!--                <label for="chinput">中文</label>-->
+<!--            </div>-->
+            <div class="user-info" th:if="${userid != null}">
+                <img class="avatar" src="/img/default_avatar.jpg" alt="">
+                <span>Welcome <span th:if="${identity == 'agent'}">Agent </span><span th:if="${identity == 'buyer'}">Buyer </span> <span th:if="${userInfo.name}" th:text="${userInfo.name}"></span> [<a id="logoutBtn" href="/userCenter/logout" ><span>SIGN OUT</span></a>]</span>
+            </div>
+            <button type="button" id="loginBtn" class="login-btn" th:if="${userid == null}" ><span>SIGN IN</span></button>
+<!--            <a id="logoutBtn" class="login-btn" href="/userCenter/logout" th:if="${userid != null}" ><span>SIGN OUT</span></a>-->
+<!--            <button type="button" class="login-btn register" th:if="${userid == null}"><span>SIGN UP</span></button>-->
+        </div>
+        <div th:if="${model == 'index' || model == 'project' || model == 'finance'}">
+            <div th:replace="index/login :: login"></div>
+            <div th:replace="index/register :: chooseType"></div>
+            <div th:replace="index/register :: userReg"></div>
+            <div th:replace="index/register :: agentReg"></div>
+            <div th:replace="index/search :: search"></div>
+            <div th:replace="index/resetPassword :: repeat"></div>
+        </div>
+        <div th:replace="index/selectMyApplication :: selectMyApplication"></div>
+    </div>
+
+
+
+    <!--  VR弹窗  -->
+    <div id="vrBox" style="padding: 0">
+        <div class="vr__screen mask" style="z-index: 9999999" id="vr-full-screen">
+            <span class="vr__screen-close mask__close-btn"><i class="iconfont iconguanbi"></i></span>
+            <iframe src="" style="width: 100%; height: 100%; background-color: rgba(0, 0, 0, .7);"></iframe>
+            <!-- <img src="/img/sitePlan/siteplan-pic1.jpg" alt=""> -->
+        </div>
+    </div>
+
+    <!--  video弹窗  -->
+    <div id="videoBox" style="padding: 0">
+        <div class="video-container">
+            <div class="mask" style="z-index: 9999999" >
+                <div class="mask__close-btn" id="close"><i class="iconfont iconguanbi"></i></div>
+                <div class="video-content" >
+                    <div class="video-title" >title</div>
+                    <div class="video-desc" >test</div>
+                    <div class="vedio-media"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="inc/commons :: head(Member, user)">
+
+<body>
+<div th:replace="index/header :: header"></div>
+<div th:replace="userCenter/header :: user"></div>
+
+<div class="container">
+    <div class="registry">
+        <h2 class="page_title">Profile</h2>
+        <div class="registry_Profile">
+            <form id="profile" action="">
+            <ul class="profile_form">
+                <li>Name<lable><input type="text" placeholder="Your Name" name="name" th:value="${userInfo.name}"></lable></li>
+                <li>Nationality<lable><input type="text" placeholder="Nationality" name="country" th:value="${userInfo.country}"></lable></li>
+                <li>Phone<lable><input type="text" placeholder="Phone" name="mobile" th:value="${userInfo.mobile}"></lable></li>
+                <li>Email<lable><input type="text" placeholder="Email" name="emailAddress" th:value="${userInfo.emailAddress}"></lable></li>
+                <li>Address <lable><input type="text" placeholder="Address " name="address" th:value="${userInfo.address}"></lable></li>
+                <li>Postal Code <lable><input type="text" placeholder="Postal Code " name="postcode" th:value="${userInfo.postcode}"></lable></li>
+                <li><button id="ProfileBtn" type="button">SAVE PROFILE</button></li>
+            </ul>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+<div th:replace="footer :: footer"></div>
+
+
+<th:block th:replace="inc/commons :: foot(user)"></th:block>
+
+
+<script th:inline='javascript'>
+    var identity=  $('#identity').val()
+    //Profile提交
+    $('#ProfileBtn').click(function(event){
+
+
+
+        var dataArr = $("#profile").serializeArray()
+        var data = {}
+        dataArr.forEach(function(item){
+            data[item.name] = item.value
+        })
+
+        // TODO 数据校验
+
+
+        var api = '';
+        if(identity === "buyer") {
+            api = '/client/buyerupdatedata'
+        } else if (identity === "agent") {
+            api = '/client/agentupdatedata'
+        } else {
+            return false
+        }
+        $.getJSON(api, data, function(res){
+            // TODO 修改为更友好的提醒
+            if(res.data) {
+                common.success("Save Success!")
+            } else {
+                common.alert("Save failed!")
+            }
+        })
+
+
+    })
+</script>
+</body>
+
+</html>

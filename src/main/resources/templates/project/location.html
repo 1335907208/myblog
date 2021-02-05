@@ -1,0 +1,155 @@
+<div class="container-fluid" id="locationBox" th:fragment="location">
+    <div class="box">
+        <div class="box-title">
+            <h2 class="box-title__content">LOCATION</h2>
+            <h4 class="box-title__sub" th:text="${projectinfodetail.name}">QUEENS PEAK</h4>
+        </div>
+        <div class="box-content">
+            <div class="row p12">
+                <div class="col-xxl-8 col-xl-7">
+                        <div class="location__pic bg-img">
+                            <a th:href="@{${prefixUrl}+${projectinfodetail.urlLocation}}">
+                                <img th:src="@{${prefixUrl}+${projectinfodetail.urlLocation}}">
+                            </a>
+                        </div>
+                </div>
+                <div class="col-xxl-4 col-xl-5">
+                    <div class="location__content">
+                        <div class="location__logo">
+                            <img th:src="@{${prefixUrl}+${projectinfodetail.previewImageLogo}}" alt="">
+                        </div>
+                        <div class="location__address">
+                            <h2 class="location__address-title">Located At</h2>
+                            <div class="location__address-desc" th:text="${projectinfodetail.address}">District 03,Queenstown,Dundee Road</div>
+                        </div>
+                        <div class="location__neighbourhood">
+                            <h2 class="location__neighbourhood-title">NEARBY AMENITIES</h2>
+                            <div class="location__neighbourhood-content">
+                                <div class="location__neighbourhood-item"
+                                     th:each="projectNearby : ${projectNearbyList}">
+                                    <div class="location__neighbourhood-item__pic bg-img"
+                                         th:style="'background-image: url('+${prefixUrl}+${projectNearby.url}+');'"></div>
+                                    <div class="location__neighbourhood-item__content">
+                                        <h3 class="location__neighbourhood-item__title"
+                                            th:text="${projectNearby.name}">KL-SG High Speed Rail</h3>
+                                        <p class="location__neighbourhood-item__desc"
+                                           th:text="${projectNearby.remark}">5 to 10 minutes</p>
+                                    </div>
+                                </div>
+
+                                <!--                                    <div class="location__neighbourhood-item">-->
+                                <!--                                        <div class="location__neighbourhood-item__pic bg-img"-->
+                                <!--                                             style="background-image: url(/media/location/2.jpg);"></div>-->
+                                <!--                                        <div class="location__neighbourhood-item__content">-->
+                                <!--                                            <h3 class="location__neighbourhood-item__title">Botanic Gardens MRT (5 MRT-->
+                                <!--                                                Stops) (UNESCO World Heritage Site)</h3>-->
+                                <!--                                            <p class="location__neighbourhood-item__desc">15 to 20 minutes</p>-->
+                                <!--                                        </div>-->
+                                <!--                                    </div>-->
+
+                                <!--                                    <div class="location__neighbourhood-item">-->
+                                <!--                                        <div class="location__neighbourhood-item__pic bg-img"-->
+                                <!--                                             style="background-image: url(/media/location/3.jpg);"></div>-->
+                                <!--                                        <div class="location__neighbourhood-item__content">-->
+                                <!--                                            <h3 class="location__neighbourhood-item__title">Dempsey Hill</h3>-->
+                                <!--                                            <p class="location__neighbourhood-item__desc">5 to 15 minutes</p>-->
+                                <!--                                        </div>-->
+                                <!--                                    </div>-->
+
+                                <!--                                    <div class="location__neighbourhood-item">-->
+                                <!--                                        <div class="location__neighbourhood-item__pic bg-img"-->
+                                <!--                                             style="background-image: url(/media/location/4.jpg);"></div>-->
+                                <!--                                        <div class="location__neighbourhood-item__content">-->
+                                <!--                                            <h3 class="location__neighbourhood-item__title">Holland Village MRT (3 MRT-->
+                                <!--                                                Stops)</h3>-->
+                                <!--                                            <p class="location__neighbourhood-item__desc">15 to 20 minutes</p>-->
+                                <!--                                        </div>-->
+                                <!--                                    </div>-->
+
+                                <!--                                    <div class="location__neighbourhood-item">-->
+                                <!--                                        <div class="location__neighbourhood-item__pic bg-img"-->
+                                <!--                                             style="background-image: url(/media/location/5.jpg);"></div>-->
+                                <!--                                        <div class="location__neighbourhood-item__content">-->
+                                <!--                                            <h3 class="location__neighbourhood-item__title">Buona Vista MRT(2 MRT-->
+                                <!--                                                Stops)</h3>-->
+                                <!--                                            <p class="location__neighbourhood-item__desc">15 to 30 minutes</p>-->
+                                <!--                                        </div>-->
+                                <!--                                    </div>-->
+
+                                <!--                                    <div class="location__neighbourhood-item">-->
+                                <!--                                        <div class="location__neighbourhood-item__pic bg-img"-->
+                                <!--                                             style="background-image: url(/media/location/6.jpg);"></div>-->
+                                <!--                                        <div class="location__neighbourhood-item__content">-->
+                                <!--                                            <h3 class="location__neighbourhood-item__title">Tiong Bahru MRT (2 MRT-->
+                                <!--                                                Stops)</h3>-->
+                                <!--                                            <p class="location__neighbourhood-item__desc">20 to 25 minutes</p>-->
+                                <!--                                        </div>-->
+                                <!--                                    </div>-->
+
+                                <!--                                    <div class="location__neighbourhood-item">-->
+                                <!--                                        <div class="location__neighbourhood-item__pic bg-img"-->
+                                <!--                                             style="background-image: url(/media/location/7.jpg);"></div>-->
+                                <!--                                        <div class="location__neighbourhood-item__content">-->
+                                <!--                                            <h3 class="location__neighbourhood-item__title">Downtown MRT (6 MRT-->
+                                <!--                                                Stops)</h3>-->
+                                <!--                                            <p class="location__neighbourhood-item__desc">15 to 20 minutes</p>-->
+                                <!--                                        </div>-->
+                                <!--                                    </div>-->
+
+                                <!--                                    <div class="location__neighbourhood-item">-->
+                                <!--                                        <div class="location__neighbourhood-item__pic bg-img"-->
+                                <!--                                             style="background-image: url(/media/location/8.jpg);"></div>-->
+                                <!--                                        <div class="location__neighbourhood-item__content">-->
+                                <!--                                            <h3 class="location__neighbourhood-item__title">HabourFront MRT (4 MRT-->
+                                <!--                                                Stops)</h3>-->
+                                <!--                                            <p class="location__neighbourhood-item__desc">15 to 20 minutes</p>-->
+                                <!--                                        </div>-->
+                                <!--                                    </div>-->
+
+                                <!--                                    <div class="location__neighbourhood-item">-->
+                                <!--                                        <div class="location__neighbourhood-item__pic bg-img"-->
+                                <!--                                             style="background-image: url(/media/location/9.jpg);"></div>-->
+                                <!--                                        <div class="location__neighbourhood-item__content">-->
+                                <!--                                            <h3 class="location__neighbourhood-item__title">Marina Bay MRT (6 MRT-->
+                                <!--                                                Stops)</h3>-->
+                                <!--                                            <p class="location__neighbourhood-item__desc">5 to 10 minutes</p>-->
+                                <!--                                        </div>-->
+                                <!--                                    </div>-->
+
+                                <!--                                    <div class="location__neighbourhood-item">-->
+                                <!--                                        <div class="location__neighbourhood-item__pic bg-img"-->
+                                <!--                                             style="background-image: url(/media/location/10.jpg);"></div>-->
+                                <!--                                        <div class="location__neighbourhood-item__content">-->
+                                <!--                                            <h3 class="location__neighbourhood-item__title">Bayfront MRT (7 MRT-->
+                                <!--                                                Stops)</h3>-->
+                                <!--                                            <p class="location__neighbourhood-item__desc">15 to 20 minutes</p>-->
+                                <!--                                        </div>-->
+                                <!--                                    </div>-->
+
+                                <!--                                    <div class="location__neighbourhood-item">-->
+                                <!--                                        <div class="location__neighbourhood-item__pic bg-img"-->
+                                <!--                                             style="background-image: url(/media/location/11.jpg);"></div>-->
+                                <!--                                        <div class="location__neighbourhood-item__content">-->
+                                <!--                                            <h3 class="location__neighbourhood-item__title">Orchard MRT (8 MRT-->
+                                <!--                                                Stops)</h3>-->
+                                <!--                                            <p class="location__neighbourhood-item__desc">25 to 35 minutes</p>-->
+                                <!--                                        </div>-->
+                                <!--                                    </div>-->
+
+                                <!--                                    <div class="location__neighbourhood-item">-->
+                                <!--                                        <div class="location__neighbourhood-item__pic bg-img"-->
+                                <!--                                             style="background-image: url(/media/location/12.jpg);"></div>-->
+                                <!--                                        <div class="location__neighbourhood-item__content">-->
+                                <!--                                            <h3 class="location__neighbourhood-item__title">Changi Airport MRT (17 MRT-->
+                                <!--                                                Stops)</h3>-->
+                                <!--                                            <p class="location__neighbourhood-item__desc">10 to 20 minutes</p>-->
+                                <!--                                        </div>-->
+                                <!--                                    </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

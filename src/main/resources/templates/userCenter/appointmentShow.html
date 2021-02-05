@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="inc/commons :: head(Member, user)">
+<body>
+<div th:replace="index/header :: header"></div>
+<div th:replace="userCenter/header :: user"></div>
+
+<div class="container">
+    <div class="registry">
+        <h2 class="page_title">My Appointment</h2>
+        <div id="showinterest">
+            <button id="exportToPdf" style="width: 200px;height: 50px;">Download PDF</button>
+            <div class="Application_information" id="export_content">
+                <div>
+                    <img id="imgcode" style="display: table-cell; float: right" th:value="${ID}" />
+                    <div style="overflow: hidden;width: 100%"></div>
+                    <h3>Expression of Interest</h3>
+<!--                    <table>-->
+<!--                        <tr>-->
+<!--                            <td th:text="'EOI NO:' + ${detail.eoiNo == null ? ' - ' : detail.eoiNo}"></td>-->
+<!--                            <td rowspan="2" valign="top" style="text-align: left;width: 20%;border: 1px solid #666;">-->
+<!--                                <span>Agent & Contact (If any):</span>-->
+<!--                                <span th:text="${detail.agentId != null ? detail.agentUser.name : detail.agent}"></span>-->
+<!--                                (<span th:text="${detail.agentId != null ? detail.agentUser.mobile : detail.agentContact}"></span>)-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td th:text="'DATE:' + ${createTime}"></td>-->
+<!--                        </tr>-->
+<!--                    </table>-->
+<!--                    <p class="App_everyparticular">UNIT(S) DETAILS:</p>-->
+<!--                    <table class="Intentionform_pdf table" border="1">-->
+<!--                        <tr>-->
+<!--                            <td>S/N</td>-->
+<!--                            <td>BLK</td>-->
+<!--                            <td>LEVEL</td>-->
+<!--                            <td>UNIT</td>-->
+<!--                            <td>TYPE</td>-->
+<!--                        </tr>-->
+<!--                        <tr th:each="unit,temp : ${ detail.purchaseIntentUnitVOList}">-->
+<!--                            <td th:text="${temp.index+1}">1</td>-->
+<!--                            <td th:text="${unit.unitVO.block}"></td>-->
+<!--                            <td th:text="${unit.unitVO.floor}"></td>-->
+<!--                            <td th:text="${unit.unitVO.unit}"></td>-->
+<!--                            <td th:text="${unit.unitVO.projectUnittype.typeName}"></td>-->
+<!--&lt;!&ndash;                            <td th:text="${detail.choiceFormat.choice01Block}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td th:text="${detail.choiceFormat.choice01Level}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td th:text="${detail.choiceFormat.choice01Unit}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <td th:text="${detail.choiceFormat.choice01Type}"></td>&ndash;&gt;-->
+<!--                        </tr>-->
+<!--                    </table>-->
+<!--                    <p class="App_everyparticular">PURCHASER(S) DETAILS:</p>-->
+                    <table border="1" class="Intentionform_pdfs table table-center">
+                        <thead>
+                        <tr>
+                            <td>Project</td>
+                            <td>Date</td>
+                            <td>Name</td>
+                            <td>Tel</td>
+                            <td>Email</td>
+                            <td>Time</td>
+                        </tr>
+                        </thead>
+                        <tr th:each="user : ${detail}">
+                            <td th:text="${user.projectName}">NAME</td>
+                            <td th:text="${user.date}">GENDER</td>
+                            <td th:text="${user.name}">NATIONALITY</td>
+                            <td th:text="${user.tel}">CONTACT </td>
+                            <td th:text="${user.email}">E-mail</td>
+                            <td><span th:text="${user.appointmentShiftData.startTime}"></span>~<span th:text="${user.appointmentShiftData.endTime}"></span></td>
+                        </tr>
+<!--                        <tr>-->
+<!--                            <td>ADDRESS</td>-->
+<!--                            <td colspan="4" th:if="${detail.purchaseIntentUserList}">-->
+<!--                                <span th:text="${detail.purchaseIntentUserList[0].address}"></span>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="footer :: footer"></div>
+
+
+<th:block th:replace="inc/commons :: foot(user)"></th:block>
+
+<script src="https://cdn.bootcss.com/jspdf/1.5.3/jspdf.debug.js"></script>
+<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+<script type="text/javascript" src="/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+<script th:inline='javascript' type="text/javascript">
+    var downPdf = document.getElementById("exportToPdf");
+    downPdf.onclick = function () {
+        var defHei = $('#export_content>div')[0].scrollHeight
+        if(defHei<1300){
+            $('#export_content>div')[0].style.marginBottom = 1400 - defHei + 'px'
+        }
+        html2canvas(
+            document.getElementById("export_content"),
+            {
+                dpi: 172,//导出pdf清晰度
+                onrendered: function (canvas) {
+                    var contentWidth = canvas.width;
+                    var contentHeight = canvas.height;
+
+                    //一页pdf显示html页面生成的canvas高度;
+                    var pageHeight = contentWidth / 592.28 * 841.89;
+                    //未生成pdf的html页面高度
+                    var leftHeight = contentHeight;
+                    //pdf页面偏移
+                    var position = 0;
+                    //html页面生成的canvas在pdf中图片的宽高（a4纸的尺寸[595.28,841.89]）
+                    var imgWidth = 595.28;
+                    var imgHeight = 592.28 / contentWidth * contentHeight;
+
+                    var pageData = canvas.toDataURL('image/jpeg', 1.0);
+                    var pdf = new jsPDF('', 'pt', 'a4');
+
+                    //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+                    //当内容未超过pdf一页显示的范围，无需分页
+                    if (leftHeight < pageHeight) {
+                        pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
+                    } else {
+                        while (leftHeight > 0) {
+                            pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+                            leftHeight -= pageHeight;
+                            position -= 841.89;
+                            //避免添加空白页
+                            if (leftHeight > 0) {
+                                pdf.addPage();
+                            }
+                        }
+                    }
+                    pdf.save('content.pdf');
+                },
+                //背景设为白色（默认为黑色）
+                background: "#fff"
+            })
+        $('#export_content>div')[0].style.marginBottom = '0'
+    }
+    $(function(){
+        var id = document.getElementById("imgcode").getAttribute("value")
+        JsBarcode("#imgcode", id,{
+            displayValue:false,
+            textAling:"center"
+        }
+        );
+    });
+
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="inc/commons :: head(Member, user)">
+
+
+
+<body>
+<div th:replace="index/header :: header"></div>
+<div th:replace="userCenter/header :: user"></div>
+
+<div class="container">
+    <div class="project_list">
+        <h2 class="page_title">Disclaimer</h2>
+        <div class="disclaimer">
+            <div class="disclaimer-title">免责声明</div>
+            <div class="disclaimer-title">DISCLAIMER</div>
+            <br>
+            <div class="disclaimer-info">
+                <p>Brochure</p>
+                <p>
+                    Whilst every reasonable care has been taken in preparing this brochure, the developer and its agents cannot be held responsible for any inaccuracies. All statements are believed to be correct but are not to be regarded as statements or representations of fact.
+                </p>
+                <br>
+                <p>
+                    Specification
+                </p>
+                <p>
+                    All information and specifications are current at the time of going to press and are subject to change as may be required and cannot form part of the contract. All plans are subject to any amendments approved or may be approved by the relevant authority. Visual representations including (architectural) models, drawings, photographs / pictures and artists’ renderings are impression only, while illustrations of interiors are only decor suggestions and none to be regarded as representation facts. Floor areas are approximate measurements and subject to final survey.
+                </p>
+                <br>
+                <p>
+                    Sales & Purchase Agreement
+                </p>
+                <p>
+                    The Sales & Purchase Agreement shall form the entire agreement between us as the Developer and the Purchaser and shall supersede all statements, representations or promises made prior to the signing of the Sale & Purchase Agreement and shall in no way be modified by any statements, representation or promises made by us or the marketing agent.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div th:replace="footer :: footer"></div>
+
+
+<th:block th:replace="inc/commons :: foot(user)"></th:block>
+
+
+<script th:inline='javascript'>
+    $('.project_list_item').click(function(){
+        console.log(111);
+    })
+</script>
+</body>
+
+</html>

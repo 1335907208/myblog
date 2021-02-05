@@ -1,0 +1,166 @@
+<!--注册选择-->
+<div class="zhucez" th:fragment="chooseType">
+    <!-- 遮罩层 -->
+    <div class="graybox"></div>
+    <div class="registryss">
+        <h2>SIGN UP</h2>
+        <div class="neiron">
+            <h3>Select Your Category</h3>
+            <ul>
+                <li><button class="neiron_inmediar reg_select_role" data-target="agentReg">AGENT</button></li>
+                <li><button class="neiron_user reg_select_role" data-target="buyerReg">BUYER</button></li>
+            </ul>
+        </div>
+        <button class="guanbi">x</button>
+    </div>
+</div>
+<!--用户注册-->
+<div class="zhuceo reg_model" id="buyerReg" th:fragment="userReg">
+    <!-- 遮罩层 -->
+    <div class="graybox"></div>
+    <div class="registry">
+        <h2>Buyer Registration</h2>
+        <div class="inter_list">
+            <form class="base_form" id="buyerRegForm">
+                <fieldset>
+                    <div class="form-group row">
+                        <label for="buyerUsername" class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="username" id="buyerUsername" placeholder="Pease Enter Your Email">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="buyerPassword" class="col-sm-3 col-form-label">Password</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" name="password" id="buyerPassword" placeholder="Pease Enter Password">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="confirmBuyerPassword" class="col-sm-3 col-form-label">Confirm Password</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" name="confirmPassword" id="confirmBuyerPassword" placeholder="Pease Confirm Password">
+                        </div>
+                    </div>
+                </fieldset>
+                <button class="btn btn-primary reg_Btn" type="button">REGISTRATION</button>
+            </form>
+        </div>
+        <div class="register_prompt">
+            <p>
+                Registration is successful, please go to email to activate !
+            </p>
+            <button class="close" type="button">CLOSE</button>
+        </div>
+        <button class="guanbi">x</button>
+    </div>
+</div>
+<!--中介注册-->
+<div class="intermediary reg_model" id="agentReg" th:fragment="agentReg">
+    <!-- 遮罩层 -->
+    <div class="graybox"></div>
+
+    <div class="registry">
+        <h2>Agent Registration</h2>
+        <div class="inter_list">
+            <form class="base_form" id="agentRegForm">
+                <fieldset>
+                    <div class="form-group row">
+                        <label for="agentUsername" class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="username" id="agentUsername" placeholder="Pease Enter Your Email">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="password" class="col-sm-3 col-form-label">Password</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Pease Enter Password">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="confirmPassword" class="col-sm-3 col-form-label">Confirm Password</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Pease Confirm Password">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-3 col-form-label">Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Pease Enter Your Name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="passportNo" class="col-sm-3 col-form-label">Last 4 Digits of NRIC</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="nricNo" id="passportNo" placeholder="Pease Enter Purchaser's Last 4 Digits of NRIC">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Gender</label>
+                        <div class="col-sm-9">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="gender_male" value="1" checked>
+                                <label class="form-check-label" for="gender_male">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="gender_female" value="0">
+                                <label class="form-check-label" for="gender_female">Female</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="country" class="col-sm-3 col-form-label">Nationality</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="country" id="country">
+                                <option th:each="item : ${nationality}" th:value="${item.dictAlias}" th:text="${item.dictValue}">1</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="mobile" class="col-sm-3 col-form-label">Mobile</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Pease Enter Your Mobile">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="address" class="col-sm-3 col-form-label">Address</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="address" id="address" placeholder="Pease Enter Your Address">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="postcode" class="col-sm-3 col-form-label">Postal Code</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="postcode" id="postcode" placeholder="Pease Enter Your Postal Code">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="company" class="col-sm-3 col-form-label">Agnecy</label>
+                        <div class="col-sm-9">
+<!--                            <input type="text" class="form-control" name="company" id="company" placeholder="Pease Enter Your Agnecy">-->
+
+                            <select class="form-control" name="company" id="company">
+                                <option th:each="item : ${agencyList}" th:value="${item.id}" th:text="${item.agencyName}">Agency</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="ceaNo" class="col-sm-3 col-form-label">CEA No.</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="ceaNo" id="ceaNo" placeholder="Pease Enter Your CEA No.">
+                        </div>
+                    </div>
+                </fieldset>
+                <button class="btn btn-primary reg_Btn" type="button">REGISTRATION</button>
+            </form>
+        </div>
+        <div class="register_prompt">
+            <p>
+                Registration is successful, please go to email to activate !
+            </p>
+            <button class="close" type="button">CLOSE</button>
+        </div>
+        <button class="guanbi">x</button>
+    </div>
+</div>

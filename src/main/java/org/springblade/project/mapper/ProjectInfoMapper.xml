@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.springblade.project.mapper.ProjectInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="projectInfoResultMap" type="org.springblade.project.entity.ProjectInfo">
+        <id column="id" property="id"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_dept" property="createDept"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="status" property="status"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="construction_type" property="constructionType"/>
+        <result column="decoration_type" property="decorationType"/>
+        <result column="address" property="address"/>
+        <result column="developer" property="developer"/>
+        <result column="avg_price" property="avgPrice"/>
+        <result column="remark" property="remark"/>
+        <result column="open_status" property="openStatus"/>
+        <result column="site_url" property="siteUrl"/>
+        <result column="link_type" property="linkType"/>
+        <result column="agency" property="agency"/>
+    </resultMap>
+
+
+    <select id="selectProjectInfoPage" resultMap="projectInfoResultMap">
+        select * from house_project_info where is_deleted = 0
+    </select>
+
+</mapper>

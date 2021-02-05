@@ -1,0 +1,35 @@
+<div class="container-fluid" id="introBox" th:fragment="intro">
+    <div class="box">
+        <div class="box-title">
+            <h2 class="box-title__content">INTRODUCTION</h2>
+            <h4 class="box-title__sub" th:text="${projectinfodetail.name}">QUEENS PEAK</h4>
+        </div>
+        <div class="box-content">
+            <div class="row">
+                <div class="col-xl-7">
+                    <div class="intro__pic bg-img"
+                         th:style="'background-image: url('+${prefixUrl}+${projectinfodetail.previewImage}+');'"></div>
+                </div>
+                <div class="col-xl-5">
+                    <div class="intro">
+                        <div class="intro__content">
+                            <div class="intro__title" th:text="${projectinfodetail.mainInfo}">
+                                NOT JUST A RESIDENCE BUTA STATEMENT OF WHO YOU ARE
+                            </div>
+                            <div class="intro__desc" th:text="${projectinfodetail.subInfo}">
+                                <p>Rising forty-four storeys into the sky across two residential towers, Queens
+                                    Peaks' sinuously contoured balconies give the facade a sculptural presence that
+                                    at once evoke a sense of awe.</p>
+                                <p>Impeccably positioned in the Queenstown district, the new lifestyle hub with the
+                                    added bonus of a city fringe location and MRT connectivity, Queens Peak is truly
+                                    close to everything that you have ever wished for.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

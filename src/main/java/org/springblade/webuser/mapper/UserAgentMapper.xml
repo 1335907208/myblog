@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.springblade.webuser.mapper.UserAgentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="userAgentResultMap" type="org.springblade.webuser.entity.UserAgent">
+        <id column="id" property="id"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="status" property="status"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="name" property="name"/>
+        <result column="gender" property="gender"/>
+        <result column="age" property="age"/>
+        <result column="country" property="country"/>
+        <result column="indentify" property="indentify"/>
+        <result column="mobile" property="mobile"/>
+        <result column="address" property="address"/>
+        <result column="email_address" property="emailAddress"/>
+        <result column="cea_no" property="ceaNo"/>
+        <result column="company" property="company"/>
+        <result column="auth_result" property="authResult"/>
+        <result column="auth_time" property="authTime"/>
+        <result column="auth_info" property="authInfo"/>
+        <result column="nric_no" property="nricNo"/>
+    </resultMap>
+
+
+    <select id="selectUserAgentPage" resultMap="userAgentResultMap">
+        select * from house_user_agent where is_deleted = 0
+    </select>
+
+</mapper>

@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Member</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css" media="all">
+    <link rel="stylesheet" href="/plugins/swiper-6.0.4/package/swiper-bundle.min.css" media="all">
+    <link rel="stylesheet" href="/plugins/select2-4.0.13/dist/css/select2.min.css" media="all">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/video.js/7.9.2/video-js.min.css" media="all">
+    <link rel="stylesheet" href="/plugins/animate/animate.min.css" media="all">
+    <link rel="stylesheet" href="/font/iconfont/iconfont.css" media="all">
+    <link rel="stylesheet" href="/css/style-site.css" media="all">
+    <link rel="stylesheet" href="/css/userCenter.css" media="all">
+    <link rel="stylesheet" href="/css/Shwointerest.css" media="all">
+    <link rel="stylesheet" href="/css/user.css" media="all">
+    <link rel="stylesheet" href="/css/openingQuotation.css" media="all">
+    <link rel="stylesheet" href="/plugins/toastr/toastr.min.css" media="all">
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/plugins/select2-4.0.13/dist/js/select2.min.js"></script>
+<script src="/font/iconfont/iconfont.js"></script>
+<script src="/plugins/toastr/toastr.min.js"></script>
+<script src="/js/commons.js"></script>
+    <script src="/js/header.js"></script>
+
+</head>
+
+
+
+<body>
+<div th:replace="index/header :: header"></div>
+
+<div class="container">
+
+    <!-- 开盘头部信息区域 -->
+    <div class="openingQuotation-header">
+        <div class="openingQuotation-header-left">
+            <div class="unitsTotal">
+                <p class="header-title">TOTAL</p>
+                <p class="header-number totalUnits"></p>
+            </div>
+            <div class="unitsRemainder">
+                <p class="header-title">BAL</p>
+                <p class="header-number remainderUnits"></p>
+            </div>
+        </div>
+        <div class="openingQuotation-header-center">
+            <div class="prev">
+                <p class="header-title">PREV SELECTION No.</p>
+                <p class="header-number"></p>
+
+            </div>
+            <div class="current">
+                <p class="header-title">CURRENT SELECTION No.</p>
+                <p class="header-number"></p>
+
+            </div>
+            <div class="next">
+                <p class="header-title">NEXT SELECTION No.</p>
+                <p class="header-number"></p>
+
+            </div>
+        </div>
+        <div class="openingQuotation-header-right">
+            <div class="selectRemainder">
+                <p class="header-title">Pending Selection</p>
+                <p class="header-number jackpot"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 开盘内容区域 -->
+    <div class="openingQuotation-content">
+        <input style="display: none" th:value="${projectEventList}" class="project-eventList-dom"/>
+        <div class="content-left">
+            <div class="content-left-video">
+                <iframe id="videoContainer" width="100%" height="100%" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+            </div>
+            <div class="content-left-menu">
+                <div
+                    class="content-left-menu__item"
+                    th:each="item,index : ${projectEventList}"
+                    th:if="${not #strings.isEmpty(item.liveUrlChina) || not #strings.isEmpty(item.liveUrlWorld)}"
+                    th:onclick="handleVideoCheck([[${item}]])">
+
+                    <img th:src="${prefixUrl}+${item.url}">
+                </div>
+            </div>
+        </div>
+        <div class="content-right">
+            <div class="currentBlock">
+                <span class="currentBlock-title">
+                    <div></div>
+<!--                    <span>#3457 select BLK1 10-01</span>-->
+                </span>
+                <span class="goHouseBtn" id="openGoHouseBtn">VIEW UNITS</span>
+            </div>
+            <div class="userInfo">
+                <p class="userInfo-title">Hello ,Welcome to <span th:text="${project.name}">11111</span> !</p>
+                <div class="currentTitle-box">
+                    <div class="userSelection">
+                        <span class="currentTitle-box-title">Your Selection No.</span>
+                        <br />
+                        <span class="currentTitle-box-number">
+                            #<span class="currentTitle-box-number_"></span>
+
+                        </span>
+                    </div>
+                    <div>
+                        <p class="failedTitle">Failed in the 1st selection</p>
+                        <span class="stateBtn stateBtnIsClick" id="stateBtn">Waiting for Selection</span>
+                    </div>
+                </div>
+            </div>
+            <p class="selectTitle">Your EOI Units</p>
+            <div class="selectBox">
+<!--                <span class="active"></span>-->
+<!--                <span></span>-->
+<!--                <span></span>-->
+            </div>
+            <span class="instructions">Balloting Rules & Instructions</span>
+        </div>
+    </div>
+
+    <!-- 遮罩层 -->
+    <div class="graybox"></div>
+
+    <!-- 规则弹窗 -->
+    <div class="instructions_box">
+
+        <div class="instructions_box_disclaimer">
+            <!--关闭按钮-->
+            <div class="instructions__close-btn" id="instructions_close"><i style="font-size: 30px" class="iconfont iconguanbi"></i></div>
+            <div class="disclaimer-title">免责声明</div>
+            <div class="disclaimer-title">DISCLAIMER</div>
+            <br>
+            <div class="disclaimer-info">
+                <p>Brochure</p>
+                <p>
+                    Whilst every reasonable care has been taken in preparing this brochure, the developer and its agents cannot be held responsible for any inaccuracies. All statements are believed to be correct but are not to be regarded as statements or representations of fact.
+                </p>
+                <br>
+                <p>
+                    Specification
+                </p>
+                <p>
+                    All information and specifications are current at the time of going to press and are subject to change as may be required and cannot form part of the contract. All plans are subject to any amendments approved or may be approved by the relevant authority. Visual representations including (architectural) models, drawings, photographs / pictures and artists’ renderings are impression only, while illustrations of interiors are only decor suggestions and none to be regarded as representation facts. Floor areas are approximate measurements and subject to final survey.
+                </p>
+                <br>
+                <p>
+                    Sales & Purchase Agreement
+                </p>
+                <p>
+                    The Sales & Purchase Agreement shall form the entire agreement between us as the Developer and the Purchaser and shall supersede all statements, representations or promises made prior to the signing of the Sale & Purchase Agreement and shall in no way be modified by any statements, representation or promises made by us or the marketing agent.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 准备弹框 -->
+    <div class="readyBox">
+        <p>You are the next buyer,please be prepared.</p>
+        <span class="readyBtn">I'm Ready</span>
+    </div>
+
+    <!-- 开始选择弹框 -->
+    <div class="startSelectBox">
+        <p>You can start choosing a room now,please confirm within 3 minutes to start the room selection,otherwise you
+            will give up the opportunity to choose a room.</p>
+        <span class="countDown">00:00</span>
+        <span class="startSelectBtn">START SELECTION</span>
+    </div>
+
+    <!-- 二次选房弹框 -->
+    <div class="secondHouseSelect">
+        <p>This is the last chance to choose a house.If the house selection fails,you will lose the eligibility to
+            choose a house.</p>
+        <div class="btns">
+            <span class="noApplyBtn">DON'T APPLY</span>
+            <span class="applyNowBtn">APPLY NOW</span>
+        </div>
+    </div>
+</div>
+
+
+<!-- 选房 -->
+<!-- 选房 -->
+
+<!-- tab标签 -->
+<div class="selectHouseContainer">
+<!--    楼-->
+    <nav class="firstnav">
+        <ul>
+        </ul>
+    </nav>
+<!--    表-->
+    <div class="selectHouseBox">
+        <div class="content">
+            <div class="table">
+            </div>
+
+        </div>
+<!--        确认按钮-->
+
+        <div class="status-box" style="z-index: 99999;">
+            <div class="no">SOLD OUT</div>
+            <div class="yes">SELL</div>
+            <div class="na">SELECTED</div>
+        </div>
+        <div class="btn">
+            <span class="countDown">03:00</span>
+            <button type="button" class="success" id="selectHouseBoxSucc">Confirm</button>
+        </div>
+<!--关闭按钮-->
+        <div class="selectHouse__close-btn" id="selectHouseClose"><i style="font-size: 30px" class="iconfont iconguanbi"></i></div>
+    </div>
+</div>
+
+<div th:replace="footer :: footer"></div>
+<!--内联数据统一输出-->
+<script th:inline='javascript'>
+</script>
+
+
+<script th:inline='javascript'>
+    var data = {};
+    var submit = false;
+    var unitType = []
+    var units = []
+    var iCount;//计时器
+    var MINE_INFO;//当前用户信息
+    var DIALOG_STATE;//当前弹窗状态
+        //get Unit
+    var unitPro = new Promise((resolve, reject) => {
+        $.ajax({
+            url: "/client/unit/list",    //请求的url地址
+            dataType: "json",   //返回格式为json
+            type: "GET",   //请求方式
+            async: true,//请求是否异步，默认为异步，这也是ajax重要特性
+            data: {
+                size: -1,
+                projectId:[[${projectId}]]
+            },
+            success: function (res) {//请求成功时处理
+                resolve(res.data.records)
+            },
+            fail: function () {//请求失败
+                reject("fail");
+            },
+            error: function () {//请求出错处理
+                reject("确定选房失败  error");
+            }
+        });
+    })
+
+
+
+    //get Unit Type
+    var unitTypePro = new Promise((resolve, reject) => {
+        $.ajax({
+            url:"/client/projectunittype/list",    //请求的url地址
+            dataType:"json",   //返回格式为json
+            type:"GET",   //请求方式
+            async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+            data: {
+                size:-1,
+                projectId:[[${projectId}]]
+            },
+            success:function(res){//请求成功时处理
+                resolve(res.data.records)
+            },
+            fail:function(){//请求失败
+                reject("fail");
+            },
+            error:function(){//请求出错处理
+                reject("确定选房失败  error");
+            }
+        });
+
+    });
+
+    function unitTableOnload(){
+        $.ajax({
+            url: "/client/unit/list",    //请求的url地址
+            dataType: "json",   //返回格式为json
+            type: "GET",   //请求方式
+            data: {
+                size: -1,
+                projectId:[[${projectId}]]
+            },
+            success: function (res1) {//请求成功时处理
+                $.ajax({
+                    url:"/client/projectunittype/list",    //请求的url地址
+                    dataType:"json",   //返回格式为json
+                    type:"GET",   //请求方式
+                    data: {
+                        size:-1,
+                        projectId:[[${projectId}]]
+                    },
+                    success:function(res2){//请求成功时处理
+                        // console.log(results)
+                        units=res1.data.records
+                        unitType=res2.data.records
+
+                        var tableDom = $('.selectHouseBox .table')
+                        tableDom[0].innerHTML = '';
+                        $('.firstnav>ul')[0].innerHTML = '';
+                        var block=[]
+                        for (var i=0;i<units.length;i++){
+                            var temp = units[i]
+                            block.push(temp.block)
+                        }
+                        var blockArr = unique(block)
+                        for (var i=0;i<blockArr.length;i++){
+                            var item = blockArr[i]
+                            var style = '';
+                            if(i==0){
+                                style = 'liactive'
+                            }
+                            var dom = '<li class="'+style+'" data-block='+item+'><span>'+item+'</span></li>'
+                            $('.firstnav>ul').append(dom)
+                            $('.firstnav li').click(navPick)
+                        }
+                        tableDom[0].innerHTML = tableInint(blockArr[0])
+                        $('.content .table table tbody td').click(roomPick)
+                    },
+                    fail:function(){//请求失败
+                        reject("fail");
+                    },
+                    error:function(){//请求出错处理
+                        reject("确定选房失败  error");
+                    }
+                });
+            },
+            fail: function () {//请求失败
+                reject("fail");
+            },
+            error: function () {//请求出错处理
+                reject("确定选房失败  error");
+            }
+        });
+
+            // Promise.all([unitPro, unitTypePro]).then(function(results){
+            //     console.log(results)
+            //     units=results[0]
+            //     unitType=results[1]
+            //
+            //     var tableDom = $('.selectHouseBox .table')
+            //     tableDom[0].innerHTML = '';
+            //     $('.firstnav>ul')[0].innerHTML = '';
+            //     var block=[]
+            //     for (var i=0;i<units.length;i++){
+            //         var temp = units[i]
+            //         block.push(temp.block)
+            //     }
+            //     var blockArr = unique(block)
+            //     for (var i=0;i<blockArr.length;i++){
+            //         var item = blockArr[i]
+            //         var style = '';
+            //         if(i==0){
+            //             style = 'liactive'
+            //         }
+            //         var dom = '<li class="'+style+'" data-block='+item+'><span>'+item+'</span></li>'
+            //         $('.firstnav>ul').append(dom)
+            //         $('.firstnav li').click(navPick)
+            //     }
+            //     tableDom[0].innerHTML = tableInint(blockArr[0])
+            //     $('.content .table table tbody td').click(roomPick)
+            // });
+    }
+
+    function navPick() {
+        data = {};
+        $('.selectHouseContainer .current').removeClass("current");
+        $('.firstnav li').removeClass('liactive');
+        $(this).eq(0).addClass('liactive');
+        var tableDom = $('.selectHouseBox .table')
+        tableDom[0].innerHTML = tableInint($(this).data('block'))
+        $('.content .table table tbody td').click(roomPick)
+    }
+    function roomPick(){
+        var unit = {}
+        units.forEach(item => {
+            if($(this).data('id')===item.id){
+                unit = item
+                return
+            }
+        })
+        if(unit.saleStatus==0){
+            data = {};
+            $('.selectHouseContainer .current').removeClass("current");
+            $(this).addClass("current");
+        }else if(unit.saleStatus==1){
+            console.log("Room types are sold out!");
+        }
+    }
+    $('#selectHouseClose').click(function () {
+        $('.selectHouseContainer').hide();
+        $('.graybox').hide();
+        $('#selectHouseBoxSucc').parent().hide()
+        $('body').css({
+            overflow: 'auto'
+        });
+    })
+    function tableInint(block) {
+        var filterUnitArr =[]
+        units.forEach(item => {
+            if(item.block == block){
+                filterUnitArr.push(item)
+            }
+        })
+        if(!Array.isArray(filterUnitArr)){return}
+        var floorArrTemp = []
+        var unitArrTemp = []
+        var row;
+        for (var i=0;i<filterUnitArr.length;i++){
+            var temp = filterUnitArr[i]
+            floorArrTemp.push(temp.floor)
+            unitArrTemp.push(temp.unit)
+        }
+        var floorArr = unique(floorArrTemp).reverse()
+        var unitArr = unique(unitArrTemp)
+
+
+        var rowTemp ='<td> Floor/Unit </td>'
+        for (var x=0;x<unitArr.length;x++){
+            var unitTemp = unitArr[x]
+            rowTemp += '<td>'+unitTemp+'</td>'
+        }
+        row = '<thead>'+rowTemp+'</thead>'
+
+        for (var i=0;i<floorArr.length;i++){
+            var floorTemp = floorArr[i]
+            var td = ''
+            for (var x=-1;x<unitArr.length;x++){
+                var val =''
+                var id =''
+                var style= ''
+                var saleStatus=0
+                var imgUrl =''
+                if(x>-1){
+                    var unit = {}
+                    filterUnitArr.forEach(o => {
+                        if(o.floor == floorTemp && o.unit == unitArr[x]){
+                            unit = o
+                            return
+                        }
+                    })
+                    var unitTypeId = unit.typeId
+                    var unitTypeEL = {}
+                    unitType.forEach(o => {
+                        if(o.id==unitTypeId){
+                            unitTypeEL = o
+                            return
+                        }
+                    })
+                    val = unitTypeEL.typeName ? unitTypeEL.typeName : ''
+                    id = unit.id ? unit.id : ''
+                    saleStatus = unit.saleStatus
+                }
+                var str = (x===-1?floorTemp:val)
+                if(x!=-1){
+                    switch (saleStatus) {
+                        case 0:
+                            style = 'class="optional"'
+                            break;
+                        case 1:
+                            style = 'class="selected"'
+                            break;
+                        case 2:
+                            style = 'class="current"'
+                            break;
+                        default:
+                            style = 'style="color:#909399;cursor: default;"'
+                            break;
+                    }
+                }
+                td += '<td data-id="'+id+'" '+style+'>'+str+'</td>'
+            }
+            row += '<tr>' + td + '</tr>'
+        }
+        return '<table>'+row+'</table>'
+    }
+    function unique(arr) {
+        if(!Array.isArray(arr)){
+            return
+        }
+        var array = []
+        for (var i=0;i<arr.length;i++){
+            if(array.indexOf(arr[i]) === -1){
+                array.push(arr[i])
+            }
+        }
+        return array
+    }
+    //开盘页面查看看房信息
+    $('#openGoHouseBtn').click(function(){
+        $('.selectHouseContainer').show();
+        $('.graybox').show();
+        unitTableOnload()
+    })
+    //开盘页面选择
+    $('#stateBtn').click(function(){
+        // if(MINE_INFO.status == 0){
+        //
+        //     $('.selectHouseContainer').show();
+        //     $('.graybox').show();
+        //     $('#selectHouseBoxSucc').parent().show()
+        //     $('body').css({
+        //         overflow: 'hidden'
+        //     });
+        //     unitTableOnload()
+        // }
+        if(MINE_INFO.status == 2){
+            $('.container .readyBox').show()
+            $('.graybox').show();
+        }
+        if(MINE_INFO.status == 5){
+            $('.selectHouseContainer').show();
+            $('.graybox').show();
+            $('#selectHouseBoxSucc').parent().show()
+            unitTableOnload()
+        }
+        if(MINE_INFO.status == 7 && MINE_INFO.sequence == 1){
+            $('.container .secondHouseSelect').show()
+            $('.graybox').show();
+        }
+
+    })
+    //开盘确认按钮
+    $('#selectHouseBoxSucc').click(function(){
+        var currentDom = $('.selectHouseContainer .current')
+        if(currentDom.length !== 0){
+            var unit = {}
+            var unitId = currentDom.data('id')
+            units.forEach(item => {
+                if(unitId===item.id){
+                    unit = item
+                    return
+                }
+            })
+            console.log(unit);
+            $.ajax({
+                  url:"/client/opening/buyLottery",    //请求的url地址
+                  dataType:"json",   //返回格式为json
+                  type:"GET",   //请求方式
+                  async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+                  data: {unitId:unit.id},
+                  success:function(res){//请求成功时处理
+                    console.log(res);
+                    alert(res.msg);
+                      $('.selectHouseContainer').hide();
+                      $('.graybox').hide();
+                      unitTableOnload()
+                  },
+                  fail:function(){//请求失败
+                      console.log("fail");
+                  },
+                  error:function(){//请求出错处理
+                      console.log("确定选房失败  error");
+                  }
+              });
+
+
+        }else{
+            common.alert("Please selection room type first!");
+        }
+    })
+    //用户准备就绪
+    $('.readyBox .readyBtn').click(function(){
+        $.ajax({
+            url:"/client/opening/ready",    //请求的url地址
+            dataType:"json",   //返回格式为json
+            type:"GET",   //请求方式
+            async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+            success:function(res){//请求成功时处理
+                $('.container .readyBox').hide()
+                $('.graybox').hide();
+                lotteryDataInit(elementSet)
+            },
+            fail:function(){//请求失败
+                console.log("fail");
+            },
+            error:function(){//请求出错处理
+                console.log("确定选房失败  error");
+            }
+        });
+    })
+    //用户开始选房
+    $('.startSelectBox .startSelectBtn').click(function(){
+
+        $('.container .startSelectBox').hide()
+        $('.graybox').hide();
+
+        $('.selectHouseContainer').show();
+        $('.graybox').show();
+        $('#selectHouseBoxSucc').parent().show()
+        unitTableOnload()
+    })
+    //申请二次选房关闭按钮
+    $('.secondHouseSelect .noApplyBtn').click(function(){
+        DIALOG_STATE = MINE_INFO.status
+        $('.container .secondHouseSelect').hide()
+        $('.graybox').hide();
+    })
+    //申请二次选房
+    $('.secondHouseSelect .applyNowBtn').click(function(){
+        $.ajax({
+            url:"/client/opening/applySecondSelection",    //请求的url地址
+            dataType:"json",   //返回格式为json
+            type:"GET",   //请求方式
+            async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+            success:function(res){//请求成功时处理
+                $('.container .secondHouseSelect').hide()
+                $('.graybox').hide();
+            },
+            fail:function(){//请求失败
+                console.log("fail");
+            },
+            error:function(){//请求出错处理
+                console.log("确定选房失败  error");
+            }
+        });
+    })
+    //底部url弹窗
+    $('.instructions').click(function(){
+        $('.instructions_box').show();
+    })
+    $('#instructions_close').click(function(){
+        $('.instructions_box').hide();
+    })
+    //界面数据回填
+    function announcementPro(){
+        var P = new Promise(function(resolve, reject){
+            $.ajax({
+                url:"/client/opening/buy",    //请求的url地址
+                dataType:"json",   //返回格式为json
+                type:"GET",   //请求方式
+                async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+                data: {
+                    projectId:[[${projectId}]]
+                },
+                success:function(res){//请求成功时处理
+                    var announcement=[]
+                    res.data.forEach(function (item ,index) {
+                        announcement.push('#'+item.eoiNo+" Selection BLK"+item.unitVO.block+" "+item.unitVO.block+"-"+item.unitVO.unit)
+                    })
+
+                    if(announcement.length==1){
+                        announcement.push(announcement[0])
+                    }else if(announcement.length>0){
+                        announcement.push(announcement[0])
+                        announcement.push(announcement[1])
+                    }
+                    resolve(announcement)
+                },
+                fail:function(){//请求失败
+                    reject("fail");
+                },
+                error:function(){//请求出错处理
+                    reject("确定选房失败  error");
+                }
+            });
+        })
+        return P
+    }
+    function mineDataPro(){
+        var P = new Promise(function(resolve, reject){
+            $.ajax({
+                url:"/client/opening/myStatus",    //请求的url地址
+                dataType:"json",   //返回格式为json
+                type:"GET",   //请求方式
+                async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+                success:function(res){//请求成功时处理
+                    console.log(res.data,'/opening/myStatus')
+                    resolve(res.data)
+                },
+                fail:function(){//请求失败
+                    reject("fail");
+                },
+                error:function(){//请求出错处理
+                    reject("确定选房失败  error");
+                }
+            });
+        })
+        return P
+    }
+    function dataPro(){
+        var P = new Promise(function(resolve, reject){
+            $.ajax({
+                url:"/client/opening/detail",    //请求的url地址
+                dataType:"json",   //返回格式为json
+                type:"GET",   //请求方式
+                async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+                data: {
+                    projectId:[[${projectId}]]
+                },
+                success:function(res){//请求成功时处理
+                    console.log(res.data,'/opening/detail')
+                    var temp = res.data
+                    var current = '',prev = '',next = '',nextSequence=1,currentSequence=1,prevSequence=1
+                    var lastTime = 0
+                    temp.lotteryVOList.forEach(function(item){
+                        if(item.status == 3){
+                            next = item.eoiNo
+                            nextSequence = item.sequence
+                        }
+                        if(item.status == 5){
+                            current = item.eoiNo
+                            currentSequence = item.sequence
+                        }
+                        if(item.status == 7 || item.status == 9){
+                            var time = item.secondSelectionTime ? item.secondSelectionTime : item.firstSelectionTime
+                            var d1 = new Date(Date.parse(time));
+                            var d2 = new Date(Date.parse(lastTime));
+                            console.log(d1,d2)
+                            if(d1>d2){
+                                prev = item.eoiNo
+                                prevSequence = item.sequence
+                                lastTime = item.secondSelectionTime ? item.secondSelectionTime : item.firstSelectionTime
+                            }
+
+                        }
+                    })
+                    var data = {
+                        prev : prev,
+                        current : current,
+                        next : next,
+                        prevSequence : prevSequence,
+                        currentSequence : currentSequence,
+                        nextSequence : nextSequence,
+                        unitsTotal : temp.sellable,
+                        unitsRemainder : temp.sellable - temp.sold,
+                        selectRemainder : (temp.totalLottery - temp.drawLottery),
+                        units : temp.application.purchaseIntentUnitVOList
+                    }
+                    resolve(data)
+                },
+                fail:function(){//请求失败
+                    reject("fail");
+                },
+                error:function(){//请求出错处理
+                    reject("确定选房失败  error");
+                }
+            });
+        })
+        return P
+    }
+    var elementSet = {
+        prev : $('.openingQuotation-header-center .prev .header-number')[0],
+        current : $('.openingQuotation-header-center .current .header-number')[0],
+        next : $('.openingQuotation-header-center .next .header-number')[0],
+        unitsTotal : $('.openingQuotation-header-left .unitsTotal .header-number')[0],
+        unitsRemainder : $('.openingQuotation-header-left .unitsRemainder .header-number')[0],
+        selectRemainder : $('.openingQuotation-header-right .selectRemainder .header-number')[0],
+        userSelection : $('.openingQuotation-content .userSelection .currentTitle-box-number_')[0],
+        units : $('.openingQuotation-content .selectBox')[0],
+        announcement : $('.openingQuotation-content .currentBlock-title>div')[0]
+    }
+    //开盘list数据轮询
+    lotteryDataInit(elementSet)
+    mineDataLoad(elementSet)
+    setInterval(function(){
+        lotteryDataInit(elementSet)
+
+    },30000)
+    setInterval(function(){
+        mineDataLoad(elementSet)
+
+    },5000)
+    function lotteryDataInit(elementGet){
+
+        houseSelectLoad(elementGet)
+        announcementLoad(elementGet)
+    }
+    function houseSelectLoad(elementGet) {
+        dataPro().then(function(Data){
+            elementGet.prev.innerHTML = '<span>'+Data.prev+'</span>'+(Data.prevSequence == 2 ? '<span class="tag">2nd</span>' : '')
+            elementGet.current.innerHTML = '<span>'+Data.current+'</span>'+(Data.currentSequence == 2 ? '<span class="tag">2nd</span>' : '')
+            elementGet.next.innerHTML = '<span>'+Data.next+'</span>'+(Data.nextSequence == 2 ? '<span class="tag">2nd</span>' : '')
+            elementGet.unitsTotal.innerText = Data.unitsTotal
+            elementGet.unitsRemainder.innerText = Data.unitsRemainder
+            elementGet.selectRemainder.innerText = Data.selectRemainder
+            var str = ''
+            Data.units.forEach(function (item) {
+                var unit = item.unitVO
+                var status = unit.saleStatus == 1 ? 'active' : ''
+                str += '<span class="'+status+'">BLK'+unit.block+' '+unit.floor+'-'+unit.unit+'</span>'
+            })
+            elementGet.units.innerHTML = str
+        })
+    }
+    function mineDataLoad(elementGet){
+        mineDataPro().then(function(user){
+            MINE_INFO = user
+            if(DIALOG_STATE == user.status){
+                return
+            }
+            // $('.userInfo .userInfo-title>span')[0].innerText = user.userBuyer.name
+            elementGet.userSelection.innerText = user.eoiNo
+            if(user.status == 0){
+                if(user.sequence == 1){
+                    $('#stateBtn')[0].innerText = 'Waiting for Selection'
+                }else{
+                    $('#stateBtn')[0].innerText = 'Waiting for 2nd Selection'
+                    $('#stateBtn').css({'font-size': '24px'})
+                }
+                $('#stateBtn').removeClass('stateBtnIsClick')
+            }
+            if(user.status == 2){
+                if(user.sequence == 1){
+                    $('#stateBtn')[0].innerText = 'Ready to Selection'
+                }else{
+                    $('#stateBtn')[0].innerText = 'Ready to 2nd Selection'
+                    $('#stateBtn').css({'font-size': '24px'})
+                }
+                $('.container .readyBox').show()
+                $('.graybox').show();
+            }
+            if(user.status == 5){
+                var sec = 0;
+                if(user.sequence == 1){
+                    $('#stateBtn')[0].innerText = 'START SELECTION'
+                    $('.startSelectBox .startSelectBtn')[0].innerText = 'START SELECTION'
+                    sec = time_to_sec(user.currentTime)-time_to_sec(user.firstSelectionTime)
+                }else{
+                    $('#stateBtn')[0].innerText = 'START 2nd SELECTION'
+                    $('.startSelectBox .startSelectBtn')[0].innerText = 'START 2nd SELECTION'
+                    $('#stateBtn').css({'font-size': '24px'})
+                    sec = time_to_sec(user.currentTime)-time_to_sec(user.secondSelectionTime)
+                }
+                if(!iCount){
+                    $('.container .startSelectBox').show()
+                    $('.graybox').show();
+                    var count = sec < 180 ? 180-sec : 1
+                    iCount =  setInterval(function () {
+                        count --
+                        if(count <= 0){
+                            $('.selectHouseContainer .countDown').addClass('timeUp')
+                            $('.startSelectBox .countDown').addClass('timeUp')
+                            clearInterval(iCount);
+                        }
+                        $('.selectHouseContainer .countDown')[0].innerText = sec_to_time(count)
+                        $('.startSelectBox .countDown')[0].innerText = sec_to_time(count)
+                    },1000)
+                }
+            }
+            if(user.status == 7 && user.sequence == 1){
+                $('.currentTitle-box .failedTitle').show()
+
+                $('#stateBtn').css({'font-size': '24px','margin-top':'0'})
+                $('#stateBtn')[0].innerText = 'APPLY 2nd SELECTION'
+            }
+            if(user.status == 6){
+                $('#stateBtn').removeClass('stateBtnIsClick')
+                $('#stateBtn')[0].innerText = 'Waiting for 2nd Selection'
+                $('#stateBtn').css({'font-size': '24px'})
+            }
+        })
+    }
+    function announcementLoad(elementGet){
+        announcementPro().then(function(announcement){
+            $('.openingQuotation-content .currentBlock-title>div').css("animation" , "moveUp "+announcement.length+"s linear infinite");
+            var paramByAnnouncementHeight = (announcement.length*30)-60;
+            // document.styleSheets[0].insertRule("@keyframes moveUp { 0% { top: 0px; } 100% { top: -"+paramByAnnouncementHeight+"px; } }",9);//写入样式
+            document.styleSheets[0].insertRule("@keyframes moveUp { 0% { transform: translateY(0px); } 100% { transform: translateY(-"+paramByAnnouncementHeight+"px)}",9);//写入样式
+
+            var announcementHtml = ''
+            announcement.forEach((item,index) => {
+                var str = '<span>'+item+'</span>'
+                announcementHtml += str
+            })
+            elementGet.announcement.innerHTML = announcementHtml
+        })
+    }
+    //数字转时间
+    function sec_to_time(sec){
+        var hour = Math.floor(sec / 3600);
+        var minute = Math.floor((sec - hour * 3600) / 60);
+        var second = sec - hour * 3600 - minute * 60;
+        if (hour < 10) {
+            hour = "0" + hour;
+        }
+        if (minute < 10) {
+            minute = "0" + minute;
+        }
+        if (second < 10) {
+            second = "0" + second;
+        }
+        return minute + ":" + second;
+    }
+    //时间转数字
+    function time_to_sec(date) {
+        if(!date){return }
+        var time = date.substring(date.indexOf(' '),date.length)
+        var s = '';
+
+        var hour = time.split(':')[0];
+        var min = time.split(':')[1];
+        var sec = time.split(':')[2];
+        s = Number(hour*3600) + Number(min*60) + Number(sec);
+
+        return s;
+    };
+    function handleVideoCheck(e) {
+        $('#videoContainer').attr('src',e.liveUrlWorld)
+        console.log(e)
+    }
+    (function initVideoSrc() {
+        var projectEventList = [[${projectEventList}]]
+        console.log(projectEventList,'projectEventList')
+        for (var i = 0; i < projectEventList.length; i++) {
+            if(projectEventList[i].liveUrlWorld){
+                $('#videoContainer').attr('src',projectEventList[i].liveUrlWorld)
+                return
+            }
+        }
+    })()
+</script>
+</body>
+
+</html>

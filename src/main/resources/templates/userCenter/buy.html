@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="inc/commons :: head(Member, user)">
+
+
+
+<body>
+<div th:replace="index/header :: header"></div>
+<div th:replace="userCenter/header :: user"></div>
+
+<div class="container">
+    <div class="project_list">
+        <h2 class="page_title">BUY</h2>
+        <div class="row">
+            <div class="col-md-6" th:each="project : ${projectList}">
+                <div class="project_list_item">
+                    <div class="project_list_item__pic" th:style="${'background-image: url(' + prefixUrl + project.previewImage + ')'}"></div>
+                    <div class="project_list_item__content">
+                        <h3 th:text="${project.name}">QUEENS PEAK</h3>
+                        <p style="overflow: hidden; height: 76px;" th:text="${project.mainInfo}">Singapore’s Premium Project to be Seamlessly Linked to Queens Town MRT Station</p>
+                        <p th:switch="${project.openStatus}">
+                        	<a th:case="0" href="javascript:;">There is no opening</a>
+                        	<a th:case="1" th:href="${'/userCenter/openingQuotation?id='+project.id}">BALLOTING</a>
+                        	<a th:case="2" th:href="${'/userCenter/daily?id='+project.id}">HOUSE SELECTION</a>
+                        	<a th:case="3" href="javascript:;">Sold out</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<div th:replace="footer :: footer"></div>
+
+
+<th:block th:replace="inc/commons :: foot(user)"></th:block>
+
+
+<script th:inline='javascript'>
+	$('.project_list_item').click(function(){
+		console.log(111);
+	})
+</script>
+</body>
+
+</html>

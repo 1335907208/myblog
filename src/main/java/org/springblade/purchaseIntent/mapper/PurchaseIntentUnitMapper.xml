@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.springblade.purchaseIntent.mapper.PurchaseIntentUnitMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="purchaseIntentUnitResultMap" type="org.springblade.purchaseIntent.entity.PurchaseIntentUnit">
+        <id column="id" property="id"/>
+        <result column="application_id" property="applicationId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="unit_id" property="unitId"/>
+    </resultMap>
+
+    <select id="selectPurchaseIntentUnitPage" resultMap="purchaseIntentUnitResultMap">
+        select * from house_application
+    </select>
+
+</mapper>
+

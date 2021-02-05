@@ -1,0 +1,223 @@
+
+        /* 选房样式 */
+.selectHouseBox{
+	background-color:#ffffff;
+	width:100%;
+    position: relative;
+	z-index:100;
+}
+
+        table {
+            width: 100%;
+            display: flex;
+            flex-flow: column;
+            height: 600px;
+            border-collapse: collapse;
+        }
+
+        .selectHouseBox .content table td ,#tbody td,.selectHouseBox .content table.tab-left-title{
+            border: 1px solid #ebeef5;
+            height: 70px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .selectHouseBox .content thead td{
+            color: #909399;
+            background-color: #ccc;
+        }
+        .selectHouseBox .content tbody td{
+            color: #FFF;
+            cursor: pointer;
+        }
+        .selectHouseBox .content tr td:first-child{
+            width: 100px;
+            color: #909399 !important;
+            cursor: default !important;
+            background-color: #ccc;
+            text-align: center;
+            font-weight: bold;
+        }
+        .tab-title td {
+            background-color: #F5F7FA;
+        }
+
+        .tab-content .tab-left-title {
+            background-color: #fdecdc;
+        }
+
+        .content tr td:first-child{
+            width: 100px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .content table thead, .content tbody tr {
+            display:table;
+            width:100%;
+            table-layout:fixed;
+        }
+        .content table thead {
+            width: calc( 100% - 1.3em )
+        }
+        .content table tbody{
+            display:block;
+            overflow-y:scroll;
+            -webkit-overflow-scrolling: touch; // 为了滚动顺畅
+        }
+
+        /* 已被选 */
+        .selected {
+            background-color: #ff6633;
+        }
+
+        /* 空房子 */
+        .emptyRoom {
+            background-color: #c0b8b8;
+        }
+
+        /* 可以选 */
+        .optional {
+            background-color: #4517ee;
+        }
+
+        /* 当前正在选 */
+        .current {
+            background-color: #077c38;
+        }
+
+		.btn{
+			text-align:center;
+		}
+        .btn button {
+            border: none;
+            width:180px;
+            line-height:22px;
+            height: 40px;
+            border-radius: 5px;
+            color: white;
+            outline: none;
+            margin:0 5px;
+        }
+
+        .btn .success {
+            background-color: #67c23a;
+        }
+
+        .btn .danger{
+        	background-color:#c9302c;
+        }
+#selectHouseImg{
+	width:800px;
+	height:600px;
+	position:fixed;
+	left:50%;
+	top:20%;
+	transform: translate(-50%);
+	z-index:10;
+	display:none;
+	background-size:100% 500px;
+	background-repeat:no-repeat;
+    background-color: #eee;
+    border: 8px solid #e0890d;
+    z-index: 9999;
+}
+#application{
+    width:1200px;
+    height:90vh;
+    position:fixed;
+    left:50%;
+    top:5vh;
+    transform: translateX(-50%);
+    z-index:999999999;
+    display:none;
+    box-sizing: border-box;
+    background: #FFF;
+    overflow: auto;
+    border: 8px solid #e0890d;
+}
+#selectHouseImg .btn,#application .btn{
+	position:absolute;
+	bottom:5px;
+    width: 410px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#application .container{
+    padding-bottom: 50px;
+    position: relative;
+}
+nav ul {
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+}
+
+nav ul li {
+    min-width: 100px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border: 1px solid #ccc;
+    position: relative;
+    border-radius: 5px;
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #646465;
+    padding: 0 10px;
+}
+nav ul li:hover{
+    background: #fcd094;
+}
+nav ul li.liactive {
+    background: #e0890d;
+    color: #FFF;
+}
+
+.application-graybox {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.6);
+    top: 0;
+    left: 0;
+    z-index: 9999999;
+    display: none;
+}
+
+        .selectHouseBox .status-box {
+            position: absolute;
+            right: 0;
+            display: flex;
+        }
+
+        .selectHouseBox .status-box div {
+            font-size: 18px;
+            text-shadow: 0 2px 8px white;
+            font-weight: 700;
+            color: #333;
+            margin-right: 40px;
+            position: relative;
+        }
+
+        .selectHouseBox .status-box div::before {
+            position: absolute;
+            left: -24px;
+            top: 3px;
+            content: '';
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #fff;
+        }
+
+        .selectHouseBox .status-box .no::before {
+            background-color: #ff6633;
+        }
+
+        .selectHouseBox .status-box .yes::before {
+            background-color: #4517ee;
+        }
+
+        .selectHouseBox .status-box .na::before {
+            background-color: #67C23A;
+        }

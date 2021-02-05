@@ -1,0 +1,25 @@
+<div class="container-fluid" id="galleryBox" th:fragment="gallery">
+    <div class="box">
+        <div class="box-title">
+            <h2 class="box-title__content">GALLERY</h2>
+            <h4 class="box-title__sub" th:text="${projectinfodetail.name}">QUEENS PEAK</h4>
+        </div>
+        <div class="box-content">
+            <div id="certify">
+                <div class="swiper-container banner-swiper">
+                    <div class="swiper-wrapper">
+                        <a class="swiper-slide" th:each="projectGallery : ${projectGalleryList}"
+                           th:href="@{${prefixUrl}+${projectGallery.imageList}}"><img
+                            th:src="@{${prefixUrl}+${projectGallery.imageList}}"
+
+                            style="height: 100%;width: 100%;object-fit: cover;"/></a>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"><i class="iconfont"></i></div>
+                <div class="swiper-button-next"></div>
+
+            </div>
+        </div>
+    </div>
+</div>

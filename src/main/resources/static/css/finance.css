@@ -1,0 +1,139 @@
+#body{
+    font-family: Montserrat,sans-serif;
+}
+#Finance .slider{
+    height: 400px;
+    width: 100%;
+    margin-bottom: 40px;
+}
+#Finance button{
+    width: 100px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: #e0890d;
+    color: #fff;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+#Finance .slider img{
+    height: 100%;
+    width: 100%;
+}
+
+.finance_container{
+    display: none;
+}
+.finance_container_show{
+    display: block !important;
+}
+.finance_remarks{
+    padding: 40px 80px;
+    color: #8d97ad;
+    font-size: 20px;
+    user-select: none;
+}
+nav ul {
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px 80px;
+}
+
+nav ul li {
+    min-width: 100px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border: 1px solid #ccc;
+    position: relative;
+    border-radius: 5px;
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #646465;
+    padding: 0 10px;
+}
+nav ul li:hover{
+    background: #fcd094;
+}
+nav ul li.liactive {
+    background: #e0890d;
+    color: #FFF;
+}
+.finance_container{
+    padding: 0 80px;
+}
+#Finance .select2,#Finance input{
+    min-width: 180px;
+}
+.finance-form{
+    display: flex;
+    align-items: center;
+}
+.finance-form-col-left{
+    text-align: right;
+    font-size: 18px;
+}
+.finance-form-col-right{
+    text-align: left;
+    font-size: 18px;
+}
+.finance-form-col-right>*,.finance-form-col-left>*{
+    margin-bottom: 20px;
+    height: 35px;
+}
+.finance_container h2{
+    font-weight: normal;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.finance-table{
+    margin-bottom: 20px;
+}
+.finance-table table {
+    width: 100%;
+}
+.finance-table td{
+    padding: 8px 15px;
+    border: 1px solid #DCDCDC;
+}
+.finance-table tr:nth-child(even) {
+    /* 匹配偶数行 */
+    background-color: #e8eef4;
+}
+.finance-table thead td{
+    font-weight: bold;
+    padding: 10px 15px;
+    border: 1px solid #DCDCDC;
+    text-align: left;
+    background-color: #898a8c;
+    color: #ffffff;
+}
+
+.finance-tables{
+    margin-bottom: 20px;
+}
+.finance-tables table {
+    width: 100%;
+}
+.finance-tables td{
+    padding: 8px 15px;
+    border: 1px solid #DCDCDC;
+}
+.finance-tables tr:nth-child(even) {
+    /* 匹配偶数行 */
+    background-color: #fff4e4;
+}
+.finance-tables thead td{
+    font-weight: bold;
+    padding: 10px 15px;
+    border: 1px solid #DCDCDC;
+    text-align: left;
+    background: #e0890d;
+    color: #ffffff;
+}

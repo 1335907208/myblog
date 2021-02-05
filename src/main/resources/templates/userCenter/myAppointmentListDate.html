@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="inc/commons :: head(Member, user)">
+<body>
+<div th:replace="index/header :: header"></div>
+<div th:replace="userCenter/header :: user"></div>
+
+<div class="container">
+    <div class="registry">
+        <h2 class="page_title">DataTime</h2>
+        <div class="page-header">
+
+            <div class="pull-right form-inline">
+                <div class="btn-group">
+                    <button class="btn btn-primary" data-calendar-nav="prev"><< Prev</button>
+                    <button class="btn" data-calendar-nav="today">Today</button>
+                    <button class="btn btn-primary" data-calendar-nav="next">Next >></button>
+                </div>
+            </div>
+            <h3></h3>
+        </div>
+        <div id="calendar" style="float:left;"></div>
+        <table class="table" style="width: 500px;margin-left: 50px">
+            <thead class="thead-light">
+            <tr>
+                <th>startTime</th>
+                <th>Shift Data ID</th>
+                <th>status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="project : ${shiftlist}" onclick="printInputValue()">
+                <td th:text="${project.startTime}"></td>
+                <td th:text="${project.shiftDataId}"></td>
+                <td th:text="${project.status}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div style="width: 100%;overflow: hidden"></div>
+        <div class="application-graybox"></div>
+        <div id="application">
+            <div class="container">
+                <div class="usercenter_box"a>
+                    <h2 class="page_title">Appointment  Information</h2>
+                    <form class="base_form" id="applicationForm">
+                        <fieldset>
+                            <div class="form-group row">
+                                <label for="contact1" class="col-sm-3 col-form-label">Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="contact1" id="name" placeholder="Pease Enter Appointment's Name">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="email1" class="col-sm-3 col-form-label">SchedulingId</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="email1" id="schedulingId" placeholder="Pease Enter Appointment's SchedulingId">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="email1" class="col-sm-3 col-form-label">Date</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="email1" id="Date" placeholder="Pease Enter Appointment's Date">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="email1" class="col-sm-3 col-form-label">ShiftDataId</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="email1" id="shiftDataId" placeholder="Pease Enter Appointment's ShiftDataId">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="email1" class="col-sm-3 col-form-label">E-mail</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Pease Enter Appointment's E-mail">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="address" class="col-sm-3 col-form-label">Tel</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="address" id="tel" placeholder="Pease Enter Appointment's Tel">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="postalCode" class="col-sm-3 col-form-label">Nric</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="postalCode" id="nric" placeholder="Pease Enter Appointment's Nric">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <div class="btn">
+                    <button type="button" class="success" id="applicationSubmit">Submit</button>
+                    <button type="button" class="danger" id="applicationclose">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+<!--        <div class="modal hide fade" id="events-modal">-->
+<!--            <div class="modal-header">-->
+<!--                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+<!--                <h3>Event</h3>-->
+<!--            </div>-->
+<!--            <div class="modal-body" style="height: 400px">-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--                <a href="#" data-dismiss="modal" class="btn">Close</a>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</div>
+<div th:replace="footer :: footer"></div>
+
+<th:block th:replace="inc/commons :: foot(user)"></th:block>
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/underscore.js/1.12.0/underscore.min.js"></script>
+<script type="text/javascript" src="/plugins/bootstrap-calendar/js/language/zh-CN.js"></script>
+<script type="text/javascript" src="/plugins/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="/plugins/bootstrap/js/bootstrap.bundle.js"></script>
+<script type="text/javascript" src="/plugins/bootstrap-calendar/js/calendar.js"></script>
+
+<script th:inline='javascript'>
+    var tmp = [[${shiftlist}]]
+    var data = {};
+    var submit = false;
+</script>
+<script type="text/javascript">
+    $('#application').hide();
+    $('.application-graybox').hide();
+    $('body').css({
+        overflow: 'auto'
+    });
+
+    console.log(tmp,'_______________')
+    var calendar = $("#calendar").calendar(
+        {
+            width: '56%',
+            language: 'zh-CN',
+            tmpl_path: "/plugins/bootstrap-calendar/tmpls/",
+            onAfterViewLoad: function(view) {
+                $('.page-header h3').text(this.getTitle());
+            },
+            events_source: function () { return []; }
+        });
+
+    $('.btn-group button[data-calendar-nav]').each(function() {
+        var $this = $(this);
+        $this.click(function() {
+            calendar.navigate($this.data('calendar-nav'));
+        });
+    });
+    // $('span[data-cal-date=2021-02-03]').parent().append('<div>1111111</div>')
+    $('span[data-cal-date]').parent().click((e)=>{
+        var tmp = e.currentTarget.childNodes[1].getAttribute("data-cal-date")
+        console.log(tmp)
+        var query = decodeURI(window.location.search.substring(1));
+        var vars = query.split("&");//分割字符串，将url切割成数组形式的对象
+        var projectId
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");//再次分割成数组
+            if (pair[0] == "projectId") {
+                projectId = pair[1]
+            }//如果匹配输出结果
+        }
+        window.location.href=("?projectId="+projectId+"&startDate="+tmp+"&endDate="+tmp);
+    });
+    function printInputValue() {
+        applicationShow()
+    };
+    $('#applicationclose').click(function(){
+        $('#application').hide();
+        $('.application-graybox').hide();
+        $('body').css({
+            overflow: 'auto'
+        });
+    })
+    $('#applicationSubmit').click(function(){
+        var dataArr = $('#applicationForm').serializeArray()
+        dataArr.forEach(function(item){
+            data[item.name] = item.value
+        })
+        console.log(data)
+        submitForm()
+
+    })
+    function applicationHide() {
+        $('#application').hide();
+        $('.application-graybox').hide();
+        $('body').css({
+            overflow: 'auto'
+        });
+    }
+    function applicationShow() {
+        $('#application').show();
+        $('.application-graybox').show();
+        $('body').css({
+            overflow: 'hidden'
+        });
+    }
+    function submitForm (){
+            $.ajax({
+                url:"/submitAppointment",    //请求的url地址
+                dataType: "json",   //返回格式为json
+                type: "POST",   //请求方式
+                contentType:"application/json",
+                success:function(res){//请求成功时处理
+                    console.log(res);data = {};
+                    common.success(res.msg);
+                    applicationHide()
+                    // window.loaction.href = 'userCenter/appointment'
+                },
+                fail:function(){//请求失败
+                    common.alert("fail");
+                },
+                error:function(){//请求出错处理
+                    common.alert("failed !");
+                }
+            });
+    }
+</script>
+
+<script th:inline='javascript'>
+
+</script>
+</body>
+
+</html>

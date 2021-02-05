@@ -1,0 +1,202 @@
+.project_list {
+    padding: 60px;
+    /*background: #FFF;*/
+    a:hover {
+        text-decoration: none;
+    }
+}
+.project_list_item {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    transition: all .3s;
+
+    &:hover {
+        box-shadow: 0px 0 15px rgba(0,0,0, .3);
+    }
+}
+.project_list_item__pic {
+    width: 60%;
+    padding-top: 45%;
+    height: 0;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.project_list_item__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 40%;
+    padding: 30px;
+    background-color: #FFF;
+}
+
+.project_list_item__content h3 {
+    font-size: 30px;
+    color: #404040;
+    transition: all .3s;
+
+    a:hover & {
+        font-size: 32px;
+        color: #333;
+    }
+
+}
+.project_list_item__content p {
+    font-size: 16px;
+    color: #666;
+
+}
+.page_title {
+    margin-bottom: 30px;
+    font-size: 30px;
+    line-height: 66px;
+    padding-left: 30px;
+    border-left: 10px solid #E6AC5C;
+}
+.usercenter_header {
+    margin-top: 110px;
+    position: relative;
+
+    .model_list {
+        height: 200px;
+        //background-color: rgba(189, 189, 189, 0.842);
+        background-image: url(../img/header_bg.png);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+
+
+        ul {
+            position: absolute;
+            bottom: 0;
+            right: 160px;
+            z-index: 9999;
+
+            li {
+                float: left;
+                margin-left: 40px;
+                font-size: 24px;
+
+                a {
+                    color: #333;
+                    text-decoration: none;
+
+                    &:hover {
+                        color: rgb(255, 185, 55);
+                    }
+                }
+
+                &.active {
+                    border-bottom:3px solid rgb(255, 185, 55);
+
+                    a {
+                        color: rgb(255, 185, 55);
+                    }
+                }
+            }
+        }
+
+    }
+
+    .model_footer {
+        height: 250px;
+        padding-top: 200px;
+        background-color: white;
+        position: relative;
+
+        &.no-nav {
+            height: 200px;
+        }
+
+        ul {
+            display:flex;
+            flex-direction: row;
+            justify-content: center;
+            height: 50px;
+            width: 100%;
+            li{
+                width: 180px;
+                text-align: center;
+                font-size: 18px;
+                color: #333;
+
+                a {
+                    text-decoration: none;
+                    color: #333;
+                    &:hover {
+                        color: rgb(255, 185, 55);
+                    }
+
+                }
+                &.active {
+                    border-bottom:3px solid rgb(255, 185, 55);
+
+                    a {
+                        color: rgb(255, 185, 55);
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    .userinfo {
+        position: absolute;
+        top: 131px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+
+        .avatar {
+            height: 138px;
+            width: 138px;
+            border-radius: 50%;
+            line-height: 138px;
+            background-color: white;
+            border: 3px solid rgb(255, 185, 55);
+            overflow: hidden;
+        }
+        h3 {
+            font-size: 16px;
+        }
+
+        h2 {
+            font-size: 24px;
+            padding-top: 10px;
+        }
+    }
+
+
+
+
+}
+.usercenter_box {
+    background: #FFF;
+    margin-top: 30px;
+    padding: 30px;
+
+    .base_form {
+        max-width: 900px;
+        width: 100%;
+        margin: 0 auto;
+
+        h3 {
+            text-align: left;
+            padding: 20px 0;
+            font-size: 30px;
+            font-weight: 400;
+        }
+    }
+}
+
+
+

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.springblade.webuser.mapper.UserBuyerMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="userBuyerResultMap" type="org.springblade.webuser.entity.UserBuyer">
+        <id column="id" property="id"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="status" property="status"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="name" property="name"/>
+        <result column="gender" property="gender"/>
+        <result column="age" property="age"/>
+        <result column="country" property="country"/>
+        <result column="indentify" property="indentify"/>
+        <result column="mobile" property="mobile"/>
+        <result column="address" property="address"/>
+        <result column="email_address" property="emailAddress"/>
+        <result column="project_no" property="projectNo"/>
+        <result column="floor_no" property="floorNo"/>
+        <result column="house_no" property="houseNo"/>
+        <result column="auth_result" property="authResult"/>
+        <result column="auth_time" property="authTime"/>
+        <result column="auth_info" property="authInfo"/>
+    </resultMap>
+
+
+    <select id="selectUserBuyerPage" resultMap="userBuyerResultMap">
+        select * from house_user_buyer where is_deleted = 0
+    </select>
+
+</mapper>

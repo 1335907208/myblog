@@ -1,0 +1,69 @@
+<head th:fragment="head(title,model)">
+    <meta charset="utf-8">
+    <title th:text="${title} + ' - MCC Singapore'">首页</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css" media="all">
+    <link rel="stylesheet" href="/plugins/swiper-6.0.4/package/swiper-bundle.min.css" media="all">
+    <link rel="stylesheet" href="/plugins/select2-4.0.13/dist/css/select2.min.css" media="all">
+    <link rel="stylesheet" href="/plugins/videojs/video-js.min.css" media="all">
+    <link rel="stylesheet" href="/plugins/toastr/toastr.min.css" media="all">
+    <link rel="stylesheet" href="/plugins/animate/animate.min.css" media="all">
+    <link rel="stylesheet" href="/font/iconfont/iconfont.css" media="all">
+    <link rel="stylesheet" href="/plugins/share/dist/css/share.min.css" media="all" th:if="${model == 'project'}">
+    <link rel="stylesheet" href="/plugins/Watch3D/dist/watch3D.min.css" media="all" th:if="${model == 'project'}">
+    <link rel="stylesheet" href="/css/style-site.css" media="all">
+    <link rel="stylesheet" href="/css/finance.css" media="all" th:if="${model == 'finance'}">
+    <link rel="stylesheet" href="/css/register.css" media="all" th:if="${model != 'user'}">
+    <link rel="stylesheet" href="/css/userCenter.css" media="all" th:if="${model == 'user'}">
+    <link rel="stylesheet" href="/css/Shwointerest.css" media="all" th:if="${model == 'user'}">
+    <link rel="stylesheet" href="/css/user.css" media="all" th:if="${model == 'user'}">
+    <link rel="stylesheet" href="/css/daily.css" media="all" th:if="${page == 'daily'}">
+    <link rel="stylesheet" href="/plugins/lightgallery/dist/css/lightgallery.min.css" media="all">
+    <link rel="stylesheet" href="/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.css" media="all">
+    <link rel="stylesheet" href="/plugins/bootstrap-calendar/css/calendar.min.css" media="all">
+    <link rel="stylesheet" href="/css/selectMyApplication.css" media="all">
+</head>
+
+
+<th:block th:fragment="foot(model)">
+    <script src="/plugins/jquery/jquery.min.js"></script>
+    <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/plugins/jquery/jquery.cookie.js"></script>
+    <script src="/plugins/toastr/toastr.min.js"></script>
+    <script src="/plugins/swiper-6.0.4/package/swiper-bundle.min.js"></script>
+    <script src="/plugins/select2-4.0.13/dist/js/select2.min.js"></script>
+    <script src="/plugins//videojs/video.min.js"></script>
+    <script src="/font/iconfont/iconfont.js"></script>
+    <script src="/js/commons.js"></script>
+    <script src="/js/header.js" th:if="${model != 'project'}"></script>
+    <script src="/js/login.js"></script>
+    <!--  生成二维码  -->
+    <script type="text/javascript" src="/plugins/qrcode/qrcode.min.js"></script>
+    <script type="text/javascript" src="/plugins/qrcode/utf.js"></script>
+    <script type="text/javascript" src="/plugins/qrcode/jquery.qrcode.js"></script>
+
+    <!--  Home  -->
+    <script src="/js/index.js" th:if="${model == 'home'}"></script>
+    <script src="//api.map.baidu.com/api?v=2.0&ak=dWQTUFqH4jZ3h8ts0uLGGgS82YTgEtsn" th:if="${model == 'home'}"></script>
+
+    <!--  Project  -->
+<!--    <script src="/plugins/share/dist/js/social-share.min.js" th:if="${model == 'project'}"></script>-->
+    <script src="/plugins/lightgallery/demo/js/lightgallery.min.js" th:if="${model == 'project'}"></script>
+    <script src="/plugins/lightgallery/demo/js/lg-zoom.min.js" th:if="${model == 'project'}"></script>
+    <script src="/plugins/lightgallery/demo/js/lg-thumbnail.min.js" th:if="${model == 'project'}"></script>
+    <script src="/plugins/lightgallery/demo/js/lg-autoplay.js" th:if="${model == 'project'}"></script>
+    <script src="/plugins/Watch3D/dist/watch3D.js" th:if="${model == 'project'}"></script>
+
+
+    <!--  appointment  -->
+    <script src="/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="/plugins/bootstrap-calendar/js/calendar.min.js"></script>
+
+
+    <!--  Finance  -->
+    <script src="/js/finance.js" th:if="${model == 'finance'}"></script>
+</th:block>

@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>用户中心</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css" media="all">
+  <link rel="stylesheet" href="/plugind/swiper-6.0.4/package/swiper-bundle.min.css" media="all">
+  <link rel="stylesheet" href="/plugins/select2-4.0.13/dist/css/select2.min.css" media="all">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/video.js/7.9.2/video-js.min.css" media="all">
+  <link rel="stylesheet" href="/plugins/animate/animate.min.css" media="all">
+  <link rel="stylesheet" href="/font/iconfont/iconfont.css" media="all">
+  <link rel="stylesheet" href="/css/style-site.css" media="all">
+  <link rel="stylesheet" href="/css/userCenter.css" media="all">
+  <link rel="stylesheet" href="/css/Shwointerest.css" media="all">
+  <script src="/plugins/jquery/jquery.min.js"></script>
+  <script src="/plugins/jquery/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" href="/css/Shwointerest.css" media="all">
+  <script src="/plugins/jquery/jquery.min.js"></script>
+  <script src="/plugins/jquery/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+
+
+<body>
+  <div id="header">
+    <div class="logo"></div>
+    <div class="top-menu">
+      <ul class="menu">
+        <li class="submenu">
+          <div class="name">PREMIUM PROPERTY</div>
+        </li>
+        <div class="subcontent">
+          <div class="content-l">
+            <div class="pj-type">
+              <div class="type-tit">Residential Projects</div>
+              <div class="type-list">
+                <a>Current Projects</a>
+                <a href="#">Queens Peak</a>
+                <a>Upcoming Projects</a>
+                <a href="#">Landmark</a>
+                <a href="#">Bernam Street</a>
+                <a>Completed Projects</a>
+                <a href="#">The Alps Residences</a>
+              </div>
+            </div>
+            <div class="pj-type">
+              <div class="type-tit">Commercial Projects</div>
+              <div class="type-list">
+                <a href="#">The Poiz Centre</a>
+              </div>
+            </div>
+            <div class="pj-type">
+              <div class="type-tit">Overseas Projects</div>
+              <div class="type-list">
+                <a href="#">Sky Villa @ Phnom Penh, Cambodia</a>
+                <a href="#">Living Star @ Jakarta, Indonesia</a>
+              </div>
+            </div>
+          </div>
+          <div class="content-r">
+            <div class="media">
+              <img src="../media/menu/sub/media1.jpg" alt="" />
+            </div>
+          </div>
+
+        </div>
+        <li class="submenu">
+          <div class="name">MCC SPACE</div>
+        </li>
+        <li class="submenu">
+          <div class="name">VR</div>
+        </li>
+        <div class="subcontent">
+          <div class="content">
+            <div class="media">
+              <img src="../media/vr/1.jpg" alt="" />
+              <span class="lab">B1-2BR</span>
+
+            </div>
+            <div class="media">
+              <img src="../media/vr/2.jpg" alt="" />
+              <span class="lab">C8-3BR+PL</span>
+            </div>
+            <div class="media">
+              <img src="../media/vr/3.jpg" alt="" />
+              <span class="lab">C8-3BR+PL</span>
+
+            </div>
+          </div>
+
+        </div>
+        <li class="submenu">
+          <div class="name">LIVE</div>
+        </li>
+        <div class="subcontent">
+          <div class="content">
+            <div class="media">
+              <img src="../media/video/1.png" alt="" />
+              <span class="lab">Developer</span>
+            </div>
+            <div class="media">
+              <img src="../media/video/2.png" alt="" />
+              <span class="lab">Developer</span>
+            </div>
+            <div class="media">
+              <img src="../media/video/3.png" alt="" />
+              <span class="lab">Developer</span>
+            </div>
+          </div>
+
+        </div>
+        <li class="submenu">
+          <div class="name">ONLINE APPLICATION</div>
+        </li>
+        <div class="subcontent">
+          <div class="content-l">
+            <div class="pj-type">
+              <div class="type-tit">Residential Projects</div>
+              <div class="type-list">
+                <a>Current Projects</a>
+                <a href="#">Queens Peak</a>
+                <a>Upcoming Projects</a>
+                <a href="#">Landmark</a>
+                <a href="#">Bernam Street</a>
+                <a>Completed Projects</a>
+                <a href="#">The Alps Residences</a>
+              </div>
+            </div>
+            <div class="pj-type">
+              <div class="type-tit">Commercial Projects</div>
+              <div class="type-list">
+                <a href="#">The Poiz Centre</a>
+              </div>
+            </div>
+            <div class="pj-type">
+              <div class="type-tit">Overseas Projects</div>
+              <div class="type-list">
+                <a href="#">Sky Villa @ Phnom Penh, Cambodia</a>
+                <a href="#">Living Star @ Jakarta, Indonesia</a>
+              </div>
+            </div>
+          </div>
+          <div class="content-r">
+            <div class="media">
+              <img src="/media/menu/sub/media1.jpg" alt="" />
+            </div>
+          </div>
+
+        </div>
+        <li class="submenu">
+          <div class="name">MEMBER</div>
+        </li>
+        <li class="submenu">
+          <div class="name">FINANCE</div>
+        </li>
+      </ul>
+      <div class="menu-toolbar">
+        <div class="btnSearch"><i class="iconfont iconsousuo"></i></div>
+        <div class="btn-group">
+          <input id="eninput" checked="checked" type="radio" name="lan" />
+          <label for="eninput">En</label>
+          <input id="chinput" type="radio" name="lan" />
+          <label for="chinput">中文</label>
+        </div>
+        <button type="button" class="login-btn"><span>LOGIN</span></button>
+      </div>
+
+
+      <div class="header__screen" id="search-full-screen">
+        <span class="header__screen-close mask__close-btn"><i class="iconfont iconguanbi"></i></span>
+        <div class="header__screen-container">
+          <div class="header__screen-title">
+            <span class="header__screen-title-font1">Find Your Dream Home</span><br>
+            <span class="header__screen-title-font2">We Have Over Million Properties For You</span>
+          </div>
+          <div class="header__screen-box">
+            <select class="header__select header__select-localtion" name="" id="">
+              <option value=""></option>
+              <option value="1">Singapore</option>
+              <option value="2">Overseas</option>
+            </select>
+            <select class="header__select header__select-status" name="" id="">
+              <option value=""></option>
+              <option value="1">HOT SALE</option>
+              <option value="2">COMPLETED</option>
+              <option value="3">FULLY SOLD</option>
+            </select>
+            <select class="header__select header__select-type" name="" id="">
+              <option value=""></option>
+              <option value="1">Residence</option>
+              <option value="2">Commerce</option>
+            </select>
+            <br>
+            <select class="header__select header__select-bedrooms" name="" id="">
+              <option value=""></option>
+              <option value="1">1-Bedroom</option>
+              <option value="2">2-Bedroom</option>
+              <option value="3">3-Bedroom</option>
+              <option value="4">4-Bedroom</option>
+              <option value="5">1-Bedroom + Study</option>
+              <option value="6">2-Bedroom + Study</option>
+              <option value="7">3-Bedroom + Study</option>
+              <option value="8">Penthouse</option>
+            </select>
+            <select class="header__select header__select-price" name="" id="">
+              <option value=""></option>
+              <option value="1">0~100W</option>
+              <option value="2">100W~200W</option>
+              <option value="3">200W~300W</option>
+              <option value="4">300W~500W</option>
+              <option value="5">500W+</option>
+            </select>
+            <button class="header__screen-button">
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="trunk">
+    <div>
+      <ul class="trunk_df">
+        <li>USER CENTER</li>
+        <li>APPLICATION</li>
+        <li>BUY</li>
+      </ul>
+    </div>
+    <div>
+      <dl class="headportrait">
+        <dd id="result">
+            <img th:src="@{${prefixUrl}+${userinfo.avator}}" id="file"/>
+            <input type="file" id="selectFile" onchange="photoUpload(this)" hidden/>
+        </dd>
+        <dt th:text="${userinfo.name}">NAME</dt>
+        <dt th:text="${userinfo.username}"> Eamil:sale@mcc.sg</dt>
+      </dl>
+      <ul class="trunk_fenxuan">
+        <li>Profile</li>
+        <li>My Application</li>
+        <li id="MyProperties">My Properties</li>
+        <li class="confirms">Confirm</li>
+        <li class="ChangePasswords">Change Password</li>
+        <li class="Logouts">Log out</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="registry">
+    <div class="registry_Profile">
+      <h2></h2>
+      <div>
+        <ul class="profile_form">
+          <li>Your Name<lable><input type="text" placeholder="Your Name" name="profileName"></lable></li>
+          <li>Nationality<lable><input type="text" placeholder="Nationality" name="Nationality"></lable></li>
+          <li>Phone<lable><input type="text" placeholder="Phone" name="Phone"></lable></li>
+          <li>Email<lable><input type="text" placeholder="Email" name="Email"></lable></li>
+          <li>Address <lable><input type="text" placeholder="Address " name="Address"></lable></li>
+          <li>Postal Code <lable><input type="text" placeholder="Postal Code " name="PostalCode"></lable></li>
+          <li><span>About Me</span> <textarea placeholder="About Me" id="" cols="30" rows="10" name="AboutMe"></textarea></li>
+          <li><button id="ProfileBtn">CONFIRM</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="registry_Application">
+      <h2></h2>
+        <ul class="Application_lists">
+            <li>Order number</li>
+            <li>Agent confirmation</li>
+            <li>MCC confirmation</li>
+            <li>Click to view</li>
+        </ul><hr>
+        <div class="Application_file">
+            <iframe th:replace="showinterest :: showinterest" width="1150px" height="700px" name="_if" scrolling="yes"></iframe>
+            <button class="Application_file_close">close</button>
+        </div>
+    </div>
+    <div class="registry_Properties">
+      <h2></h2>
+
+    </div>
+      <div class="registry_confirm">
+          <h2></h2>
+          <div>
+              <ul>
+                  <li>order number<lable><input class="ordernumber" type="text" placeholder="order number"></lable></li>
+                  <li>Check photo  <img src="" id="file_Check" class="confirm_img">
+                      <input type="file" id="selectFiles" onchange="photoUploads(this)" hidden/></li>
+                  <li><button id="confirm_Submit">confirm Submit</button></li>
+              </ul>
+          </div>
+      </div>
+    <div class="registry_Change">
+      <h2></h2>
+      <div>
+        <ul>
+          	<li>Old Password<lable><input  type="text" placeholder="Your Old Password" id="oldPass"></lable></li>
+          	<li>New Password<lable><input  type="text" placeholder="Your New Password" id="newPass"></lable></li>
+          	<li>Confirm Password<lable><input  type="text" placeholder="Confirm Your New Password" id="confirmPass"></lable></li>
+          	<li><button id="chengePasswordBtn">Confirm</button></li>
+
+        </ul>
+      </div>
+    </div>
+    <div class="registry_Log">
+      <h2></h2>
+      <div>
+      	<ul>
+      		<li><button id="LogOutBtn">LogOut</button></li>
+      	</ul>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="application">
+    <div class="application_list">
+      <h2>APPLICATION</h2>
+      <div class="Buyersintention">
+        <ul id="Buyersintention_ul">
+          	<li>Name of Purchaser<lable><input id="purchaser1" type="text" placeholder="Name of Purchaser 1"></lable></li>
+          	<li>Last 4 Digits of NRIC<lable><input id="passportNo1" type="text" placeholder="Passport No"></lable></li>
+          	<li>Nationality
+                <lable>
+                <select class="Nationalityoption" id="nationality1">
+                    <option value = "China">China</option>
+                    <option value = "China">China</option>
+                </select>
+                </lable>
+            </li>
+          	<li>Gender
+                <span class="Gender_1st" style="text-align:left;">
+                <lable>
+                <input  type="radio" class="Gender" name="gender1" value="man">man
+                <input  type="radio" class="Gender" name="gender1" value="woman">women
+                </lable>
+                </span>
+            </li>
+          	<li>Contact <lable><input  type="text" id="contact1" placeholder="Contact"></lable></li>
+          	<li>E-mail<lable><input  type="text" id="email1" placeholder="E-mail1"></lable></li>
+          	<li>Address<lable><input  type="text" id="address" placeholder="Address"></lable></li>
+          	<li>Postal Code<lable><input  type="text" id="PostalCode" placeholder="Postal Code"></lable></li>
+            <li>Agent<lable><input  type="text" placeholder="Agent" id="Agent"></lable></li>
+            <li>Agent's Contact<lable><input  type="text" placeholder="Agent's Contact" id="AgentContact"></lable></li>
+            <li>Project selection
+                <lable>
+                    <select class="Projectselection" id="Projectselection">
+                    </select>
+                </lable>
+            </li>
+            <li>1st Choice of Unit <lable><input  type="text" placeholder="1st Choice of Unit " id="choice01"></lable></li>
+            <li><button id="Add_purchase_intention">Add purchase intention</button></li>
+        </ul>
+          <button id="Addbuyer">Add buyer</button>
+        <ul>
+          <li>Name of Purchaser 2<lable><input id="purchaser2" type="text" placeholder="Name of Purchaser 2"></lable></li>
+          <li>Last 4 Digits of NRIC<lable><input id="passportNo2" type="text" placeholder="Passport No"></lable></li>
+            <li >Nationality
+                <lable>
+                    <select class="Nationalityoption" id="nationality2">
+                        <option value = "China">China</option>
+                        <option value = "China">China</option>
+                    </select>
+                </lable>
+            </li>
+          <li>Gender
+              <span class="Gender_1st" style="text-align:left;">
+              <lable>
+              <input  type="radio" class="Gender" name="gender2" value="man">man
+              <input  type="radio" class="Gender" name="gender2" value="woman">women
+              </lable>
+              </span>
+          </li>
+          <li>Contact <lable><input  type="text" id="contact2" placeholder="Contact "></lable></li>
+          <li>E-mail<lable><input  type="text" id="email2" placeholder="E-mail2"></lable></li>
+        </ul>
+      </div>
+        <button id="btn">CONFIRM</button>
+    </div>
+  </div>
+
+
+<!-- 开盘 -->
+  <div class="buy">
+    <h2>buy</h2>
+  	<div class="buy_box">
+  		<!-- 开盘头部信息区域 -->
+	    <div class="openingQuotation-header">
+	        <div class="openingQuotation-header-left">
+	            <div>
+	                <span class="header-title">Total Units</span>
+	                <br />
+	                <span class="header-number">500</span>
+	            </div>
+	            <div>
+	                <span class="header-title">Remainder Units</span>
+	                <br />
+	                <span class="header-number">300</span>
+	            </div>
+	        </div>
+	        <div class="openingQuotation-header-center">
+	            <div>
+	                <span class="header-title">PREV SELECTION No.</span>
+	                <br />
+	                <span class="header-number">3455</span>
+	            </div>
+	            <div class="current">
+	                <span class="header-title">CURRENT SELECTION No.</span>
+	                <br />
+	                <span class="header-number">3456</span>
+	            </div>
+	            <div>
+	                <span class="header-title">NEXT SELECTION No.</span>
+	                <br />
+	                <span class="header-number">3457</span>
+	            </div>
+	        </div>
+	        <div class="openingQuotation-header-right">
+	            <div>
+	                <span class="header-title">Remainder SELECTION No.</span>
+	                <br />
+	                <span class="header-number">600</span>
+	            </div>
+	        </div>
+	    </div>
+
+
+		<!-- 开盘内容区域 -->
+	    <div class="openingQuotation-content">
+	        <div class="content-left"></div>
+	        <div class="content-right">
+	            <div class="currentBlock">
+	                <span class="currentBlock-title">#3457 select BLK1 10-01</span>
+	                <span class="goHouseBtn">VIEW UNITS</span>
+	            </div>
+	            <div class="userInfo">
+	                <p class="userInfo-title">Hello,<span th:text="${userinfo.name}">Jone</span>!&nbsp;&nbsp;Welcome to join Queens Peak.</p>
+	                <div class="currentTitle-box">
+	                    <div>
+	                        <span class="currentTitle-box-title">Your Selection No.</span>
+	                        <br />
+	                        <span class="currentTitle-box-number">#3485</span>
+	                    </div>
+	                    <div>
+	                        <p class="failedTitle">Failed in the 1st selection</p>
+	                        <span class="stateBtn">Waiting for select</span>
+	                    </div>
+	                </div>
+	            </div>
+	            <p class="selectTitle">Your Interested Units</p>
+	            <div class="selectBox">
+	                <span class="active">BLK1 10-01</span>
+	                <span>BLK1 11-01</span>
+	                <span>BLK1 12-01</span>
+	            </div>
+	            <a href="javascript:;" class="instructions">Unit selection rules and operating instructions</a>
+	        </div>
+	    </div>
+
+
+		<!-- 遮罩层 -->
+	    <div class="graybox"></div>
+
+	    <!-- 准备弹框 -->
+	    <div class="readyBox">
+	        <p>You are the next buyer,please be prepared.</p>
+	        <span class="readyBtn">I'm Ready</span>
+	    </div>
+
+	    <!-- 开始选择弹框 -->
+	    <div class="startSelectBox">
+	        <p>You can start choosing a room now,please confirm within 3 minutes to start the room selection,otherwise you
+	            will give up the opportunity to choose a room.</p>
+	        <span class="countDown">03:00</span>
+	        <span class="startSelectBtn">START SELECT</span>
+	    </div>
+
+	    <!-- 二次选房弹框 -->
+	    <div class="secondHouseSelect">
+	        <p>This is the last chance to choose a house.If the house selection fails,you will lose the eligibility to
+	            choose a house.</p>
+	        <div class="btns">
+	            <span class="noApplyBtn">DON'T APPLY</span>
+	            <span class="applyNowBtn">APPLY NOW</span>
+	        </div>
+	    </div>
+	</div>
+  </div>
+
+
+
+<!-- 选房 -->
+  <div class="selectHouseBox">
+        <div class="content">
+	        <div style="overflow-y:scroll;max-height: 700px;">
+				<table class="table">
+		            	<thead>
+		            		<tr class="tab-title">
+			                    <td rowspan="2">BLOCK</td>
+			                    <td rowspan="2">FLOOR</td>
+			                    <td id="unitsLength1">UNITS</td>
+		                	</tr>
+			                <tr class="tab-title" id="unitsLength2">
+			                    <!-- 在这插入units中最长的长度 -->
+			                </tr>
+		            	</thead>
+		            		<tbody id="tbody">
+		                	<!-- 在这插入选房内容区域 -->
+		                </tbody>
+
+		            </table>
+			</div>
+
+        </div>
+        <div class="btn">
+            <button type="button" class="success" id="selectHouseBoxSucc">确定选房</button>
+            <button type="button" class="danger" id="selectHouseBoxClose">关闭</button>
+        </div>
+
+    </div>
+<div id="selectHouseImg">
+	<div class="btn">
+            <button type="button" class="success" id="selectHouseImgSucc">选中此房</button>
+            <button type="button" class="danger" id="selectHouseImgclose">关闭</button>
+    </div>
+</div>
+
+
+  <div id="footer" class="footer">
+
+    <div class="row">
+      <div class="col-sm region-col">
+        <div class="f-list">
+          <div class="f-tit">MCC LAND (SINGAPORE) PTE LTD</div>
+          <a class="f-item">21 Bukit Batok Crescent,</a>
+          <a class="f-item">#19-77 WCEGA Tower,</a>
+          <a class="f-item">Singapore 658065</a>
+          <a class="f-item"></a>
+          <a class="f-item">Email: sales@mcc.sg</a>
+        </div>
+
+      </div>
+      <div class="col-sm region-col">
+        <div class="row">
+          <div class="col-sm">
+            <div class="f-list">
+              <div class="row">
+                <div class="col-sm">
+                  <div class="f-tit">Residential</div>
+                  <a href="#" class="f-item">Current Projects</a>
+                  <a class="f-item">Queens Peak</a>
+                  <a class="f-item"></a>
+                  <a href="#" class="f-item">Upcoming Projects</a>
+                  <a class="f-item">Landmark</a>
+                  <a class="f-item">Bernam Street</a>
+                  <a class="f-item">Canberra Link EC</a>
+                </div>
+                <div class="col-sm">
+                  <div class="f-tit">&nbsp;</div>
+                  <a href="#" class="f-item">Completed Projects</a>
+                  <a class="f-item">The Alps Residences</a>
+                  <a class="f-item">Northwave EC</a>
+                  <a class="f-item">The Poiz Residences</a>
+                  <a class="f-item">TRE Residences</a>
+                  <a class="f-item">The Santorini</a>
+                  <a class="f-item">Sea Horizon EC</a>
+                  <a class="f-item">Forestville EC</a>
+                  <a class="f-item">One Canberra EC</a>
+                  <a class="f-item">The Nautical</a>
+                  <a class="f-item">Canberra Residences</a>
+                  <a class="f-item">The Canopy EC</a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-sm region-col">
+        <div class="f-list">
+          <div class="f-tit">Commercial</div>
+          <a class="f-item">The Poiz Centre</a>
+          <div class="f-tit" style="margin-top: 40px;">OVERSEAS</div>
+          <a class="f-item">Sky Villa @ Phnom Penh, Cambodia</a>
+          <a class="f-item">Living Star @ Jakarta, Indonesia</a>
+        </div>
+      </div>
+      <div class="col-sm region-col noline">
+        <div class="row">
+          <div class="col-sm">
+            <div class="f-list">
+              <div class="row">
+                <div class="col-sm">
+                  <div class="f-tit">CONTACT US</div>
+                  <a class="f-item f-sub-tit">General&nbsp;Enquiry</a>
+                  <a class="f-item">T: +65 6508 2288</a>
+                  <a class="f-item">F: +65 6508 2289</a>
+                  <a class="f-item">E:&nbsp;sales@mcc.sg</a>
+                  <a class="f-item"></a>
+                </div>
+                <div class="col-sm">
+                  <div class="f-tit">&nbsp;</div>
+                  <a class="f-item f-sub-tit">The Poiz Centre Hotline</a>
+                  <a class="f-item">T: +65 8338 7800</a>
+                  <a class="f-item">E: contact@thepoizcentre.com.sg</a>
+                  <a class="f-item"></a>
+                  <a class="f-item f-sub-tit">Sky Villa @ Phnom Penh (Cambodia)</a>
+                  <a class="f-item f-sub-tit">Sales Enquiry</a>
+                  <a class="f-item">T: +855 99-821919</a>
+                  <a class="f-item">E: skyvillasales@mcc.sg</a>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/plugins/swiper-6.0.4/package/swiper-bundle.min.js"></script>
+  <script src="/plugins/select2-4.0.13/dist/js/select2.min.js"></script>
+  <script src="/plugins/share/dist/js/social-share.min.js"></script>
+  <script src="/plugins/lightgallery/demo/js/lightgallery.min.js"></script>
+  <script src="/plugins/lightgallery/demo/js/lg-zoom.min.js"></script>
+  <script src="/plugins/lightgallery/demo/js/lg-thumbnail.min.js"></script>
+  <script src="/plugins/lightgallery/demo/js/lg-autoplay.js"></script>
+  <script src="https://cdn.staticfile.org/video.js/7.9.2/video.min.js"></script>
+  <script src="/plugins/Watch3D/dist/watch3D.js "></script>
+  <script src="/font/iconfont/iconfont.js"></script>
+  <script src="//api.map.baidu.com/api?v=2.0&ak=dWQTUFqH4jZ3h8ts0uLGGgS82YTgEtsn"></script>
+  <script src="/js/index.js"></script>
+
+  <script th:inline='javascript'>
+  $(document).ready(function(){
+	  //console.log([[${userinfo}]]);
+	  $('.profile_form input[name="profileName"]').val([[${userinfo.name}]]);
+	  $('.profile_form input[name="Nationality"]').val([[${userinfo.country}]]);
+	  $('.profile_form input[name="Phone"]').val([[${userinfo.mobile}]]);
+	  $('.profile_form input[name="Email"]').val([[${userinfo.emailAddress}]]);
+	  $('.profile_form input[name="Address"]').val([[${userinfo.address}]]);
+	  $('.profile_form input[name="PostalCode"]').val([[${userinfo.postcode}]]);
+	  $('.profile_form textarea[name="AboutMe"]').val([[${userinfo.remark}]]);
+  });
+   //更改密码
+  $('#chengePasswordBtn').click(function(){
+	  var oldPass = $('#oldPass').val();
+	  var newPass = $('#newPass').val();
+	  var confirmPass = $('#confirmPass').val();
+	  var userid = [[${userid}]];
+	  //console.log(userid,newPass);
+	  if(oldPass == '' || newPass == '' || confirmPass == ''){
+	      alert('Please check if the user name or password is empty!');
+	      return false;
+	  }else if(oldPass == newPass){
+		alert("Password change failed. The new password is the same as the original password");
+		$('#newPass').val("");
+		$('#confirmPass').val("");
+	  }else if(newPass !== confirmPass){
+		  alert("Password change failed, please reconfirm password");
+		  $('#confirmPass').val("");
+	  }else{
+		  $.ajax({
+	          url:"client/changePassword",    //请求的url地址
+	          dataType:"json",   //返回格式为json
+	          type:"GET",   //请求方式
+	          async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+	          data: {
+	        	  newPass:newPass,
+	        	  userid:userid,
+	              idnt:[[${identity}]]
+	          },
+	          success:function(res){//请求成功时处理
+	              //console.log(res);
+	              alert(res.msg);
+	          },
+	          fail:function(){//请求失败
+	              console.log("fail");
+	          },
+	          error:function(){//请求出错处理
+	              console.log("error");
+	          }
+	      });
+	  }
+  })
+
+//开盘页面显示看房信息
+$('#goHouseBtn').click(function(){
+	$('.selectHouseBox').show();
+	$('.graybox').show();
+
+	$.ajax({
+        url:"units/getProjectAllUnits",    //请求的url地址
+        dataType:"json",   //返回格式为json
+        type:"GET",   //请求方式
+        async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+        data:{
+        	projectId:"1277846730104135682"
+        },
+        success:function(res){//请求成功时处理
+        	console.log(res);
+        	res = res.data;
+        	let arrMaxLength=[];
+        	for(var i = 0;i < res.length;i ++){
+        		for(var j = 0;j < res[i].length;j ++){
+        			//取出units中长度最大的
+        			//console.log(res[i][j].length);
+        			if(res[i][j] && res[i][j].length > arrMaxLength.length){
+        				arrMaxLength=res[i][j];
+        			}
+
+        			for(var k = 0;k < res[i][j].length;k ++){
+						//创建block和floor
+        				//console.log(res[i][j][k].block);
+        				$('#tbody').append('<tr class="tab-content"><td class="tab-left-title">'+res[i][j][k].block+'</td><td class="tab-left-title">'+res[i][j][k].floor+'</td></tr>');
+        				//$('.selectHouseBox tbody tr td').attr("houseStatus",res[i][j][k].houseStatus);
+            		}
+        		}
+        	}
+        	//console.log('最长的数组：',arrMaxLength.length)
+        	//设置units表头的长度
+        	$('#unitsLength1').attr("colspan",arrMaxLength.length);
+        	//创建units单元格
+        	for(var i = 0;i < arrMaxLength.length;i ++){
+        		//units单元格内容
+        		$('#unitsLength2').append('<td>'+ (i + 1) +'</td>');
+        		$('#tbody tr').append('<td class="tbodyTd"></td>');
+        	}
+
+
+        	for(var i = 0;i < res.length;i ++){
+        		for(var j = 0;j < res[i].length;j ++){
+        			for(var k = 0;k < res[i][j].length;k ++){
+        				//console.log(res[i][j][k]);
+        				$('#tbody tr .tbodyTd').attr("saleStatus",res[i][j][k].saleStatus);
+        				$('#tbody tr .tbodyTd').attr("typeUrl",res[i][j][k].typeUrl);
+        				$('#tbody tr .tbodyTd').attr("id",res[i][j][k].id);
+        				$('#tbody tr .tbodyTd').attr("projectId",res[i][j][k].projectId);
+        				// .tab-current正在选：绿
+
+        		        //.tab-selected已卖：橙
+
+        		        //.tab-optional可挑选：蓝
+
+        		        //.tab-emptyRoom没有房：灰
+        				$('#tbody tr .tbodyTd[saleStatus=0]').addClass("tab-current");
+        				$('#tbody tr .tbodyTd[saleStatus=1]').addClass("tab-selected");
+        				$('#tbody tr .tbodyTd[saleStatus=2]').addClass("tab-optional");
+        				$('#tbody tr .tbodyTd[saleStatus=3]').addClass("tab-emptyRoom");
+            		}
+        		}
+        	}
+
+        	$('#tbody tr .tbodyTd').click(function(e){
+        		//console.log($(this)[0].classList);
+        		$('.tab-current').removeClass("tab-current");
+        		$(this).addClass("tab-current");
+
+        		switch(e.target.attributes[1].nodeValue){
+        		case "0":
+        			console.log(0);
+        			break;
+        		case "1":
+        			//console.log(1);
+        			$('#selectHouseImg').show();
+        			$('#selectHouseImg').css("background-image","url("+ e.target.attributes.typeurl.nodeValue +")");
+        			//console.log(e.target.attributes.typeurl.nodeValue);
+        			break;
+        		case "2":
+        			console.log(2);
+        			break;
+        		case "3":
+        			console.log(3);
+        			break;
+        		}
+
+        	})
+
+        },
+        fail:function(){//请求失败
+            console.log("fail");
+        },
+        error:function(){//请求出错处理
+            console.log("error");
+        }
+    });
+
+})
+//开盘确认按钮
+$('#selectHouseBoxSucc').click(function(){
+	if($('.tab-current').length !== 0){
+		$.ajax({
+			  url:"",    //请求的url地址
+	          dataType:"json",   //返回格式为json
+	          type:"GET",   //请求方式
+	          async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+	          data: {
+	        	  id:$('.tab-current').attr("id"),
+	        	  projectId:$('.tab-current').attr("projectId"),
+	          },
+	          success:function(res){//请求成功时处理
+	              console.log(res);
+	          },
+	          fail:function(){//请求失败
+	              console.log("fail");
+	          },
+	          error:function(){//请求出错处理
+	              console.log("error");
+	          }
+	      });
+
+		$('.selectHouseBox').hide();
+		$('.graybox').hide();
+	}else{
+		console.log("请先选择房型！")
+	}
+})
+
+
+//关闭  开盘页面看房信息
+$('#selectHouseBoxClose').click(function(){
+	$('.selectHouseBox').hide();
+	$('.graybox').hide();
+})
+$('#selectHouseImgclose,#selectHouseImgSucc').click(function(){
+	$('#selectHouseImg').hide();
+})
+  //Profile提交
+  $('#ProfileBtn').click(function(){
+	  var profileName =$('.profile_form input[name="profileName"]').val();
+	  var Nationality =$('.profile_form input[name="Nationality"]').val();
+	  var Phone =$('.profile_form input[name="Phone"]').val();
+	  var Email =$('.profile_form input[name="Email"]').val();
+	  var Address =$('.profile_form input[name="Address"]').val();
+	  var PostalCode =$('.profile_form input[name="PostalCode"]').val();
+	  var AboutMe =$('.profile_form textarea[name="AboutMe"]').val();
+	  var userid = [[${userid}]];
+	  var data = {
+        	  name:profileName,
+        	  country:Nationality,
+        	  mobile:Phone,
+        	  emailAddress:Email,
+        	  address:Address,
+        	  postcode:PostalCode,
+        	  remark:AboutMe,
+        	  id:userid,
+          };
+	  //console.log(profileName,Nationality,Phone,Email,Address,PostalCode,AboutMe);
+	  if([[${identity}]] === "buyer"){
+		  $.ajax({
+	          url:"client/buyerupdatedata",    //请求的url地址
+	          dataType:"json",   //返回格式为json
+	          type:"GET",   //请求方式
+	          async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+	          data:data,
+	          success:function(res){//请求成功时处理
+	          	console.log(res);
+	          	console.log("buyer");
+	            alert("Information submitted successfully!");
+	          },
+	          fail:function(){//请求失败
+	              console.log("fail");
+	          },
+	          error:function(){//请求出错处理
+	              console.log("error");
+	          }
+	      });
+	  }else{
+		  $.ajax({
+	          url:"client/agentupdatedata",    //请求的url地址
+	          dataType:"json",   //返回格式为json
+	          type:"GET",   //请求方式
+	          async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+	          data:data,
+	          success:function(res){//请求成功时处理
+
+	          	console.log("agent");
+	            alert("Information submitted successfully!");
+	          },
+	          fail:function(){//请求失败
+	              console.log("fail");
+	          },
+	          error:function(){//请求出错处理
+	              console.log("error");
+	          }
+	      });
+	  }
+
+  })
+
+
+
+
+  $(function(){
+      var userid = [[${userid}]];
+      if([[${identity}]] === "buyer"){
+          $.ajax({
+              url:"client/buyerupdatedata",    //请求的url地址
+              dataType:"json",   //返回格式为json
+              type:"GET",   //请求方式
+              async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+              data: {
+                  id:userid,
+              },
+              success:function(res){//请求成功时处理
+                  //console.log(res);
+                  $('.confirms').hide();
+              },
+              fail:function(){//请求失败
+                  console.log("fail");
+              },
+              error:function(){//请求出错处理
+                  console.log("error");
+              }
+          });
+      }else{
+          $.ajax({
+              url:"client/agentupdatedata",    //请求的url地址
+              dataType:"json",   //返回格式为json
+              type:"GET",   //请求方式
+              async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+              data: {
+                  id:userid,
+              },
+              success:function(res){//请求成功时处理
+
+                  $('.confirms').show();
+              },
+              fail:function(){//请求失败
+                  console.log("fail");
+              },
+              error:function(){//请求出错处理
+                  console.log("error");
+              }
+          });
+      }
+
+  })
+
+	//退出
+	$('#LogOutBtn').click(function(){
+		window.location.href = "/";
+
+	})
+
+
+  var projectselection = [[${projectinfonames}]];
+  //console.log(projectselection);
+  for(var i=0;i<projectselection.length;i++){
+      $('#Projectselection').each(function(){
+          $(this).append('<option value = "'+projectselection[i][Object.keys(projectselection[i])[0]]+'">'+Object.keys(projectselection[i])[0]+'</option>');
+      })
+  }
+
+
+
+
+  $('#btn').click(function(){
+      var PostalCode = $("#PostalCode").val();
+      var Agency = $("#Agency").val();
+      var Agent = $("#Agent").val();
+      var AgentContact = $("#AgentContact").val();
+      var userid= $.cookie("userid");
+      var Address= $("#address").val();
+      var Projectselection = $('#Projectselection').val();
+      var data = {
+          postalCode:PostalCode,
+          Agency:Agency,
+          Agent:Agent,
+          agentContact:AgentContact,
+          userid: userid,
+          Address:Address,
+          projectId:Projectselection,
+      };
+
+      var choiceArr = $("[id^=choic]");
+      for(var i=0;i<choiceArr.length;i++){
+          var choiceInput = choiceArr[i];
+          var id = choiceInput.id;
+          data[id] = choiceInput.value;
+      }
+
+      var nameArr = $("[id^=purchaser]");
+      for(var i=0;i<nameArr.length;i++){
+          var nameInput = nameArr[i];
+          var id = nameInput.id;
+          data[id] = nameInput.value;
+      }
+
+      var PassportNoArr = $("[id^=passportNo]");
+      for(var i=0;i<PassportNoArr.length;i++){
+          var PassportNoInput = PassportNoArr[i];
+          var id = PassportNoInput.id;
+          data[id] = PassportNoInput.value;
+      }
+
+      var NationalityArr = $("[id^=nationality]");
+      for(var i=0;i<NationalityArr.length;i++){
+          var NationalityInput = NationalityArr[i];
+          var id = NationalityInput.id;
+          data[id] = NationalityInput.value;
+      }
+
+      var ContactArr = $("[id^=contact]");
+      for(var i=0;i<ContactArr.length;i++){
+          var ContactInput = ContactArr[i];
+          var id = ContactInput.id;
+          data[id] = ContactInput.value;
+      }
+
+      var E_mail1Arr = $("[id^=email]");
+      for(var i=0;i<E_mail1Arr.length;i++){
+          var E_mail1Input = E_mail1Arr[i];
+          var id = E_mail1Input.id;
+          data[id] = E_mail1Input.value;
+      }
+
+      var genderArr = $("input[name^=gender]:checked");
+      for(var i=0;i<genderArr.length;i++){
+          var genderInput = genderArr[i];
+          var id = genderInput.name;
+          var value = genderInput.value;
+          if(value == "man"){
+              value = 1;
+          }else{
+              value = 0;
+          }
+          data[id] = value;
+      }
+      $.ajax({
+          url:"client/submitApplication",    //请求的url地址
+          dataType:"json",   //返回格式为json
+          type:"GET",   //请求方式
+          async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+          data: data,
+          success:function(res){//请求成功时处理
+              console.log(res);
+              if(res.data==0){
+                  alert(res.msg);
+                  return;
+              }
+              alert("Success！Your order number is:"+res.data);
+          },
+          fail:function(){//请求失败
+              console.log("fail");
+          },
+          error:function(){//请求出错处理
+              console.log(data);
+          }
+      });
+  });
+
+   $(function() {
+       var userid = [[${userid}]];
+       //console.log(userid);
+       $.ajax({
+           url:"/client/applicationList",    //请求的url地址
+           dataType:"json",   //返回格式为json
+           type:"GET",   //请求方式
+           async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+           data: {
+               userid:userid,
+           },
+           success:function(res){//请求成功时处理
+               //console.log(res);
+               for(var i=0;i<res.data.length;i++){
+                    var data = res.data[i];
+                   var agentConfirm = data.agentConfirm;
+                   var mccConfirm = data.mccConfirm;
+                   if(agentConfirm == 0){
+                       agentConfirm = "Unconfirmed";
+                   }else{
+                       agentConfirm = "confirm";
+                   }
+                   if(mccConfirm == 0){
+                       mccConfirm = "Unconfirmed";
+                   }else{
+                       mccConfirm = "confirm";
+                   }
+                   $('.registry_Application').append('<ul class="Application_lists"><li>'+data.ordernumber+'</li><li>'+agentConfirm+'</li><li>'+mccConfirm+'</li><li><button class="Clicktoviewshwointerest'+i+'">Click to view</button></li></ul><hr>');
+                   //Shwointerest查看
+                   $('.Clicktoviewshwointerest'+i).click(function(){
+
+                       $('.Application_file').show();
+                       var choiceArray =  new Array();
+                       var html = "";
+                       for(var key  in data){
+                           //console.log(key + '---' + data[key])
+                           if(key.indexOf("choice") != -1){
+                               $('.Intentionform_pdf').append('<tr><td>Option1</td><td>'+data[key]+'</td><td>'+data[key]+'</td><td>'+data[key]+'</td></tr>');
+                           }
+
+                           if(key.indexOf("purchaser") != -1){
+                               html += "<tr><td>"+data[key]+"</td>";
+                           }
+                           if(key.indexOf("gender") != -1){
+                               html += "<td>"+data[key]+"</td>";
+                           }
+                           if(key.indexOf("nationality") != -1){
+                               html += "<td>"+data[key]+"</td>";
+                           }
+                           if(key.indexOf("contact") != -1){
+                               html += "<td>"+data[key]+"</td>";
+                           }
+                           if(key.indexOf("email") != -1){
+                               html += "<td>"+data[key]+"</td></tr>";
+                           }
+                       }
+
+                       html += '<tr><td>ADDRESS</td><td colspan="4">'+data.address+'</td></tr>';
+                       //console.log(html);
+                       $('.Intentionform_pdfs').append(html);
+                       //console.log(choiceArray);
+                   })
+               }
+           },
+           fail:function(){//请求失败
+               console.log("fail");
+           },
+           error:function(){//请求出错处理
+               console.log("error");
+           }
+       })
+   })
+
+	// buy   点击切换单元被选中的样式
+     $('.content-right .selectBox span').click(function () {
+       $(this).addClass('active').siblings().removeClass('active');
+      	// 改变显示的信息
+       $('.currentBlock-title').html('#' + $('.current .header-number').html() + ' ' + 'select' + ' ' + $(this).html());
+     })
+
+
+  //项目选择下拉值
+
+
+
+
+
+
+
+
+    $('.trunk_fenxuan li').click(function(){
+      $(this).addClass("trunk_fenxuanss");
+      $(this).siblings().removeClass("trunk_fenxuanss");
+    })
+    $('.trunk_fenxuan').each(function(){
+      $(this).find("li").first().addClass("trunk_fenxuanss");
+    })
+    $('.trunk_df li').click(function(){
+      $(this).addClass("trunk_fenxuans");
+      $(this).siblings().removeClass("trunk_fenxuans");
+    })
+    $('.trunk_df li:nth-of-type(1)').click(function(){
+      $('.application').hide();
+      $('.registry').show();
+      $('.trunk_fenxuan').show();
+      $('.buy').hide();
+    })
+    $('.trunk_df li:nth-of-type(2)').click(function(){
+      $('.application').show();
+      $('.registry').hide();
+      $('.trunk_fenxuan').hide();
+      $('.buy').hide();
+    })
+    $('.trunk_df li:nth-of-type(3)').click(function(){
+      $('.application').hide();
+      $('.registry').hide();
+      $('.trunk_fenxuan').hide();
+      $('.buy').show();
+    })
+    $('.trunk_df').each(function(){
+      $(this).find("li").first().addClass("trunk_fenxuans");
+    })
+
+    $('.trunk_df li:first').click(function(){
+      $('.trunk_fenxuan').show();
+    })
+    $('.trunk_fenxuan li:nth-of-type(1)').click(function(){
+      var test = $(this).text();
+      $('.registry_Profile h2').text(test);
+      $('.registry_Profile').show();
+      $('.registry_Profile').siblings('div').hide();
+    })
+    $('.trunk_fenxuan li:nth-of-type(1)').each(function(){
+      var test = $(this).text();
+      $('.registry_Profile h2').text(test);
+    })
+    $('.trunk_fenxuan li:nth-of-type(2)').click(function(){
+      var test = $(this).text();
+      $('.registry_Application h2').text(test);
+      $('.registry_Application').show();
+      $('.registry_Application').siblings('div').hide();
+    })
+    $('.trunk_fenxuan li:nth-of-type(3)').click(function(){
+      var test = $(this).text();
+      $('.registry_Properties h2').text(test);
+      $('.registry_Properties').show();
+      $('.registry_Properties').siblings('div').hide();
+    })
+  $('.trunk_fenxuan .confirms').click(function(){
+      var test = $(this).text();
+      $('.registry_confirm h2').text(test);
+      $('.registry_confirm').show();
+      $('.registry_confirm').siblings('div').hide();
+  })
+    $('.trunk_fenxuan .ChangePasswords').click(function(){
+      var test = $(this).text();
+      $('.registry_Change h2').text(test);
+      $('.registry_Change').show();
+      $('.registry_Change').siblings('div').hide();
+    })
+    $('.trunk_fenxuan .Logouts').click(function(){
+      var test = $(this).text();
+      $('.registry_Log h2').text(test);
+      $('.registry_Log').show();
+      $('.registry_Log').siblings('div').hide();
+    })
+
+      //点击查看
+      $('.Clicktoviewshwointerest').click(function(){
+    	  $('.Application_file').show();
+      })
+  </script>
+  <script type="text/javascript">
+
+      $('#file').on('click',function(){
+        $("#selectFile").click();
+
+      })
+
+      function photoUpload(obj){
+        //获取展示图片的区域
+        var img = document.getElementById("file");
+        //获取文件对象
+        let file = obj.files[0];
+        //获取文件阅读器
+        let reader = new FileReader();
+
+        reader.readAsDataURL(file);
+        reader.onload = function(){
+            //给img的src设置图片url
+            //img.setAttribute("src", this.result);
+            var formData = new FormData();
+            formData.append("file",file)
+            $.ajax({
+                url: "client/uploadAvator",    //请求的url地址
+                dataType: "json",   //返回格式为json
+                type: "POST",   //请求方式
+                async: true,//请求是否异步，默认为异步，这也是ajax重要特性
+                contentType:false,
+                processData:false,
+                mimeType:"multipart/form-data",
+                data: formData,
+                success: function (res) {//请求成功时处理
+                    console.log(res);
+                },
+                fail: function () {//请求失败
+                    console.log("fail");
+                },
+                error: function () {//请求出错处理
+                    console.log("error");
+                }
+            })
+        }
+      }
+
+      $('#file_Check').on('click',function(){
+          $("#selectFiles").click();
+      })
+
+      function photoUploads(obj){
+          //获取展示图片的区域
+          var img = document.getElementById("file_Check");
+          //获取文件对象
+          let file = obj.files[0];
+          //获取文件阅读器
+          let reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = function(){
+              //给img的src设置图片url
+              img.setAttribute("src", this.result);
+              var formData = new FormData();
+              formData.append("file",file)
+              $.ajax({
+                  url: "client/uploadOrderPhoto",    //请求的url地址
+                  dataType: "json",   //返回格式为json
+                  type: "POST",   //请求方式
+                  async: true,//请求是否异步，默认为异步，这也是ajax重要特性
+                  contentType:false,
+                  processData:false,
+                  mimeType:"multipart/form-data",
+                  data: formData,
+                  success: function (res) {//请求成功时处理
+                      $.cookie("orderphotourl",res.data.url,{"expires":7,path:'/'});
+                      console.log(res.data.url);
+
+                  },
+                  fail: function () {//请求失败
+                      console.log("fail");
+                  },
+                  error: function () {//请求出错处理
+                      console.log("error");
+                  }
+              })
+          }
+      }
+
+
+
+    // function ProcessFile(e) {
+    //     var file = document.getElementById('file').files[0];
+    //     if (file) {
+    //         var reader = new FileReader();
+    //         reader.onload = function (event) {
+    //             var txt = event.target.result;
+    //             var img = document.createElement("img");
+    //             img.src = txt;//将图片base64字符串赋值给img的src
+    //            // console.log(txt);
+    //             document.getElementById("result").appendChild(img);
+    //         };
+    //     }
+    //     reader.readAsDataURL(file);
+    // }
+    // function contentLoaded() {
+    //     document.getElementById('file').addEventListener('change',
+    //       ProcessFile, false);
+    // }
+    // window.addEventListener("DOMContentLoaded", contentLoaded, false);
+    // function imageOnClick(){
+    //     document.getElementById('file').click();//my_photo隐藏的input[file]的id
+    // }
+
+
+
+    // function ProcessFiles(e) {
+    //     var file = document.getElementById('file_Check').files[0];
+    //     if (file) {
+    //         var reader = new FileReader();
+    //         reader.onload = function (event) {
+    //             var txt = event.target.result;
+    //             var img = document.createElement("img");
+    //             img.src = txt;//将图片base64字符串赋值给img的src
+    //             // console.log(txt);
+    //             document.getElementById("results").appendChild(img);
+    //         };
+    //     }
+    //     reader.readAsDataURL(file);
+    // }
+    // function contentLoaded() {
+    //     document.getElementById('file_Check').addEventListener('change',
+    //         ProcessFiles, false);
+    // }
+    // window.addEventListener("DOMContentLoaded", contentLoaded, false);
+    // function imageOnClick(){
+    //     document.getElementById('file_Check').click();//my_photo隐藏的input[file]的id
+    // }
+
+
+
+
+  //  var date = new Date()
+  //      var y = date.getFullYear();
+  //      var m = date.getMonth()+1;
+   //     var d = date.getDate();
+   //     document.getElementById("ymd").innerHTML = +y+"-"+m+"-"+d;
+
+
+
+$('#Addbuyer').click(function(){
+    $('.Buyersintention ul:nth-of-type(2)').show();
+    $(this).hide();
+})
+var count=1;
+$("#Add_purchase_intention").click(function(){
+    var son = 2;
+    count++;
+    $(this).before("<li>Choice of Unit<lable><input  type='text' placeholder=' Choice of Unit' class='choic' id='choice0"+count+"'></lable></li>");
+});
+
+$("#Add_purchase_intentions").click(function(){
+    $(this).before("<li>Choice of Unit<lable><input  type=\"text\" placeholder=\" Choice of Unit\" class=\"choics\"></lable></li>");
+});
+</script>
+</body>
+
+</html>

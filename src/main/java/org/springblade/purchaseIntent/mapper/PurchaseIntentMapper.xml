@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.springblade.purchaseIntent.mapper.PurchaseIntentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="purchaseIntentResultMap" type="org.springblade.purchaseIntent.entity.PurchaseIntent">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="eoi_no" property="eoiNo"/>
+        <result column="order_number" property="orderNumber"/>
+        <result column="type" property="type"/>
+        <result column="agency" property="agency"/>
+        <result column="agent_id" property="agentId"/>
+        <result column="agent_confirm_time" property="agentConfirmTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="remark" property="remark"/>
+        <result column="agent" property="agent"/>
+        <result column="agent_contact" property="agentContact"/>
+        <result column="cheque_pic" property="chequePic"/>
+        <result column="mcc_user_id" property="mccUserId"/>
+        <result column="mcc_confirm_time" property="mccConfirmTime"/>
+        <result column="status" property="status"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user_type" property="createUserType"/>
+        <result column="bulk_purchase" property="bulkPurchase"/>
+        <result column="duplicate" property="duplicate"/>
+    </resultMap>
+
+    <resultMap id="purchaseIntentVOResultMap" type="org.springblade.purchaseIntent.vo.PurchaseIntentVO">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="project_id" property="projectId"/>
+        <result column="eoi_no" property="eoiNo"/>
+        <result column="order_number" property="orderNumber"/>
+        <result column="type" property="type"/>
+        <result column="agency" property="agency"/>
+        <result column="agent_id" property="agentId"/>
+        <result column="agent_confirm_time" property="agentConfirmTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="remark" property="remark"/>
+        <result column="agent" property="agent"/>
+        <result column="agent_contact" property="agentContact"/>
+        <result column="cheque_pic" property="chequePic"/>
+        <result column="mcc_user_id" property="mccUserId"/>
+        <result column="mcc_confirm_time" property="mccConfirmTime"/>
+        <result column="status" property="status"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user_type" property="createUserType"/>
+        <result column="bulk_purchase" property="bulkPurchase"/>
+        <result column="duplicate" property="duplicate"/>
+        <result column="block" property="Stack"/>
+        <result column="floor" property="Level"/>
+        <result column="type_name" property="unitType"/>
+    </resultMap>
+
+
+    <select id="selectPurchaseIntentPage" resultMap="purchaseIntentResultMap">
+        select a.* from house_application a
+        LEFT JOIN house_application_purchaser p
+        ON a.id = p.application_id
+        <where>
+            <if test="intentVO.projectId != null">
+                AND a.project_id = #{intentVO.projectId}
+            </if>
+            <if test="intentVO.agencyId != null and intentVO.agencyId != ''">
+                AND a.agency = #{intentVO.agencyId}
+            </if>
+            <if test="intentVO.passportNo != null and intentVO.passportNo != ''">
+                AND p.passport_no = #{intentVO.passportNo}
+            </if>
+            <if test="intentVO.status != null">
+                AND a.status = #{intentVO.status}
+            </if>
+            AND a.is_deleted = 0
+        </where>
+    </select>
+
+    <select id="statistic" resultMap="purchaseIntentVOResultMap">
+        SELECT a.id,a.project_id,a.agency,p.block,p.floor,t.type_name
+        FROM house_application a
+        LEFT JOIN house_application_unit u
+        ON a.id = u.application_id
+        LEFT JOIN house_project_unit p
+        ON p.id = u.unit_id
+        LEFT JOIN house_project_unittype t
+        ON p.type_id = t.id
+        <where>
+            a.type = 1
+            <if test="intentVO.projectId != null">
+                AND a.project_id = #{intentVO.projectId}
+            </if>
+        </where>
+    </select>
+
+</mapper>

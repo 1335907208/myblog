@@ -1,0 +1,89 @@
+
+.select-myapplication-btn {
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: #e0890d;
+    color: #fff;
+    padding:0 10px;
+}
+
+.select-myapplication{
+    display: none;
+}
+
+  /*遮罩层*/
+.select-myapplication .graybox {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: block;
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+.select-myapplication .select-box,.qrcode-box{
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 25%);
+    background-color: #fffeff;
+    z-index: 999;
+    border-radius: 10px;
+    min-width: 500px;
+    min-height: 400px;
+}
+.select-myapplication .qrcode-box{
+    display: none;
+}
+.select-myapplication .select-box .closeBox,.backBox {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    top: 20px;
+    left: 20px;
+    border: none;
+    background-color: #e8e7ea;
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.select-myapplication .input_container {
+
+    margin: 100px 150px 0px 150px;
+}
+
+.select-myapplication .create-qecode {
+
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #f3b21c;
+    color: white;
+    margin: 30px 0 80px;
+    cursor: pointer;
+}
+
+.select-myapplication .create-qecode a {
+    color: #FFF;
+}
+
+.select-myapplication #qrcode{
+    text-align: center;
+}
+.select-myapplication .input_container .remarks{
+    text-align: center;
+    color: #bbb;
+    font-size: 18px;
+    margin: 10px 0;
+}

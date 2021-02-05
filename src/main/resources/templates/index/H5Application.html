@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+    <meta charset="utf-8">
+
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+
+    <meta content="yes" name="apple-mobile-web-app-capable">
+
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+
+    <meta content="telephone=no" name="format-detection">
+    <title>Application</title>
+    <style>
+        .Application_information_title{
+            text-align: center;
+        }
+        .table{
+            width: 100%;
+            max-width: 365px;
+        }
+        .table td{
+            text-align: center;
+        }
+        .info-remarks p{
+            font-size: 14px;
+        }
+        .table .table-info{
+            font-size: 12px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+<div id="H5Application">
+    <div class="Application_information" id="export_content">
+        <div>
+            <h3 class="Application_information_title">Expression of Interest</h3>
+            <table class="table">
+                <tr>
+                    <td style="text-align: left" th:text="'EOI NO:' + ${data.eoiNo == null ? ' - ' : data.eoiNo}"></td>
+                    <td rowspan="2" valign="top" style="text-align: center;width: 150px;border: 1px solid #666;">
+                        <span>Agent & Contact</span>
+                        <p class="table-info">
+                            <span th:text="${data.agent}"></span>
+                            <span th:if="${data.agentContact != ''}">
+                                (<span th:text="${data.agentContact}"></span>)
+                            </span>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left" th:text="'DATE:' + ${createTime}"></td>
+                </tr>
+            </table>
+            <p class="App_everyparticular">UNIT(S) DETAILS:</p>
+            <table class="Intentionform_pdf table" border="1">
+                <tr>
+                    <td>S/N</td>
+                    <td>BLK</td>
+                    <td>LEVEL</td>
+                    <td>UNIT</td>
+                    <td>TYPE</td>
+                </tr>
+                <tr th:each="unit,temp : ${ data.purchaseIntentUnitVOList}">
+                    <td th:text="${temp.index+1}">1</td>
+                    <td th:text="${unit.unitVO.block}"></td>
+                    <td th:text="${unit.unitVO.floor}"></td>
+                    <td th:text="${unit.unitVO.unit}"></td>
+                    <td th:text="${unit.unitVO.projectUnittype.typeName}"></td>
+                </tr>
+            </table>
+            <p class="App_everyparticular">PURCHASER(S) DETAILS:</p>
+            <table border="1" class="Intentionform_pdfs table table-center">
+                <thead>
+                <tr>
+                    <td class="table-info">NAME</td>
+                    <td class="table-info">GENDER</td>
+                    <td class="table-info">NATIONALITY</td>
+                    <td class="table-info">CONTACT </td>
+                    <td class="table-info">E-mail</td>
+                </tr>
+                </thead>
+                <tr th:each="user : ${ data.purchaseIntentUserList}">
+                    <td class="table-info" style="font-size: 8px" th:text="${user.name}">NAME</td>
+                    <td class="table-info" style="font-size: 8px" th:text="${user.gender == 1 ? 'Male' : 'Female'}">GENDER</td>
+                    <td class="table-info" style="font-size: 8px" th:text="${user.nationality}">NATIONALITY</td>
+                    <td class="table-info" style="font-size: 8px" th:text="${user.contact}">CONTACT </td>
+                    <td class="table-info" style="font-size: 8px" th:text="${user.email}">E-mail</td>
+                </tr>
+                <tr>
+                    <td>ADDRESS</td>
+                    <td colspan="4" th:if="${data.purchaseIntentUserList}">
+                        <span th:if="${!#arrays.isEmpty(data.purchaseIntentUserList)}" th:text="${data.purchaseIntentUserList[0].address}"></span>
+                    </td>
+                </tr>
+            </table>
+            <span class="info-remarks" style="font-style:oblique;">
+                    <p>Please note that this reservation "DOES NOT CONSTITUTE" a sale and developer shall not be liable for any claims whatsoever.</p>
+                    <p>We are fully aware that developer will not warrant, assure or confirm that the Intending purchaser/s will be able to secure unit(s) that they have selected.</p><br />
+                    <p>My/Our purchase is subject to the terms and conditions contained in the OTP which may be issued to me/us thereafter.</p>
+                    <p>I/We confirm that this request is merely an expression of interest without any liability to you if you are subsequently unable to issue the OTP for the unit/s to me/us for any reason whatsoever.</p>
+                    </span>
+            <hr/>
+        </div>
+        <div class="info-remarks">
+            <h4>IMPORTANT NOTES AND PURCHASER DECLARATION</h4>
+            <p class="App_everyparticular">A.ELIGIBILITY</p>
+            <p>1.The purchaser(s) must be 21 YEARS OLD or above and must be eligible to purchase private property by virtue of the Housing & Development Act/Executive Condominium Housing Scheme Act.</p>
+            <p>2.The Option to Purchase will be issued to the person(s) named only. No assignment, addition, deletion or substitution of names will be allowed once the Option to Purchase is issued.</p>
+            <p>3.Please note that the Option to Purchase is not subject to approval of Housing Loan.</p>
+            <p>4.I/We hereby confirm my/our eligibility to purchase private residential property under the existing HDB rules & regulations, if applicable.</p>
+            <p class="App_everyparticular" id="App_everyparticular_B">B.PERSONAL DATA</p>
+            <p>5.I/We hereby confirm that we agree and consent to developer, its officers, employees and associates to collect the Personal Data listed in this form. </p>
+            <p>6.I/We also consent to the disclosure of our personal data to the related corporations, associates, independent contractors and other third parties that developer is associated with, but only in connection with the purposes required for the purchase of the Property and/or Unit(s) listed in the form.</p>
+            <p>7.I/We, undertake to notify developer if I/we wish to withdraw the above consent for the purposes stated in this form.</p>
+            <p class="App_everyparticular" id="App_everyparticular_C">C.ANTI MONEY LAUNDERING AND COUNTERING TERRORISM FINANCING</p>
+            <p>8.I/We understand that Developer may require further declaration, information or documents from me as part of their compliance with prevailing money laundering and countering terrorism financing laws.</p>
+            <p>9.It is further declared that I am/we are or the beneficial owner is/beneficial owners are (applicable to 9(b), (c) and (d) if there is a beneficial owner/there are beneficial owners in the transaction):</p>
+            <table border="1" class="table">
+                <tr>
+                    <td>(a)</td>
+                    <td>the beneficial owner(s) of the property which will be purchased</td>
+                    <td>Yes/No</td>
+                </tr>
+                <tr>
+                    <td>(b)</td>
+                    <td>not a politically exposed person (“PEP”) i.e. holding a position with prominent public function (includes Head  of  State  or government, government ministers, senior civil or public servants, senior judicial or military officials, senior 	executives of state owned corporations or senior officials of political parties, members of the legislature and senior management of international organisations)</td>
+                    <td>Yes/No</td>
+                </tr>
+                <tr>
+                    <td>(c)</td>
+                    <td>not a family member of a PEP i.e. a parent/step-parent/child/step-child/adopted  child/spouse/sibling/step-sibling/adopted sibling</td>
+                    <td>Yes/No</td>
+                </tr>
+                <tr>
+                    <td>(d)</td>
+                    <td>not a close associate of the PEP i.e. closely connected to the PEP, either socially or professionally</td>
+                    <td>Yes/No</td>
+                </tr>
+            </table>
+            <p>10.Please provide more details if you have declared “No” for any of the above:</p>
+            <p style="border-bottom: 1px solid #000;">&nbsp;</p>
+            <br/>
+            <table class="sign-table">
+                <tr>
+                    <td>____________________________</td>
+                    <td></td>
+                    <td>____________________________</td>
+                </tr>
+                <tr>
+                    <td>Signature of Intending Purchaser</td>
+                    <td></td>
+                    <td>Signature of Intending Purchaser</td>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td></td>
+                    <td>Name:</td>
+                </tr>
+                <tr>
+                    <td>NRIC:</td>
+                    <td></td>
+                    <td>NRIC:</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

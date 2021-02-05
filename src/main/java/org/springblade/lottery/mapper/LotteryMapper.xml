@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.springblade.lottery.mapper.LotteryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="LotteryResultMap" type="org.springblade.lottery.entity.Lottery">
+        <id column="id" property="id"/>
+        <result column="project_id" property="projectId"/>
+        <result column="application_id" property="applicationId"/>
+        <result column="eoi_no" property="eoiNo"/>
+        <result column="status" property="status"/>
+        <result column="sequence" property="sequence"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_type" property="userType"/>
+        <result column="lottery_time" property="lotteryTime"/>
+        <result column="first_selection_time" property="firstSelectionTime"/>
+        <result column="second_selection_apply_time" property="secondSelectionApplyTime"/>
+        <result column="second_selection_time" property="secondSelectionTime"/>
+        <result column="lottery_order" property="lotteryOrder"/>
+    </resultMap>
+
+
+    <select id="selectLotteryPage" resultMap="LotteryResultMap">
+        select * from house_application
+    </select>
+
+</mapper>

@@ -1,0 +1,368 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+ul {
+    list-style-type: none;
+}
+input {
+    outline: none;
+    border: 1px solid black;
+}
+img{
+    border:none;
+}
+table{
+    border-collapse:collapse;
+}
+#exportToPdf{
+    background-color: rgb(204, 204, 204);
+    border:1px solid white;
+    margin: auto;
+    border-radius: 90px;
+}
+#exportToPdf:focus {
+    outline: none;
+}
+#exportToPdf img{
+    width: 100%;
+}
+.Application_information{
+    width: 1130px;
+}
+.Application_information .clear-float{
+    clear:both;
+    float:none;
+    height:0;
+    overflow:hidden
+}
+#top_ul{
+    width: 100%;
+}
+#top_ul ul{
+    width: 50%;
+    float: right;
+    text-align: center;
+    list-style-type: none;
+    border: 1px #808080 dashed;
+}
+#top_ul ul li{
+    float: left;
+    width: 50%;
+    height: 30px;
+}
+#top_ul .ul_li_input input{
+    border: none;
+    border-bottom: 1px #808080 solid;
+    margin-bottom: 5px;
+}
+#top_ul .ul_li_input{
+    border-bottom: 1px #808080 dashed ;
+}
+#top_ul .ul_li_inputs input{
+    border: none;
+    border-bottom: 1px #808080 solid;
+    margin-bottom: 5px;
+}
+#top_ul .li-text{
+    border-bottom: 1px #808080 dashed ;
+    border-right: 1px #808080 dashed ;
+}
+#top_ul .li-texts{
+    border-right: 1px #808080 dashed ;
+}
+#fgx{
+    width: 100%;
+    border-bottom: 3px #000000 solid;
+}
+.Application_information .Price{
+    width: 100%;
+    margin: 5px 0px;
+}
+.Application_information .Price span{
+    float: left;
+}
+.Application_information .Price div{
+    overflow: hidden;
+}
+.Application_information .Price div input{
+    border: none;
+    border-bottom: 1px #000000 solid;
+    width: 100%;
+}
+#xinxi{
+    width: 100%;
+}
+#xinxi ul li{
+    float: left;
+    width: 23%;
+    white-space: nowrap;
+}
+#xinxi ul li input{
+    border: none;
+    width: 70%;
+    border-bottom: 1px #000000 solid;
+}
+#Address{
+    width: 100%;
+    margin: 5px 0px;
+    display: flex;
+}
+#Address .Address_div1{
+    flex: 3;
+}
+#Address .Address_div1 span{
+    float: left;
+}
+#Address .Address_div1 div{
+    overflow: hidden;
+}
+#Address .Address_div1 div input{
+    border: none;
+    border-bottom: 1px #000000 solid;
+    width: 100%;
+}
+#Address .Address_div2{
+    flex: 1;
+}
+#Address .Address_div2 span{
+    float: left;
+}
+#Address .Address_div2 div{
+    overflow: hidden;
+}
+#Address .Address_div2 div input{
+    border: none;
+    border-bottom: 1px #000000 solid;
+    width: 100%;
+}
+#Purchaser{
+    width: 100%;
+}
+#Purchaser span{
+    float: left;
+}
+#Purchaser div{
+    overflow: hidden;
+}
+#Purchaser div input{
+    width: 100%;
+    border: none;
+    border-bottom: 1px #000000 solid;
+}
+#Company{
+    margin: 5px 0px;
+    width: 100%;
+}
+#Company span{
+    float: left;
+}
+#Company div{
+    overflow: hidden;
+}
+#Company div input{
+    width: 100%;
+    border: none;
+    border-bottom: 1px #000000 solid;
+}
+#Tel{
+    margin: 5px 0px;
+    width: 100%;
+}
+#Tel span{
+    float: left;
+}
+#Tel div{
+    overflow: hidden;
+}
+#Tel div input{
+    width: 100%;
+    border: none;
+    border-bottom: 1px #000000 solid;
+}
+#following{
+    width: 100%;
+    padding-bottom: 30px;
+    border: 1px #000000 solid;
+    margin-bottom: 20px;
+}
+#following div{
+    width: 100%;
+    border-bottom: 1px #000000 dashed;
+}
+#text_input{
+    width: 100%;
+    display: flex;
+}
+#text_input .left_input{
+    flex: 6;
+}
+#text_input .left_input input{
+    width: 70%;
+    float: left;
+    border: none;
+    border-bottom: 1px #000000 solid;
+}
+#text_input .right_input{
+    flex: 4;
+}
+#text_input .right_input input{
+    width: 100%;
+    float: right;
+    border: none;
+    border-bottom: 1px #000000 solid;
+}
+#text{
+    width: 100%;
+    display: flex;
+    margin: 10px 0 0 0;
+}
+#text .left_text{
+    flex: 6;
+}
+#text .right_text{
+    flex: 4;
+}
+#input_bottom{
+    width: 100%;
+}
+#input_bottom input{
+    width: 100%;
+    border: none;
+    border-bottom: 1px #000000 solid;
+}
+#USE{
+    margin: 8px 0;
+    width: 100%;
+}
+#OFFICIAL{
+    width: 100%;
+    display: flex;
+}
+#OFFICIAL .Fee{
+    flex: 4;
+}
+#OFFICIAL .Fee span{
+    float: left;
+}
+#OFFICIAL .Fee div{
+    overflow: hidden;
+}
+#OFFICIAL .Fee div input{
+    width: 70%;
+    border: none;
+    border-bottom: 1px #000000 solid;
+}
+#OFFICIAL .Cheque{
+    flex: 6;
+}
+#OFFICIAL .Cheque span{
+    float: left;
+}
+#OFFICIAL .Cheque div{
+    overflow: hidden;
+}
+#OFFICIAL .Cheque div input{
+    width: 100%;
+    border: none;
+    border-bottom: 1px #000000 solid;
+}
+#Remarks{
+    width: 100%;
+    margin: 10px 0;
+}
+#Remarks span{
+    float: left;
+}
+#Remarks div{
+    overflow: hidden;
+}
+#Remarks div input{
+    width: 100%;
+    border: none;
+    border-bottom: 1px #000000 solid;
+}
+#option{
+    width: 100%;
+    text-align: center;
+}
+.Application_information p{
+    margin-top:15px ;
+}
+.Application_information .App_everyparticular{
+    font-weight: 700;
+}
+div h3{
+    text-align: center;
+}
+#App_everyparticular_B{
+    margin-top: 40px;
+}
+#App_everyparticular_C{
+    margin-top: 40px;
+}
+.Application_information h4{
+    text-align: center;
+}
+
+#showinterest .table {
+    width: 100%;
+    margin-bottom: 10px;
+}
+#showinterest .table-center td{
+    text-align: center;
+}
+#showinterest .table td{
+    padding: 8px 15px;
+    border: 1px solid #666;
+}
+#showinterest .table thead td{
+    font-weight: bold;
+    padding: 6px 15px;
+    background-color: #898a8c;
+    color: #ffffff;
+}
+/*#showinterest table:nth-of-type(1),#showinterest table:nth-of-type(2){*/
+/*    width: 100%;*/
+/*}*/
+/*#showinterest table:nth-of-type(1) tr td{*/
+/*    width: 50%;*/
+/*}*/
+/*#showinterest table:nth-of-type(1) tr td span{*/
+/*    width: 200px;*/
+/*    height: 40px;*/
+/*    border:1px solid rgb(0, 0, 0);*/
+/*    display: block;*/
+/*    margin-left: 400px;*/
+/*}*/
+/*#showinterest table:nth-of-type(2), #showinterest table:nth-of-type(3), #showinterest table:nth-of-type(4){*/
+/*    width: 100%;*/
+/*    margin: auto;*/
+/*    text-align: center;*/
+/*}*/
+/*#showinterest table:nth-of-type(4) tr td:nth-of-type(1){*/
+/*    width: 50px;*/
+/*}*/
+/*#showinterest table:nth-of-type(4) tr td:nth-of-type(3){*/
+/*    width: 80px;*/
+/*}*/
+/*#showinterest table:nth-of-type(5){*/
+/*    width: 70%;*/
+/*    margin:auto;*/
+/*    margin-top:60px;*/
+/*}*/
+/*#showinterest table:nth-of-type(5) tr td:nth-of-type(2){*/
+/*    padding-left: 150px;*/
+/*}*/
+/*#showinterest table:nth-of-type(2) tr td{*/
+/*    width: 25%;*/
+/*    height: 40px;*/
+/*}*/
+/*#showinterest table:nth-of-type(3) tr td{*/
+/*    width: 20%;*/
+/*    height: 40px;*/
+/*}*/
+#export_content {
+    width: 950px;
+    padding: 60px 60px 0 60px;
+}

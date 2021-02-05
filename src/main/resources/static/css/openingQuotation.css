@@ -1,0 +1,723 @@
+
+        .container{
+            background-color:#ffffff
+        }
+        p{
+            margin: 0;
+        }
+
+            /* 开盘头部信息区域 */
+            .openingQuotation-header {
+                margin-top: 110px;
+                display: flex;
+                width: 100%;
+                position: relative;
+                background-color: #e6ac5c;
+                height: 80px;
+                cursor: default;
+            }
+
+            .openingQuotation-header-left,
+            .openingQuotation-header-right,
+            .openingQuotation-header-center {
+                display: flex;
+                height: 80px;
+                text-align: center;
+                position: absolute;
+                color: white;
+            }
+
+            .openingQuotation-header-left .header-title,
+            .openingQuotation-header-right .header-title{
+                margin-top: 10px;
+                font-size: 16px;
+                font-family: PingFangSC-Light, PingFang SC;
+                font-weight: 300;
+                color: #FFFFFF;
+                line-height: 22px;
+            }
+            .openingQuotation-header-center .prev .header-title,.openingQuotation-header-center .next .header-title{
+                margin-top: 10px;
+                font-size: 16px;
+                font-family: RobotoCondensed-Light, RobotoCondensed;
+                font-weight: 300;
+                color: #000000;
+                line-height: 19px;
+            }
+            .openingQuotation-header-center .current .header-title{
+                margin-top: 10px;
+                font-size: 18px;
+                font-family: RobotoCondensed-Light, RobotoCondensed;
+                font-weight: 300;
+                color: #FFFFFF;
+                line-height: 21px;
+            }
+            .openingQuotation-header-left div,
+            .openingQuotation-header-right div,
+            .openingQuotation-header-center div {
+                margin: 0 20px;
+                position: relative;
+            }
+
+            .openingQuotation-header-left {
+                left: 0px;
+                top: 0;
+            }
+
+            .openingQuotation-header-center {
+                left: 50%;
+                top: 0;
+                transform: translate(-50%);
+                color: black;
+                position: absolute;
+            }
+
+            .openingQuotation-header-center .current{
+                background-color:#ff9400;
+                height: 100px;
+                font-size: 18px;
+                font-family: Roboto Condensed;
+            }
+
+            .openingQuotation-header-right {
+                right: 0px;
+                top: 0;
+            }
+
+            .openingQuotation-header-right .header-number,
+            .openingQuotation-header-left .header-number{
+                font-size: 32px;
+                font-family: PingFangSC-Light, PingFang SC;
+                font-weight: 300;
+                color: #FFFFFF;
+                line-height: 45px;
+            }
+            .openingQuotation-header-center .header-number{
+                position: relative;
+                font-size: 32px;
+                font-family: RobotoCondensed-Regular, RobotoCondensed;
+                font-weight: 400;
+                color: #000000;
+                line-height: 38px;
+            }
+            .openingQuotation-header-center .header-number .tag{
+                position: absolute;
+                right: 5px;
+                top: 10px;
+                width: 26px;
+                height: 14px;
+                background: #FF5050;
+                border-radius: 3px;
+                font-size: 10px;
+                font-family: RobotoCondensed-Light, RobotoCondensed;
+                font-weight: 300;
+                color: #FFFFFF;
+                line-height: 11px;
+                letter-spacing:0;
+            }
+            .current {
+                color: white;
+                background-color: #ff9400;
+                padding: 0 15px;
+            }
+
+            .current .header-number {
+                font-size: 60px;
+                font-family: RobotoCondensed-Regular, RobotoCondensed;
+                font-weight: 400;
+                color: #FFFFFF;
+                line-height: 71px;
+                letter-spacing: 5px;
+                text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+            }
+
+            /* 开盘内容区域  */
+            .openingQuotation-content {
+                padding: 60px 80px;
+                margin: 0 !important;
+                display: flex;
+            }
+
+            .content-left {
+                flex: 1;
+                width: 100%;
+                background-color: #d8d8d8;
+            }
+            .content-left-video{
+                height: calc(100% - 150px);
+            }
+            .content-left-menu{
+                height: 140px;
+                box-sizing: border-box;
+                display: flex;
+                padding: 10px;
+                justify-content: center;
+                overflow-x: auto;
+                overflow-y: hidden;
+            }
+            .content-left-menu__item{
+                overflow: hidden;
+                cursor: pointer;
+                height: 140px;
+                margin-right: 10px;
+                text-align: center;
+            }
+            .content-left-menu__item img{
+                height:100%;
+                transform: scale(1);
+                transition: all .3s;
+            }
+            .content-left-menu__item:hover img{
+                transform: scale(1.3);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+            }
+            .content-right {
+                flex: 1;
+                width: 100%;
+                padding-left: 20px;
+            }
+
+            .currentBlock {
+                position: relative;
+            }
+
+            .currentBlock-title {
+                display: inline-block;
+                width: 68%;
+                height: 52px;
+                background-color: #FFEDD3;
+                line-height: 52px;
+                text-indent: 15px;
+                cursor: default;
+                font-size: 16px;
+                font-family: RobotoCondensed-Light, RobotoCondensed;
+                font-weight: 300;
+                color: #3E3E3E;
+                overflow: hidden;
+            }
+            .currentBlock-title>div{
+                position: relative;
+                top:10px;
+                transition: all 0ms ease-in 0s;
+            }
+            .currentBlock-title span{
+                display: block;
+                line-height: 30px;
+            }
+            .goHouseBtn {
+                display: inline-block;
+                width: 30%;
+                height: 52px;
+                line-height: 52px;
+                text-align: center;
+                background-color: #ff9400;
+                position: absolute;
+                top: 0;
+                right: 0;
+                cursor: pointer;
+                font-size: 16px;
+                font-family: PingFangSC-Light, PingFang SC;
+                font-weight: 300;
+                color: #FFFFFF;
+            }
+
+            .userInfo {
+                border: 5px solid #ff9400;
+                width: 100%;
+                margin-top: 20px;
+                cursor: default;
+            }
+
+            .userInfo-title {
+                display: inline-block;
+                text-align: center;
+                width: 100%;
+                height: 100px;
+
+                font-size: 20px;
+                font-family: PingFangSC-Light, PingFang SC;
+                font-weight: 300;
+                color: #E6AC5C;
+                line-height: 100px;
+            }
+
+            .currentTitle-box {
+                display: flex;
+                justify-content: space-around;
+                margin-bottom: 50px;
+            }
+
+            .currentTitle-box div {
+                flex: 1;
+                text-align: center;
+            }
+
+            .currentTitle-box-title {
+
+                font-size: 28px;
+                font-family: RobotoCondensed-Light, RobotoCondensed;
+                font-weight: 300;
+                color: #464646;
+                line-height: 38px;
+            }
+
+            .currentTitle-box-number {
+                font-size: 70px;
+                font-family: RobotoCondensed-Regular, RobotoCondensed;
+                font-weight: 400;
+                color: #FF9400;
+                line-height: 85px;
+                letter-spacing: 6px;
+            }
+
+            .failedTitle {
+                font-size: 18px;
+                display: none;
+                font-family: PingFangSC-Light, PingFang SC;
+                font-weight: 300;
+                color: #FF0000;
+                line-height: 33px;
+            }
+
+            .stateBtn {
+                display: inline-block;
+                width: 80%;
+                height: 70px;
+                line-height: 70px;
+                margin-top: 25px;
+                font-size: 30px;
+                font-family: RobotoCondensed-Light, RobotoCondensed;
+                font-weight: 300;
+                color: #373737;
+                cursor: default;
+            }
+            .stateBtnIsClick{
+                cursor: pointer !important;
+                color: #FFF !important;
+                background: #FF9400 !important;
+            }
+            .selectTitle {
+                line-height: 100px;
+                font-size: 28px;
+                font-family: RobotoCondensed-Light, RobotoCondensed;
+                font-weight: 300;
+                color: #464646;
+            }
+
+            .selectBox {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+
+            .selectBox span {
+                width: 30%;
+                height: 70px;
+                line-height: 70px;
+                text-align: center;
+                background: #FFFFFF;
+                border: 3px solid #0091FF;
+                cursor: pointer;
+
+                margin-bottom: 20px;
+                font-size: 24px;
+                font-family: RobotoCondensed-Light, RobotoCondensed;
+                font-weight: 300;
+                color: #464646;
+            }
+
+            .selectBox span.active {
+                border: none;
+                background-color: #e7e7e7;
+                overflow: hidden;
+                position: relative;
+                cursor: default;
+            }
+
+            .selectBox span.active:before{
+                content: 'SOLD';
+                background-color: #000000;
+                width: 100px;
+                line-height: 20px;
+                position: absolute;
+                right: -70px;
+                top: 10px;
+                font-size: 16px;
+                font-family: RobotoCondensed-Regular, RobotoCondensed;
+                font-weight: 400;
+                color: #FFFFFF;
+                line-height: 19px;
+                transform: rotate(-45deg) translateY(-50%) translateX(-50%);
+            }
+            .instructions {
+                margin-top: 30px;
+                float: right;
+                font-size: 16px;
+                font-family: PingFangSC-Light, PingFang SC;
+                font-weight: 300;
+                color: #FF9400;
+                line-height: 22px;
+                cursor: pointer;
+            }
+            .instructions:hover{
+                text-decoration: underline;
+                color: blue;
+            }
+
+            /* 遮罩层 */
+            .graybox {
+                width: 100%;
+                height: 100%;
+                position: fixed;
+                background-color: rgba(251, 251, 252, .6);
+                top: 0;
+                left: 0;
+                z-index: 1;
+                display: none;
+            }
+
+            /* 弹框 */
+            .readyBox,
+            .startSelectBox,
+            .secondHouseSelect{
+                position: fixed;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 32%;
+                padding: 45px 45px 25px;
+                border: 5px solid #ff9202;
+                background-color: #fffeff;
+                color: #898b8c;
+                cursor: default;
+                z-index: 2;
+            }
+            .instructions_box{
+                position: fixed;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 32%;
+                padding-top: 60px;
+                border: 5px solid #ff9202;
+                background-color: #fffeff;
+                color: #898b8c;
+                cursor: default;
+                z-index: 2;
+            }
+            .readyBox,
+            .startSelectBox,
+            .secondHouseSelect,
+            .instructions_box{
+                display: none;
+            }
+
+            .readyBox p,
+            .startSelectBox p,
+            .secondHouseSelect p{
+                font-size: 30px;
+                font-family: RobotoCondensed-Light, RobotoCondensed;
+                font-weight: 300;
+                color: #373737;
+                line-height: 30px;
+            }
+            .readyBox span,
+            .startSelectBox span,
+            .secondHouseSelect span{
+                font-size: 18px;
+                font-family: PingFangSC-Light, PingFang SC;
+                font-weight: 300;
+                color: #FFFFFF;
+                line-height: 50px;
+            }
+            .secondHouseSelect .btns{
+                margin:30px 0;
+            }
+
+            .startSelectBox .countDown, .selectHouseContainer .countDown {
+                display: block;
+                width: 100%;
+                height: 50px;
+                line-height: 50px;
+                background-color: #feeed2;
+                color: #398630;
+                font-size: 35px;
+                text-align: center;
+                margin:30px 0;
+            }
+            .selectHouseContainer .countDown {
+                margin:0 0 10px 0;
+            }
+            .startSelectBox .timeUp{
+                color: red;
+            }
+            .readyBtn,
+            .startSelectBtn,
+            .noApplyBtn,
+            .applyNowBtn {
+                display: block;
+                width: 50%;
+                height: 50px;
+                line-height: 50px;
+                text-align: center;
+                color: #ccc;
+                background-color: #ff9202;
+                cursor: pointer;
+                margin: 0 auto;
+                font-size: 20px;
+                margin: 30px auto;
+            }
+
+            .noApplyBtn,
+            .applyNowBtn {
+                width: 35%;
+            }
+
+            .noApplyBtn {
+                background-color: black;
+            }
+
+            .btns {
+                display: flex;
+                justify-content: space-between;
+            }
+
+
+
+
+            /* 选房样式 */
+
+        /* 选房样式 */
+        .selectHouseBox{
+            background-color:#ffffff;
+            width:100%;
+            z-index:100;
+        }
+
+        table {
+            width: 100%;
+            display: flex;
+            flex-flow: column;
+            height: 385px;
+            border-collapse: collapse;
+        }
+        .selectHouseBox .table{
+            margin-bottom: 0;
+        }
+        .selectHouseBox .btn{
+            padding: 0;
+        }
+        .selectHouseBox .timeUp{
+            color: red;
+        }
+        .selectHouseBox .content table td ,#tbody td,.selectHouseBox .content table.tab-left-title{
+            border: 1px solid #ebeef5;
+            height: 70px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .selectHouseBox .content thead td{
+            color: #909399;
+            background-color: #ccc;
+        }
+        .selectHouseBox .content tbody td{
+            color: #FFF;
+            cursor: pointer;
+        }
+        .selectHouseBox .content tr td:first-child{
+            width: 100px;
+            color: #909399 !important;
+            cursor: default !important;
+            background-color: #ccc;
+            text-align: center;
+            font-weight: bold;
+        }
+        .tab-title td {
+            background-color: #F5F7FA;
+        }
+
+        .tab-content .tab-left-title {
+            background-color: #fdecdc;
+        }
+
+        .content tr td:first-child{
+            width: 100px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .content table thead, .content tbody tr {
+            display:table;
+            width:100%;
+            table-layout:fixed;
+        }
+        .content table thead {
+            width: calc( 100% - 1.3em )
+        }
+        .content table tbody{
+            display:block;
+            overflow-y:scroll;
+            -webkit-overflow-scrolling: touch; // 为了滚动顺畅
+        }
+
+        /* 已被选 */
+        .selected {
+            background-color: #ff6633;
+        }
+
+        /* 空房子 */
+        .emptyRoom {
+            background-color: #c0b8b8;
+        }
+
+        /* 可以选 */
+        .optional {
+            background-color: #4517ee;
+        }
+
+        /* 当前正在选 */
+        .current {
+            background-color: #67C23A;
+        }
+
+        .btn{
+            text-align:center;
+        }
+        .btn button {
+            border: none;
+            width:180px;
+            line-height:22px;
+            height: 40px;
+            border-radius: 5px;
+            color: white;
+            outline: none;
+            margin:0 5px;
+        }
+        .selectHouseContainer .btn{
+            display: none;
+        }
+        .btn .success {
+            background-color: #67c23a;
+        }
+
+        .btn .danger{
+            background-color:#c9302c;
+        }
+    .selectHouseContainer{
+        width:1000px;
+        padding: 30px;
+        /*height:600px;*/
+        position:fixed;
+        left:50%;
+        top:50%;
+        transform: translateX(-50%) translateY(-50%);
+        z-index:999999999;
+        display:none;
+        box-sizing: border-box;
+        background: #FFF;
+        overflow: auto;
+        border: 8px solid #e0890d;
+    }
+
+        nav ul {
+            overflow: hidden;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        nav ul li {
+            min-width: 100px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border: 1px solid #ccc;
+            position: relative;
+            border-radius: 5px;
+            margin: 0 10px;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 0 10px;
+            font-family: RobotoCondensed-Regular, RobotoCondensed;
+            font-weight: 400;
+            color: #000000;
+            letter-spacing: 5px;
+            text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+        }
+        nav ul li:hover{
+            background: #fcd094;
+        }
+        nav ul li.liactive {
+            background: #e0890d;
+            color: #FFF;
+        }
+
+        .selectHouse__close-btn {
+            width: 64px;
+            height: 64px;
+            line-height: 64px;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .instructions__close-btn {
+            width: 64px;
+            height: 64px;
+            line-height: 64px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            text-align: center;
+            cursor: pointer;
+        }
+        .selectHouseContainer .status-box {
+            margin: 20px 50px;
+            display: flex;
+        }
+
+        .selectHouseContainer .status-box div {
+            font-size: 18px;
+            text-shadow: 0 2px 8px white;
+            font-weight: 700;
+            color: #333;
+            margin-right: 40px;
+            position: relative;
+        }
+
+        .selectHouseContainer .status-box div::before {
+            position: absolute;
+            left: -24px;
+            top: 3px;
+            content: '';
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #fff;
+        }
+
+        .selectHouseContainer .status-box .no::before {
+            background-color: #ff6633;
+        }
+
+        .selectHouseContainer .status-box .yes::before {
+            background-color: #4517ee;
+        }
+
+        .selectHouseContainer .status-box .na::before {
+            background-color: #67C23A;
+        }
+
+        .instructions_box_disclaimer{
+            background: #FFF;
+            padding: 30px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        .instructions_box_disclaimer .disclaimer-title{
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .instructions_box_disclaimer .disclaimer-info{
+            font-size: 18px;
+        }

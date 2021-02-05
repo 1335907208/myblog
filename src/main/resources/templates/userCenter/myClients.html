@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="inc/commons :: head(Member, user)">
+
+
+
+<body>
+<div th:replace="index/header :: header"></div>
+<div th:replace="userCenter/header :: user"></div>
+
+<div class="container">
+    <div class="registry">
+        <h2 class="page_title">My Clients</h2>
+        <div class="form-groups row">
+            <label for="nationality3" class="col-form-label">Project</label>
+            <div class="col-sm-9">
+                <select class="form-control" name="nationality3" id="nationality3" onchange="window.location=this.value">
+                    <option value="" disabled selected hidden th:text="${option}">请选择项目</option>
+                    <option th:each="order : ${infoList}" th:value="'/userCenter/myClients?projectId='+${order.id}" th:text="${order.name}">1</option>
+                </select>
+            </div>
+        </div>
+        <div class="input_btn"><input type="text" id="dome"/><a class="btn btn-primary btn-sm" id="find_a" onclick="printInputValue()">搜索</a></div>
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th>#</th>
+                <th>Project</th>
+                <th>EOI No.</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Status</th>
+                <th>Action</th>
+
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="order, stat : ${Clients.records}">
+                    <th scope="row" th:text="${stat.index + 1}">1</th>
+                    <td th:text="${order.projectName}">-</td>
+                    <td th:text="${order.eoiNo == null ? ' - ' : order.eoiNo}"></td>
+                    <td th:text="${order.name}">-</td>
+                    <td th:text="${order.contact}">-</td>
+                    <td th:text="${order.email}">-</td>
+                    <td th:text="${order.address}">-</td>
+    <!--                <td th:text="${order.projectInfo.name}"></td>-->
+                    <td>
+                        <span class="badge badge-warning" th:if="${order.status ==0}">Unconfirmed</span>
+                        <span class="badge badge-warning" th:if="${order.status == 5}">Agent confirmation</span>
+                        <span class="badge badge-warning" th:if="${order.status == 7}">MCC confirmation failed</span>
+                        <span class="badge badge-warning" th:if="${order.status == 9}">MCC confirmation</span>
+                    </td>
+                    <td><a th:href="${'?id=' + order.id}" class="btn btn-primary btn-sm">View</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center" th:each="order, stat : ${Clients}">
+                <li class="page-item" th:classappend="${order.current == 1}? 'disabled' : ''">
+                    <a class="page-link" th:href="'/userCenter/myClients?size=10&amp;current='+${(order.current - 1)}" >Previous</a>
+                </li>
+                <li class="page-item" th:each="index : ${#numbers.sequence(1,allPage)}" th:classappend="${order.current == index} ? 'active' : ''">
+                    <a class="page-link" th:href="${'/userCenter/myClients?size=10&amp;current='+index}" th:text="${index}">1</a>
+                </li>
+                <li class="page-item" th:classappend="${allPage == order.current}? 'disabled' : ''">
+                    <a class="page-link" th:href="'/userCenter/myClients?size=10&amp;current='+${(order.current + 1)}" >Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+<div th:replace="footer :: footer"></div>
+
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/plugins/select2-4.0.13/dist/js/select2.min.js"></script>
+<script src="/font/iconfont/iconfont.js"></script>
+
+
+<script th:inline='javascript'>
+    var identity=  $('#identity').val()
+</script>
+<script>
+    function printInputValue() {
+                     var inputValue = document.getElementById("dome").value;
+                     $("#find_a").attr("href","?name="+inputValue);
+                 };
+    function change(v) {
+        alert(v)
+    }
+</script>
+</body>
+
+</html>

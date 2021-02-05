@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.springblade.appointment.mapper.AppointmentSchedulingMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="appointmentSchedulingResultMap" type="org.springblade.appointment.entity.AppointmentScheduling">
+        <id column="id" property="id"/>
+        <result column="status" property="status"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="project_id" property="projectId"/>
+        <result column="date" property="date"/>
+        <result column="shift_id" property="shiftId"/>
+    </resultMap>
+
+
+    <select id="selectAppointmentSchedulingPage" resultMap="appointmentSchedulingResultMap">
+        select * from house_appointment_scheduling where is_deleted = 0
+    </select>
+
+    <select id="selectSchedulingWithShiftPage" resultType="org.springblade.appointment.vo.AppointmentSchedulingVO">
+        SELECT
+            scheduling.*,
+            shift.shift_name as shiftName
+        FROM
+            house_appointment_scheduling scheduling
+            LEFT JOIN house_appointment_shift shift ON scheduling.shift_id = shift.id
+        <where>
+            ${ew.getSqlSegment}
+        </where>
+    </select>
+
+    <select id="selectSchedulingInfo" resultType="org.springblade.appointment.vo.AppointmentSchedulingVO">
+         SELECT
+                scheduling.*,
+                shift.shift_name as shiftName,
+                sdata.id as shiftDataId,
+                sdata.start_time as startTime,
+                sdata.end_time as endTime
+
+         FROM
+                house_appointment_scheduling scheduling
+                LEFT JOIN house_appointment_shift shift ON scheduling.shift_id = shift.id
+                LEFT JOIN house_appointment_shift_data sdata ON shift.id = sdata.shift_id
+         <where>
+            ${ew.getSqlSegment}
+         </where>
+                ORDER BY scheduling.date
+    </select>
+
+</mapper>

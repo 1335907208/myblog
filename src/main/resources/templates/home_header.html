@@ -1,0 +1,270 @@
+<div id="header" th:fragment="header">
+    <div class="logo"></div>
+    <div class="top-menu">
+        <ul class="menu">
+            <li class="submenu">
+                <div class="name">PREMIUM PROPERTY</div>
+            </li>
+            <div class="subcontent">
+                <div class="content-l">
+                    <div class="pj-type">
+                        <div class="type-tit">Residential Projects</div>
+                        <div class="type-list">
+                            <a>Current Projects</a>
+                            <a href="#">Queens Peak</a>
+                            <a>Upcoming Projects</a>
+                            <a href="#">Landmark</a>
+                            <a href="#">Bernam Street</a>
+                            <a>Completed Projects</a>
+                            <a href="#">The Alps Residences</a>
+                        </div>
+                    </div>
+                    <div class="pj-type">
+                        <div class="type-tit">Commercial Projects</div>
+                        <div class="type-list">
+                            <a href="#">The Poiz Centre</a>
+                        </div>
+                    </div>
+                    <div class="pj-type">
+                        <div class="type-tit">Overseas Projects</div>
+                        <div class="type-list">
+                            <a href="#">Sky Villa @ Phnom Penh, Cambodia</a>
+                            <a href="#">Living Star @ Jakarta, Indonesia</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-r">
+                    <div class="media">
+                        <img src="/media/menu/sub/media1.jpg" alt=""/>
+                    </div>
+                </div>
+
+            </div>
+            <li class="submenu">
+                <div class="name">MCC SPACE</div>
+            </li>
+            <li class="submenu">
+                <div class="name">VR</div>
+            </li>
+            <div class="subcontent">
+                <div class="content">
+                    <div class="media">
+                        <img src="/media/vr/1.jpg" alt=""/>
+                        <span class="lab">B1-2BR</span>
+
+                    </div>
+                    <div class="media">
+                        <img src="/media/vr/2.jpg" alt=""/>
+                        <span class="lab">C8-3BR+PL</span>
+                    </div>
+                    <div class="media">
+                        <img src="/media/vr/3.jpg" alt=""/>
+                        <span class="lab">C8-3BR+PL</span>
+
+                    </div>
+                </div>
+
+            </div>
+            <li class="submenu">
+                <div class="name">LIVE</div>
+            </li>
+            <div class="subcontent">
+                <div class="content">
+                    <div class="media">
+                        <img src="/media/video/1.png" alt=""/>
+                        <span class="lab">Developer</span>
+                    </div>
+                    <div class="media">
+                        <img src="/media/video/2.png" alt=""/>
+                        <span class="lab">Developer</span>
+                    </div>
+                    <div class="media">
+                        <img src="/media/video/3.png" alt=""/>
+                        <span class="lab">Developer</span>
+                    </div>
+                </div>
+
+            </div>
+            <li class="submenu">
+                <div class="name">ONLINE APPLICATION</div>
+            </li>
+            <div class="subcontent">
+                <div class="content-l">
+                    <div class="pj-type">
+                        <div class="type-tit">Residential Projects</div>
+                        <div class="type-list">
+                            <a>Current Projects</a>
+                            <a href="#">Queens Peak</a>
+                            <a>Upcoming Projects</a>
+                            <a href="#">Landmark</a>
+                            <a href="#">Bernam Street</a>
+                            <a>Completed Projects</a>
+                            <a href="#">The Alps Residences</a>
+                        </div>
+                    </div>
+                    <div class="pj-type">
+                        <div class="type-tit">Commercial Projects</div>
+                        <div class="type-list">
+                            <a href="#">The Poiz Centre</a>
+                        </div>
+                    </div>
+                    <div class="pj-type">
+                        <div class="type-tit">Overseas Projects</div>
+                        <div class="type-list">
+                            <a href="#">Sky Villa @ Phnom Penh, Cambodia</a>
+                            <a href="#">Living Star @ Jakarta, Indonesia</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-r">
+                    <div class="media">
+                        <img src="/media/menu/sub/media1.jpg" alt=""/>
+                    </div>
+                </div>
+
+            </div>
+            <li class="submenu">
+                <div class="name" th:onclick="subenu_member;">MEMBER</div>
+            </li>
+            <li class="submenu">
+                <div class="name">FINANCE</div>
+            </li>
+        </ul>
+        <div class="menu-toolbar">
+            <div class="btnSearch"><i class="iconfont iconsousuo"></i></div>
+            <div class="btn-group">
+                <input id="eninput" checked="checked" type="radio" name="lan"/>
+                <label for="eninput">En</label>
+                <input id="chinput" type="radio" name="lan"/>
+                <label for="chinput">涓枃</label>
+            </div>
+            <button type="button" class="login-btn" ><span>LOGIN</span></button>
+        </div>
+
+        <!--娉ㄥ唽閫夋嫨-->
+        <div class="zhucez">
+            <!-- 閬僵灞� -->
+            <div class="graybox"></div>
+            <div class="registryss">
+                <h2>SIGN UP</h2>
+                <div class="neiron">
+                    <h3>WHAT IS YOUR REGISTERED IDENTITY?</h3>
+                    <ul>
+                        <li><button class="neiron_inmediar">AGENT</button></li>
+                        <li><button class="neiron_user">BUYER</button></li>
+                    </ul>
+                </div>
+                <button class="guanbi">x</button>
+            </div>
+        </div>
+        <!--鐢ㄦ埛娉ㄥ唽-->
+        <div class="zhuceo">
+            <!-- 閬僵灞� -->
+            <div class="graybox"></div>
+            <div class="registry">
+                <h2>Buyer registration</h2>
+                <div class="zcb">
+                    <ul class="zcb_two" style="margin-left: 30px;">
+                        <li>
+                            <lable>EMAIL<input type="text" id="username" placeholder="EMAIL" required="required"></lable>
+                        </li>
+                        <li>
+                            <lable>PASSWORD<input type="text" id="userpassword" placeholder="PASSWORD" required="required"></lable>
+                        </li>
+                        <li>
+                            <lable>Confirm password<input type="text" id="usercpassword" placeholder="Confirm password" required="required"></lable>
+                        </li>
+                        <li><button id="Userregistration">REGISTRATION1111111</button></li>
+                    </ul>
+                </div>
+                <button class="guanbi">x</button>
+            </div>
+        </div>
+        <!--涓粙娉ㄥ唽-->
+        <div class="intermediary">
+            <!-- 閬僵灞� -->
+            <div class="graybox"></div>
+
+            <div class="registry">
+                <h2>Agent registration</h2>
+                <div class="inter_list">
+                    <ul class="zcb_two">
+                        <li>
+                            <lable>Agent<input type="text" placeholder="Agent" required="required"></lable>
+                        </li>
+                        <li>
+                            <lable>Agency<input type="text" placeholder="Agency" required="required"></lable>
+                        </li>
+                        <li>
+                            <lable>Agent's Contact<input type="text" placeholder="Agent's Contact" required="required"></lable>
+                        </li>
+                        <li>
+                            <lable>Email<input type="text" placeholder="EMAIL" required="required"></lable>
+                        </li>
+                        <li>
+                            <lable>PASSWORD<input type="text" placeholder="PASSWORD" required="required"></lable>
+                        </li>
+                        <li>
+                            <lable>Confirm password<input type="text" placeholder="Confirm password" required="required"></lable>
+                        </li>
+
+                        <li><button>REGISTRATION</button></li>
+                    </ul>
+                </div>
+                <button class="guanbi">x</button>
+            </div>
+        </div>
+
+        <div class="header__screen" id="search-full-screen">
+            <span class="header__screen-close mask__close-btn"><i class="iconfont iconguanbi"></i></span>
+            <div class="header__screen-container">
+                <div class="header__screen-title">
+                    <span class="header__screen-title-font1">Find Your Dream Home</span><br>
+                    <span class="header__screen-title-font2">We Have Over Million Properties For You</span>
+                </div>
+                <div class="header__screen-box">
+                    <select class="header__select header__select-localtion" name="">
+                        <option value=""></option>
+                        <option value="1">Singapore</option>
+                        <option value="2">Overseas</option>
+                    </select>
+                    <select class="header__select header__select-status" name="">
+                        <option value=""></option>
+                        <option value="1">HOT SALE</option>
+                        <option value="2">COMPLETED</option>
+                        <option value="3">FULLY SOLD</option>
+                    </select>
+                    <select class="header__select header__select-type" name="">
+                        <option value=""></option>
+                        <option value="1">Residence</option>
+                        <option value="2">Commerce</option>
+                    </select>
+                    <br>
+                    <select class="header__select header__select-bedrooms" name="">
+                        <option value=""></option>
+                        <option value="1">1-Bedroom</option>
+                        <option value="2">2-Bedroom</option>
+                        <option value="3">3-Bedroom</option>
+                        <option value="4">4-Bedroom</option>
+                        <option value="5">1-Bedroom + Study</option>
+                        <option value="6">2-Bedroom + Study</option>
+                        <option value="7">3-Bedroom + Study</option>
+                        <option value="8">Penthouse</option>
+                    </select>
+                    <select class="header__select header__select-price" name="">
+                        <option value=""></option>
+                        <option value="1">0~100W</option>
+                        <option value="2">100W~200W</option>
+                        <option value="3">200W~300W</option>
+                        <option value="4">300W~500W</option>
+                        <option value="5">500W+</option>
+                    </select>
+                    <button class="header__screen-button">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:inline='javascript' src="/js/index.js"></script>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="inc/commons :: head(Member, user)">
+
+
+
+<body>
+<!--<div th:replace="index/selectMyApplication :: selectMyApplication"></div>-->
+<div th:replace="index/header :: header"></div>
+<div th:replace="userCenter/header :: user"></div>
+
+<div class="container">
+    <div class="registry">
+        <h2 class="page_title">My Application</h2>
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th>#</th>
+                <th>Order No.</th>
+                <th>EOI No.</th>
+                <th>Project</th>
+                <th>Status</th>
+                <th style="text-align: center">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="project, stat : ${applicationList}">
+                <th scope="row" th:text="${stat.index + 1}">1</th>
+                <td th:text="${project.orderNumber}">-</td>
+                <td th:text="${project.eoiNo == null ? ' - ' : project.eoiNo}"></td>
+                <td th:text="${project.projectInfo.name}"></td>
+<!--                project.mccConfirmTime == null ? 'Waiting Mcc Confirm' : (-->
+                <td>
+                    <span class="badge badge-warning" th:if="${project.status ==0}">Pending Cheque</span>
+                    <span class="badge badge-warning" th:if="${project.status == 5}">Agent Confirmed</span>
+                    <span class="badge badge-warning" th:if="${project.status == 9}">Mcc Confirmed</span>
+                </td>
+                <td style="text-align: center">
+                    <a th:href="${'?id=' + project.id}" class="btn btn-primary btn-sm">View</a>
+                    <a th:onclick="makeCode([[${project}]])" class="btn btn-primary btn-sm">QR Code</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+<div th:replace="footer :: footer"></div>
+
+
+<th:block th:replace="inc/commons :: foot(user)"></th:block>
+
+
+<div>
+</div>
+
+<script th:inline='javascript'>
+    var identity=  $('#identity').val()
+
+
+    // $('#selectMyapplicationBtn').click(function () {
+    //     $('.select-myapplication').show()
+    // })
+    $('.select-myapplication .closeBox').click(function () {
+        $('body').css({
+            overflow: 'auto'
+        });
+        $('.select-myapplication').hide()
+    })
+    function makeCode(data){
+
+        var orderNumber = data.orderNumber
+        var eoiNo = data.eoiNo
+        var prefixUrl = document.getElementById("prefixUrlVal");//"http://192.168.1.108:38888"
+        var params = {}
+        if(orderNumber){
+            params.orderNumber = orderNumber
+        }
+        if(eoiNo){
+            params.eoiNo = eoiNo
+        }
+
+        $(".select-myapplication #qrcode").html("");
+        $.ajax({
+            url:"/client/purchaseIntent/detail",    //请求的url地址
+            dataType:"json",   //返回格式为json
+            type:"GET",   //请求方式
+            async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+            data: params,
+            success:function(res){//请求成功时处理
+                if(res.code !== 200){
+                    common.alert('The number entered is wrong');
+                }else {
+                    console.log(res)
+                    $('body').css({
+                        overflow: 'hidden'
+                    });
+                    $('.select-myapplication').show()
+                    $(".select-myapplication #qrcode").qrcode({
+                        render : "canvas",    //设置渲染方式，有table和canvas，使用canvas方式渲染性能相对来说比较好
+                        text : prefixUrl + "/H5Application?orderNumber="+ orderNumber +(eoiNo?("&eoiNo="+ eoiNo):''),
+                        width : "200",               //二维码的宽度
+                        height : "200",              //二维码的高度
+                        src: '/img/logo2.jpg'             //二维码中间的图片
+                    });
+                }
+            },
+            fail:function(){//请求失败
+                common.alert('The number entered is wrong');
+            },
+            error:function(){//请求出错处理
+                common.alert('The number entered is wrong');
+            }
+        });
+    }
+    // $('.select-myapplication #createQrCode').click(function () {
+    //
+    // })
+    // $('.select-myapplication .backBox').click(function () {
+    //     $('.select-myapplication .qrcode-box').hide()
+    //     $('.select-myapplication .select-box').show()
+    // })
+</script>
+</body>
+
+</html>

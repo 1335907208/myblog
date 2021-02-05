@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="inc/commons :: head(Member, user)">
+
+
+
+<body>
+<div th:replace="index/header :: header"></div>
+<div th:replace="userCenter/header :: user"></div>
+
+<div class="container">
+    <div class="usercenter_box">
+        <h2 class="page_title">Application</h2>
+        <form class="base_form" id="applicationForm">
+            <div class="form-group row">
+                <label for="project" class="col-sm-3 col-form-label">Project</label>
+                <div class="col-sm-9">
+                    <input type="text" readonly class="form-control-plaintext" id="project" th:value="${project.name}">
+                    <input type="hidden" name="projectId" th:value="${project.id}">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="purchaserNum" class="col-sm-3 col-form-label">Number of Purchaser</label>
+                <div class="col-sm-4">
+                    <select class="form-control" id="purchaserNum">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+            </div>
+            <fieldset>
+                <h3>First Purchaser Infomation</h3>
+                <div class="form-group row">
+                    <label for="purchaser1" class="col-sm-3 col-form-label">Name of Purchaser</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="purchaser1" id="purchaser1" placeholder="Pease Enter Purchaser's Name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="passportNo1" class="col-sm-3 col-form-label">Last 4 Characters of NRIC</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="passportNo1" id="passportNo1" placeholder="Pease Enter Purchaser's Last 4 Characters of NRIC">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="nationality1" class="col-sm-3 col-form-label">Nationality</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" name="nationality1" id="nationality1">
+                            <option th:each="item : ${nationality}" th:value="${item.dictAlias}" th:text="${item.dictValue}">1</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Gender</label>
+                    <div class="col-sm-9">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender1" id="gender1_male" value="1" checked>
+                            <label class="form-check-label" for="gender1_male">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender1" id="gender1_female" value="0">
+                            <label class="form-check-label" for="gender1_female">Female</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="contact1" class="col-sm-3 col-form-label">Contact</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="contact1" id="contact1" placeholder="Pease Enter Purchaser's Mobile">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email1" class="col-sm-3 col-form-label">E-mail</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="email1" id="email1" placeholder="Pease Enter Purchaser's E-mail">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="address" class="col-sm-3 col-form-label">Address</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="address" id="address" placeholder="Pease Enter Purchaser's Address">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="postalCode" class="col-sm-3 col-form-label">Postal Code</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="postalCode" id="postalCode" placeholder="Pease Enter Purchaser's Postal Code">
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset style="display: none" disabled id="secondPurchaser">
+                <h3>Second Purchaser Infomation</h3>
+                <div class="form-group row">
+                    <label for="purchaser2" class="col-sm-3 col-form-label">Name of Purchaser</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="purchaser2" id="purchaser2" placeholder="Pease Enter Second Purchaser's Name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="passportNo2" class="col-sm-3 col-form-label">Last 4 Digits of NRIC</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="passportNo2" id="passportNo2" placeholder="Pease Enter Second Purchaser's Last 4 Digits of NRIC">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="nationality2" class="col-sm-3 col-form-label">Nationality</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" name="nationality2" id="nationality2">
+                            <option th:each="item : ${nationality}" th:value="${item.dictAlias}" th:text="${item.dictValue}">1</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Gender</label>
+                    <div class="col-sm-9">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender2" id="gender2_male" value="1" checked>
+                            <label class="form-check-label" for="gender2_male">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender2" id="gender2_female" value="0">
+                            <label class="form-check-label" for="gender2_female">Female</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="contact2" class="col-sm-3 col-form-label">Contact</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="contact2" id="contact2" placeholder="Pease Enter Second Purchaser's Mobile">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email2" class="col-sm-3 col-form-label">E-mail</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="email2" id="email2" placeholder="Pease Enter Second Purchaser's E-mail">
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset style="display: none" disabled id="thirdPurchaser">
+                <h3>Third Purchaser Infomation</h3>
+                <div class="form-group row">
+                    <label for="purchaser3" class="col-sm-3 col-form-label">Name of Purchaser</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="purchaser3" id="purchaser3" placeholder="Pease Enter Second Purchaser's Name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="passportNo3" class="col-sm-3 col-form-label">Last 4 Digits of NRIC</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="passportNo3" id="passportNo3" placeholder="Pease Enter Second Purchaser's Last 4 Digits of NRIC">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="nationality3" class="col-sm-3 col-form-label">Nationality</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" name="nationality3" id="nationality3">
+                            <option th:each="item : ${nationality}" th:value="${item.dictAlias}" th:text="${item.dictValue}">1</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Gender</label>
+                    <div class="col-sm-9">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender3" id="gender3_male" value="1" checked>
+                            <label class="form-check-label" for="gender3_male">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender3" id="gender3_female" value="0">
+                            <label class="form-check-label" for="gender3_female">Female</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="contact3" class="col-sm-3 col-form-label">Contact</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="contact3" id="contact3" placeholder="Pease Enter Second Purchaser's Mobile">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email3" class="col-sm-3 col-form-label">E-mail</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="email3" id="email3" placeholder="Pease Enter Second Purchaser's E-mail">
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <h3>Agent Infomation</h3>
+                <div class="form-group row">
+                    <label for="nationality3" class="col-sm-3 col-form-label">Agency</label>
+                    <div class="col-sm-9">
+<!--                        <select class="form-control" name="nationality3" id="nationality3">-->
+<!--                            <option th:each="item : ${agency}" th:value="${item.dictAlias}" th:text="${item.dictValue}">1</option>-->
+<!--                        </select>-->
+                        <select class="form-control" name="agency" id="agencySelect">
+                            <option th:each="item : ${agency}" th:value="${item.id}" th:text="${item.agencyName}">1</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="agent" class="col-sm-3 col-form-label">Agent CEA No.</label>
+                    <div class="col-sm-9" style="display: flex">
+                        <select class="form-control agent-select" id="agentSelect" name="agentId">
+<!--                            <option th:each="item : ${agency}" th:value="${item.id}" th:text="${item.agencyName}">1</option>-->
+                        </select>
+                        <input style="display: none;" type="text" class="form-control agent-input" name="agent" id="agent" placeholder="Pease Enter Your Agent CEA No.(if Any)">
+                        <div style="width: 100px;line-height: 40px;margin: 0 10px;"><input class="agentOtherCheckBox" type='checkbox' name='Other' value="1"/><span style="margin: 0 10px">Other</span></div>
+                    </div>
+                </div>
+                <div class="form-group row" id="contactInput" style="display: none;">
+                    <label for="agentContact" class="col-sm-3 col-form-label">Agent's Contact</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="agentContact" id="agentContact" placeholder="Pease Enter Your Agent's Contact">
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <h3>Interested Unit(s) Details</h3>
+                <div class="form-group row">
+                    <label for="block1" class="col-sm-3 col-form-label">Interested Unit 1</label>
+                    <div class="col-sm-3">
+                        <select class="form-control block" data-choice="1" name="choice01Block" id="block1">
+                            <option value="">==Select Block==</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <select class="form-control level" data-choice="1" name="choice01Level" id="level1">
+                            <option value="">==Select Level==</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <select class="form-control unit" data-choice="1" name="choice01Unit" id="unit1">
+                            <option value="">==Select Unit==</option>
+                        </select>
+                    </div>
+                    <input type="hidden" name="choice01Type" data-choice="1" class="type" value="">
+                </div>
+                <div class="form-group row">
+                    <label for="block2" class="col-sm-3 col-form-label">Interested Unit 2</label>
+                    <div class="col-sm-3">
+                        <select class="form-control block" data-choice="2" name="choice02Block" id="block2">
+                            <option value="">==Select Block==</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <select class="form-control level" data-choice="2" name="choice02Level" id="level2">
+                            <option value="">==Select Level==</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <select class="form-control unit" data-choice="2" name="choice02Unit" id="unit2">
+                            <option value="">==Select Unit==</option>
+                        </select>
+                    </div>
+                    <input type="hidden" name="choice02Type" data-choice="2" class="type" value="">
+                </div>
+                <div class="form-group row">
+                    <label for="block3" class="col-sm-3 col-form-label">Interested Unit 3</label>
+                    <div class="col-sm-3">
+                        <select class="form-control block" data-choice="3" name="choice03Block" id="block3">
+                            <option value="">==Select Block==</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <select class="form-control level" data-choice="3" name="choice03Level" id="level3">
+                            <option value="">==Select Level==</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <select class="form-control unit" data-choice="3" name="choice03Unit" id="unit3">
+                            <option value="">==Select Unit==</option>
+                        </select>
+                    </div>
+                    <input type="hidden" name="choice03Type" data-choice="3" class="type" value="">
+                </div>
+            </fieldset>
+            <button class="btn btn-primary" type="button" id="submit">Submit Application</button>
+        </form>
+    </div>
+
+</div>
+
+
+<div th:replace="footer :: footer"></div>
+
+
+<th:block th:replace="inc/commons :: foot(user)"></th:block>
+
+<script th:inline='javascript'>
+    var unitType = [[${unitType}]]
+    var unitList = [[${unitList}]]
+    var agencyList = [[${agency}]]
+    var identity=  $('#identity').val()
+    var OtherCheckBox = false
+    $(document).ready(function(){
+        function formatUnitObj (arr){
+            var obj = {}
+            arr.forEach(function (item){
+                if(!obj.hasOwnProperty(item.block)){
+                    obj[item.block] = {}
+                    obj[item.block][item.floor] = {}
+                } else {
+                    if(!obj[item.block].hasOwnProperty(item.floor)){
+                        obj[item.block][item.floor] = {}
+                    }
+                }
+                obj[item.block][item.floor][item.unit] = item
+            })
+            return obj
+        }
+        function createOption(obj,isUnit=false) {
+            var option = ''
+            console.log(obj)
+            var value = '';
+            for (key in obj){
+                if(isUnit){
+                    value=obj[key].id;
+                }else{
+                    value=key
+                }
+                option = option += '<option value="' + value + '">' + key + '</option>'
+            }
+            return option
+        }
+        function renderBlock(obj) {
+            var option = createOption(obj)
+            option = '<option value="">==Select Block==</option>' + option
+            $('.block').html(option)
+        }
+        var unitData = formatUnitObj(unitList)
+        renderBlock(unitData)
+        $('#purchaserNum').on('change', function(){
+            var val = $('#purchaserNum').val()
+            if (val == 2) {
+                $('#secondPurchaser').show().prop('disabled', false)
+                $('#thirdPurchaser').hide().prop('disabled', true)
+            } else if(val == 3){
+                $('#thirdPurchaser').show().prop('disabled', false)
+                $('#secondPurchaser').show().prop('disabled', false)
+            } else {
+                $('#secondPurchaser').hide().prop('disabled', true)
+                $('#thirdPurchaser').hide().prop('disabled', true)
+            }
+        })
+        $('#submit').on('click', function(){
+            var dataArr = $('#applicationForm').serializeArray()
+            var data = {}
+            dataArr.forEach(function(item){
+                data[item.name] = item.value
+            })
+            data.choice01 = data.choice01Block ? data.choice01Block + '-' + data.choice01Level + '-' + data.choice01Unit + '-' + data.choice01Type  : null
+            data.choice02 = data.choice02Block ? data.choice02Block + '-' + data.choice02Level + '-' + data.choice02Unit + '-' + data.choice02Type  : null
+            data.choice03 = data.choice03Block ? data.choice03Block + '-' + data.choice03Level + '-' + data.choice03Unit + '-' + data.choice03Type  : null
+            //数据格式化
+            var purchaseIntentUserList = [];
+            var purchaseIntentUnitList = [];
+            for ( let i = 1;i<=$('#purchaserNum').val();i++){
+                purchaseIntentUserList.push({
+                    nationality:data['nationality'+i],
+                    passportNo:data['passportNo'+i],
+                    email:data['email'+i],
+                    address:data['address'],
+                    postalCode:data['postalCode'],
+                    gender:data['gender'+i],
+                    contact:data['contact'+i],
+                    name:data['purchaser'+i]
+                })
+            }
+            for ( let i = 1;i<=3;i++){
+                if(data['choice0'+i+'Unit']){
+                    purchaseIntentUnitList.push({
+                        projectId:data.projectId,
+                        unitId:data['choice0'+i+'Unit']
+                    })
+                }
+            }
+            var dataTemp = {
+                agent:data.agent,
+                agentContact:data.agentContact,
+                projectId:data.projectId,
+                purchaseIntentUnitVOList:purchaseIntentUnitList,
+                purchaseIntentUserList:purchaseIntentUserList
+            }
+            console.log(data,dataTemp)
+            $.ajax({
+                url:"/client/applicationSubmit",    //请求的url地址
+                dataType: "json",   //返回格式为json
+                type: "POST",   //请求方式
+                data: JSON.stringify(dataTemp),
+                contentType:"application/json",
+                success:function(res){//请求成功时处理
+                    // TODO 友好提示，并跳转
+                    if(res.data == 0){
+                        common.alert(res.msg);
+                        return;
+                    }
+                    common.success("Success！Your order number is:" + res.data);
+                    setTimeout(function(){
+                        window.location.href = '/userCenter/myApplication'
+                    }, 1000)
+                },
+                fail:function(){//请求失败
+                    console.log("fail");
+                },
+                error:function(){//请求出错处理
+                    console.log(data);
+                }
+            });
+        })
+        $('.block').on('change', function(){
+            var choice = $(this).data('choice')
+            var block = $(this).val()
+            var option = createOption(unitData[block])
+            console.log(unitData[block])
+            option = '<option value="">==Select Level==</option>' + option
+            $('.level[data-choice=' + choice + ']').html(option)
+        })
+        $('.level').on('change', function(){
+            var choice = $(this).data('choice')
+            var block = $('.block[data-choice=' + choice + ']').val()
+            var level = $(this).val()
+            var option = createOption(unitData[block][level],true)
+            console.log(unitData[block][level])
+            option = '<option value="">==Select Unit==</option>' + option
+            $('.unit[data-choice=' + choice + ']').html(option)
+        })
+        $('.unit').on('change', function(){
+            var choice = $(this).data('choice')
+            var block = $('.block[data-choice=' + choice + ']').val()
+            var level = $('.level[data-choice=' + choice + ']').val()
+            var unit = $(this).val()
+            var unitObj = {}
+            console.log(unitData[block][level])
+            var temp = unitData[block][level]
+            for(key in temp){
+                if(unit == temp[key].id){
+                    unitObj=temp[key]
+                    console.log(unitObj,temp[key])
+                    return;
+                }
+            }
+            var unitTypeObj = selectUnitTypeByTypeId(unitObj.typeId)
+            // console.log(unitTypeObj.typeName)
+            $('.type[data-choice=' + choice + ']').val(unitTypeObj.typeName)
+        })
+
+        // 通过typeId查询户型
+        function selectUnitTypeByTypeId(id) {
+            if(!unitType) return {}
+            var _unitType = {}
+            unitType.forEach(function(item){
+                if(item.id == id) {
+                    _unitType = item
+                }
+            })
+            return _unitType
+        }
+
+        //agency
+        $('.agentOtherCheckBox').on('change', function () {
+            OtherCheckBox = !OtherCheckBox
+            if(OtherCheckBox){
+                $('#contactInput').show()
+                $('.agent-select').hide()
+                $('.agent-input').show()
+                $('#agentSelect').val('')
+                $('#agentContact').val('')
+            }else{
+                $('#contactInput').hide()
+                $('.agent-select').show()
+                $('.agent-input').hide()
+                $('#agent').val('')
+                $('#agentSelect').val('')
+            }
+        })
+        $('#agencySelect').on('change', function () {
+            var id = $(this).val()
+            setDefaultAgent(id ? id : -1)
+        })
+        $('#agentSelect').on('change', function () {
+            $('#agentContact').val($(this).find("option:selected").data('mobile'))
+        })
+        function setDefaultAgent(agencyId) {
+            if(agencyList.length>0 || agencyId){
+                var id = agencyId ? agencyId : agencyList[0].id
+                $.ajax({
+                    url:"/webuser/useragent/list",    //请求的url地址
+                    dataType:"json",   //返回格式为json
+                    type:"GET",   //请求方式
+                    async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+                    data: {
+                        company: id
+                    },
+                    success:function(res){//请求成功时处理
+                        var agentList = res.data.records
+                        $('.agent-select').html('')
+                        console.log(agentList)
+                        for (var i = 0; i < agentList.length; i++) {
+                            var item = agentList[i]
+                            $(".agent-select").append("<option data-mobile='"+item.mobile+"' value='"+item.id+"'>"+item.name+"</option>");
+                            if(i == 0){
+                                $('#agentContact').val(item.mobile)
+                            }
+                        }
+                    },
+                    fail:function(){//请求失败
+                        common.alert('The number entered is wrong');
+                    },
+                    error:function(){//请求出错处理
+                        common.alert('The number entered is wrong');
+                    }
+                });
+            }
+        }
+        setDefaultAgent(false)
+    })
+
+
+</script>
+</body>
+
+</html>

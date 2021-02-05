@@ -1,0 +1,39 @@
+#数据源配置
+spring:
+  redis:
+    ##redis 单机环境配置
+    host: 127.0.0.1
+    port: 6379
+    password:
+    database: 0
+    ssl: false
+    ##redis 集群环境配置
+    #cluster:
+    #  nodes: 127.0.0.1:7001,127.0.0.1:7002,127.0.0.1:7003
+    #  commandTimeout: 5000
+  datasource:
+    url: jdbc:mysql://localhost:3306/house?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8
+    username: house
+    password: House@2020
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#blade配置
+blade:
+  prop:
+    upload-path: /home/test/mcc_site/upload/
+    #upload-path: /Users/wfc/projects/其他外包项目-2020/新加坡-VR看房系统/git/singaporeHouseManager/VUE-House-Manage/public/
+    document-path: /home/test/mcc_site/upload/
+    #document-path: /Users/wfc/projects/其他外包项目-2020/新加坡-VR看房系统/git/singaporeHouseManager/VUE-House-Manage/public/
+    prefixUrl: http://203.125.12.205:31080
+    requestUrl: http://203.125.12.205:31080
+    upload-domain: http://203.125.12.205:31080/
+    remote-mode: true
+    remote-path: /usr/share/nginx/html
+    remote-path-iis: D://iis/html
+    log-mode: true
+    #邮件相关配置
+    mailFrom: noreply@mccsingapore.com.sg
+    password_mailFrom: Jingye-1973
+    mail_host: smtp.mccsingapore.com.sg
+    smtp: smtp
+    active_host: 203.125.12.205:31080

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="inc/commons :: head(Member, user)">
+
+
+
+<body>
+<div th:replace="index/header :: header"></div>
+<div th:replace="userCenter/header :: user"></div>
+
+<div class="container">
+    <div class="registry">
+        <h2 class="page_title">My Properties</h2>
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th>#</th>
+                <th>Unit</th>
+                <th>EOI No.</th>
+                <th>Project</th>
+                <th>Status</th>
+                <th>Application</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order, stat : ${orderList}">
+                <th scope="row" th:text="${stat.index + 1}">1</th>
+                <td th:text="${order.unitVO.unit}">-</td>
+                <td th:text="${order.eoiNo == null ? ' - ' : order.eoiNo}"></td>
+                <td th:text="${order.projectInfo.name}"></td>
+                <td>
+                    <span class="badge badge-warning" th:if="${order.status ==0}">Intention</span>
+                    <span class="badge badge-warning" th:if="${order.status == 1}">Scheduled</span>
+                    <span class="badge badge-warning" th:if="${order.status == 9}">Successful purchase</span>
+                </td>
+                <td><a th:href="${'?id=' + order.id}" class="btn btn-primary btn-sm">View</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+<div th:replace="footer :: footer"></div>
+
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+<script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/plugins/select2-4.0.13/dist/js/select2.min.js"></script>
+<script src="/font/iconfont/iconfont.js"></script>
+
+
+<script th:inline='javascript'>
+    var identity=  $('#identity').val()
+
+
+</script>
+</body>
+
+</html>

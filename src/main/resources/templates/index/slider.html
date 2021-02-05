@@ -1,0 +1,94 @@
+<div class="" id="homeSliderBox" th:fragment="slider" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="content">
+        <div class="swiper-container banner-swiper" id="videos" >
+            <div class="swiper-wrapper">
+                <!--                    <div class="swiper-slide">-->
+                <!--                        <video id="video-details" class="slider-video" autoplay="" muted="" poster="">-->
+                <!--                            <source src="/media/1.mp4" type="video/mp4">-->
+                <!--                        </video>-->
+                <!--                        &lt;!&ndash; <video class="vjs-tech slider-video" playsinline="playsinline" webkit-playsinline="true"-->
+                <!--                               x5-playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="false"-->
+                <!--                               id="vjs_video_433_html5_api" tabindex="-1" preload="false" autoplay=""-->
+                <!--                               src="/media/1.mp4"></video>-->
+                <!--                        </video> &ndash;&gt;-->
+                <!--                        <div class="info-box">-->
+                <!--                            <div class="info-center">-->
+                <!--                                <div class="info-media"-->
+                <!--                                     style="background: url('/media/lead/banner-info2.png') left top/contain no-repeat;"></div>-->
+                <!--                                <button type="button" class="el-button el-button&#45;&#45;default"><span>APPLY NOW</span>-->
+                <!--                                </button>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+
+                <!--                    </div>-->
+<!--                <div class="swiper-slide">-->
+<!--                    <div class="swiper-slide" style="z-index: 9999999">-->
+<!--                        <iframe src="https://beyond.3dnest.biz/play/?m=d88f5492_t6gT_b6f9" style="width: 100%; height: 100%; background-color: rgba(0, 0, 0, .7);"></iframe>-->
+<!--                        &lt;!&ndash; <img src="/img/sitePlan/siteplan-pic1.jpg" alt=""> &ndash;&gt;-->
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="swiper-slide" th:each="header : ${headers}">
+                    <div class="swiper-slide"
+                         th:if="${header.urlType == 1}"
+                         th:style="'background: url('+${prefixUrl}+${header.url}+') center/cover no-repeat;'">
+                    </div>
+                    <video id="video-details" class="slider-video" autoplay="" muted="" poster=""
+                           th:if="${header.urlType == 2}">
+                        <source th:src="${prefixUrl}+${header.url}" type="video/mp4">
+                    </video>
+                    <div id="vr_screen" style="width: 100%; height: 100%" th:if="${header.urlType == 3}">
+                        <iframe th:src="${header.url}" style="width: 100%; height: 100%; background-color: rgba(0, 0, 0, .7);"></iframe>
+                    </div>
+
+
+                    <div class="info-box" th:if="${header.urlType != 3}">
+                        <div class="info-center">
+                            <div class="info-media" th:style="'background: url('+${prefixUrl}+${header.urlText}+') left top/contain no-repeat;'"></div>
+                            <a class="btn btn-warning btn-lg"
+                                    th:classappend="${header.linkModel == 3 ? 'show_model_link' : ''}"
+                                    th:href="${header.linkModel == 1 ? '/project?id=' + header.pidCopy : (header.linkModel == 2 ? header.linkUrl : 'javascript:;')}"
+                                    th:attr="data-link=${header.linkUrl}"
+                                    th:if="${header.btnShow == 1}"><span th:text="${header.btnText}">APPLY NOW</span></a>
+                        </div>
+                    </div>
+                </div>
+                <!--                    <div class="swiper-slide">-->
+                <!--                        <div class="swiper-slide"-->
+                <!--                             style="background: url('/media/lead/banner2.jpg') center/cover no-repeat;"></div>-->
+                <!--                        <div class="info-box">-->
+                <!--                            <div class="info-center">-->
+                <!--                                <div class="info-media"-->
+                <!--                                     style="background: url('/media/lead/banner-info2.png') left top/contain no-repeat;"></div>-->
+                <!--                                <button type="button" class="el-button el-button&#45;&#45;default"><span>APPLY NOW</span>-->
+                <!--                                </button>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                    <div class="swiper-slide">-->
+                <!--                        <div class="swiper-slide"-->
+                <!--                             style="background: url('/media/lead/banner3.png') center/cover no-repeat;"></div>-->
+                <!--                        <div class="info-box">-->
+                <!--                            <div class="info-center">-->
+                <!--                                <div class="info-media"-->
+                <!--                                     style="background: url('/media/lead/banner-info2.png') left top/contain no-repeat;"></div>-->
+                <!--                                <button type="button" class="el-button el-button&#45;&#45;default"><span>APPLY NOW</span>-->
+                <!--                                </button>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <!--<div class="swiper-button-prev"></div>-->
+        <!--<div class="swiper-button-next"></div>-->
+
+    </div>
+    <!--  VR弹窗  -->
+    <div id="modelBox" style="padding: 0; display: none">
+        <div class="vr__screen mask" style="z-index: 9999999">
+            <span class="vr__screen-close mask__close-btn"><i class="iconfont iconguanbi"></i></span>
+            <iframe src="" style="width: 100%; height: 100%; background-color: rgba(0, 0, 0, .7);"></iframe>
+            <!-- <img src="/img/sitePlan/siteplan-pic1.jpg" alt=""> -->
+        </div>
+    </div>
+</div>

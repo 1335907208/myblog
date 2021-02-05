@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="inc/commons :: head(Member, user)">
+
+
+
+<body>
+<div th:replace="index/header :: header"></div>
+<div th:replace="userCenter/header :: user"></div>
+
+<div class="container">
+    <div class="project_list">
+        <h2 class="page_title">Application</h2>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            Please select the project you want to apply for.
+        </div>
+        <div class="row">
+            <div class="col-md-6" th:each="project : ${projectList}">
+                <a th:href="'?projectId=' + ${project.id}">
+                    <div class="project_list_item">
+                        <div class="project_list_item__pic" th:style="${'background-image: url(' + prefixUrl + project.previewImage + ')'}"></div>
+                        <div class="project_list_item__content">
+                            <h3 th:text="${project.name}">QUEENS PEAK</h3>
+                            <p th:text="${project.mainInfo}">Singapore’s Premium Project to be Seamlessly Linked to Queens Town MRT Station</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<div th:replace="footer :: footer"></div>
+
+
+<th:block th:replace="inc/commons :: foot(user)"></th:block>
+
+
+<script th:inline='javascript'>
+
+</script>
+</body>
+
+</html>

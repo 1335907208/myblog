@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.springblade.client.mapper.UnitMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="unitResultMap" type="org.springblade.client.eneity.Unit">
+        <id column="id" property="id"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_dept" property="createDept"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="status" property="status"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="project_id" property="projectId"/>
+        <result column="block" property="block"/>
+        <result column="floor" property="floor"/>
+        <result column="unit" property="unit"/>
+        <result column="type_id" property="typeId"/>
+        <result column="sale_status" property="saleStatus"/>
+        <result column="house_status" property="houseStatus"/>
+        <result column="price" property="price"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+
+    <select id="selectUnitPage" resultMap="unitResultMap">
+        select * from house_project_unit where is_deleted = 0
+    </select>
+
+</mapper>

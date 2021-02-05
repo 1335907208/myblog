@@ -1,0 +1,31 @@
+<div class="container-fluid" id="view360Box" th:fragment="view360" th:if="${ProjectAllviewlist.size() != 0}"
+     xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="box">
+        <div class="box-title">
+            <h2 class="box-title__content">360 VIEW</h2>
+            <h4 class="box-title__sub" th:text="${projectinfodetail.name}">QUEENS PEAK</h4>
+        </div>
+        <div class="box-content">
+            <div class="view360">
+                <div class="view360__pic bg-img">
+
+                    <div class="wrapper"></div>
+                    <div class="view360__switch">
+                        <div class="view360__pic-icon view360__pic-icon-day iconShow" style="background-color: #FFF;"><i
+                            style="color: #000;" class="iconfont">&#xe611;</i></div>
+                        <div class="view360__pic-icon view360__pic-icon-night"><i class="iconfont">&#xe616;</i></div>
+                    </div>
+                </div>
+                <div class="view360__btn">
+                    <a href="javascript:;" class="view360__btn-item" th:each="ProjectAllview : ${ProjectAllviewlist}" th:text="${ProjectAllview.name}" th:data-src="@{${ProjectAllview.url} ? ${prefixUrl} + ${ProjectAllview.url} : ''}" th:data-srcDark="@{${ProjectAllview.urlDark} ? ${prefixUrl} + ${ProjectAllview.urlDark} : ''}">Level
+                        08</a>
+                    <!-- <a href="javascript:;" class="view360__btn-item" data-src='lvl18'>Level 18</a>
+                     <a href="javascript:;" class="view360__btn-item" data-src="lvl27">Level 27</a>
+                     <a href="javascript:;" class="view360__btn-item" data-src="lvl35">Level 35</a>
+                     <a href="javascript:;" class="view360__btn-item" data-src="lvl44">Level 44</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
